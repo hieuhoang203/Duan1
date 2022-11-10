@@ -62,7 +62,7 @@ public class DongSp implements Serializable{
         this.giaBan = giaBan;
         this.idHang = idHang;
         this.ngayThem = new Date(new java.util.Date().getTime());
-        this.ngaySua = null;
+        this.ngaySua = ngaySua;
     }
 
     public String getId() {

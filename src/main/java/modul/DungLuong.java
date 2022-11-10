@@ -54,7 +54,7 @@ public class DungLuong implements Serializable{
         this.ma = ma;
         this.ten = ten;
         this.ngayThem = new Date(new java.util.Date().getTime());
-        this.ngaySua = null;
+        this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
     }
 

@@ -29,8 +29,6 @@ public class ChiTietSP implements Serializable{
     @Column(name = "Id")
     private String id;
     
-    @Column(name = "TenSP")
-    private String tenSp;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdDongSP")
@@ -65,15 +63,14 @@ public class ChiTietSP implements Serializable{
     public ChiTietSP() {
     }
 
-    public ChiTietSP(String id, String tenSp, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, CuaHang idCuaHang, Date ngayThem, Date ngaySua, int soLuong, int trangThai) {
+    public ChiTietSP(String id, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, CuaHang idCuaHang, Date ngayThem, Date ngaySua, int soLuong, int trangThai) {
         this.id = id;
-        this.tenSp = tenSp;
         this.idDongSp = idDongSp;
         this.idMauSac = idMauSac;
         this.idDungLuong = idDungLuong;
         this.idCuaHang = idCuaHang;
         this.ngayThem = new Date(new java.util.Date().getTime());
-        this.ngaySua = null;
+        this.ngaySua = ngaySua;
         this.soLuong = soLuong;
         this.trangThai = trangThai;
     }
@@ -84,14 +81,6 @@ public class ChiTietSP implements Serializable{
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTenSp() {
-        return tenSp;
-    }
-
-    public void setTenSp(String tenSp) {
-        this.tenSp = tenSp;
     }
 
     public DongSp getIdDongSp() {

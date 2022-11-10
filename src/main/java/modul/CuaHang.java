@@ -60,7 +60,7 @@ public class CuaHang implements Serializable{
         this.diaChi = diaChi;
         this.idCoSo = idCoSo;
         this.ngayThem = new Date(new java.util.Date().getTime());
-        this.ngaySua = null;
+        this.ngaySua = ngaySua;
     }
 
     public String getId() {

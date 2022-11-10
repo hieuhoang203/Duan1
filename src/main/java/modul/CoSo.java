@@ -54,7 +54,7 @@ public class CoSo implements Serializable{
         this.ma = ma;
         this.ten = ten;
         this.ngayThem = new Date(new java.util.Date().getTime());
-        this.ngaySua = null;
+        this.ngaySua = ngaySuaDate;
         this.cuaHangs = cuaHangs;
     }
 
