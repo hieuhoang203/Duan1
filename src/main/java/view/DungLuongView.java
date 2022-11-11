@@ -20,6 +20,29 @@ public class DungLuongView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void fillData(int row){
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+        txt_ten.setText(tb_list.getValueAt(row, 2).toString());
+        txt_ngaythem.setText(tb_list.getValueAt(row, 3).toString());
+        try {
+            txt_ngaysua.setText(tb_list.getValueAt(row, 4).toString());
+        } catch (Exception e) {
+            txt_ngaysua.setText("");
+        }
+    }
+    
+    
+    public void clear(){
+        txt_id.setText("");
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_ngaythem.setText("");
+        txt_ngaysua.setText("");
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
