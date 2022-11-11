@@ -4,12 +4,17 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
+import modul.CoSo;
+import service.serviceImpl.CoSoServiceImpl;
+
 /**
  *
  * @author admin
  */
 public class CoSoView extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    private CoSoServiceImpl coSoServiceImpl = new CoSoServiceImpl();
     /**
      * Creates new form CoSoView
      */
@@ -17,6 +22,28 @@ public class CoSoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void clear(){
+        txt_id.setText("");
+        txt_ma.setText("");
+        txt_ngaySua.setText("");
+        txt_ngayThem.setText("");
+        txt_ten.setText("");
+    }
+    
+    public void fillData(int row){
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+        txt_ten.setText(tb_list.getValueAt(row, 2).toString());
+        txt_ngayThem.setText(tb_list.getValueAt(row, 3).toString());
+        try {
+            txt_ngaySua.setText(tb_list.getValueAt(row, 4).toString());
+        } catch (Exception e) {
+            txt_ngaySua.setText("");
+        }
+    }
+    public CoSo create(){
+        return new CoSo("", txt_ma.getText().trim(), txt_ten.getText().trim(), null, null, null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
