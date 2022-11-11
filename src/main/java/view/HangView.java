@@ -9,7 +9,7 @@ package view;
  * @author admin
  */
 public class HangView extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form HangView
      */
