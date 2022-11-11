@@ -4,12 +4,15 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author admin
  */
 public class DungLuongView extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    
     /**
      * Creates new form DungLuongView
      */
