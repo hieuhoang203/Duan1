@@ -4,22 +4,112 @@
  */
 package view;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import modul.ChiTietSP;
 import modul.CuaHang;
 import modul.DongSp;
 import modul.DungLuong;
 import modul.MauSac;
+import service.serviceImpl.CuaHangServiceImpl;
+import service.serviceImpl.DongSpServiceImpl;
+import service.serviceImpl.DungLuongServiceImpl;
+import service.serviceImpl.MauSacServiceImpl;
 
 /**
  *
  * @author admin
  */
 public class ChiTietSPView extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    private ComboBoxModel cbxDongSp;
+    private ComboBoxModel cbxMauSac;
+    private ComboBoxModel cbxDungLuong;
+    private ComboBoxModel cbxCuaHang;
+    private DongSpServiceImpl dongSpServiceImpl = new DongSpServiceImpl();
+    private MauSacServiceImpl mauSacServiceImpl = new MauSacServiceImpl();
+    private DungLuongServiceImpl dungLuongServiceImpl = new DungLuongServiceImpl();
+    private CuaHangServiceImpl cuaHangServiceImpl = new CuaHangServiceImpl();
     /**
      * Creates new form ChiTietSPView
      */
     public ChiTietSPView() {
         initComponents();
+        addCbxDongSp();
+        addCbxMauSac();
+        addCbxDungLuong();
+        addCbxCuaHang();
+        addTrangThai();
+    }
+    
+    public void addTrangThai(){
+        ButtonGroup group = new ButtonGroup();
+        group.add(rd_chuaban);
+        group.add(rd_daban);
+    }
+    
+    public void addCbxDongSp(){
+        cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
+        cbx_dongsp.setSelectedIndex(0);
+    }
+    
+    public void addCbxMauSac(){
+        cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
+        cbx_mausac.setSelectedIndex(0);
+    }
+    
+    public void addCbxDungLuong(){
+        cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
+        cbx_dungluong.setSelectedIndex(0);
+    }
+    
+    public void addCbxCuaHang(){
+        cbxCuaHang = (DefaultComboBoxModel) cbx_cuahang.getModel();
+        cbx_cuahang.setSelectedIndex(0);
+    }
+    
+    public void fillData(int row){
+        cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
+        cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
+        cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
+        cbxCuaHang = (DefaultComboBoxModel) cbx_cuahang.getModel();
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        cbxDongSp.setSelectedItem(tb_list.getValueAt(row, 1));
+        cbxMauSac.setSelectedItem(tb_list.getValueAt(row, 2));
+        cbxDungLuong.setSelectedItem(tb_list.getValueAt(row, 3));
+        cbxCuaHang.setSelectedItem(tb_list.getValueAt(row, 4));
+        txt_ngaythem.setText(tb_list.getValueAt(row, 5).toString());
+        try {
+            txt_ngaysua.setText(tb_list.getValueAt(row, 6).toString());
+        } catch (Exception e) {
+            txt_ngaysua.setText("");
+        }
+        txt_soluong.setText(tb_list.getValueAt(row, 7).toString());
+        if (Integer.parseInt(tb_list.getValueAt(row, 8).toString()) == 1) {
+            rd_chuaban.setSelected(true);
+        } else {
+            rd_chuaban.setSelected(true);
+        }
+    }
+    
+    public void clear(){
+        txt_id.setText("");
+        cbx_dongsp.setSelectedIndex(0);
+        cbx_mausac.setSelectedIndex(0);
+        cbx_dungluong.setSelectedIndex(0);
+        cbx_cuahang.setSelectedIndex(0);
+        txt_ngaythem.setText("");
+        txt_ngaysua.setText("");
+        txt_soluong.setText("");
+    }
+    
+    public ChiTietSP create(){
+        return new ChiTietSP("", (DongSp)cbx_dongsp.getSelectedItem(), 
+                (MauSac)cbx_mausac.getSelectedItem(), 
+                (DungLuong)cbx_dungluong.getSelectedItem(), 
+                (CuaHang)cbx_cuahang.getSelectedItem(), null, null, 0, 1);
     }
 
     /**

@@ -28,7 +28,7 @@ public class ChiTietSP implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
     private String id;
-    
+     
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdDongSP")
