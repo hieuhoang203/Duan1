@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,7 +42,8 @@ public class DongSp implements Serializable{
     @Column(name = "GiaBan")
     private int giaBan;
     
-    @OneToMany(mappedBy = "idDongSp", fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "IdHang")
     private Hang idHang;
     
     @Column(name = "NgayThem")

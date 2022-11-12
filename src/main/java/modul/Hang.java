@@ -26,6 +26,7 @@ import javax.persistence.Temporal;
 public class Hang implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id")
     private String id;
     
     @Column(name = "Ma")
