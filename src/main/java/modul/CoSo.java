@@ -43,7 +43,7 @@ public class CoSo implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idCoSo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idCoSo", fetch = FetchType.EAGER)
     private ArrayList<CuaHang> cuaHangs;
 
     public CoSo() {

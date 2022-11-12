@@ -30,19 +30,19 @@ public class ChiTietSP implements Serializable{
     private String id;
      
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdDongSP")
     private DongSp idDongSp;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdMauSac")
     private MauSac idMauSac;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdDungLuong")
     private DungLuong idDungLuong;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdCuaHang")
     private CuaHang idCuaHang;
     

@@ -4,10 +4,16 @@
  */
 package repository;
 
+import org.hibernate.Session;
+import hibernateConfig.HibernateConfig;
+import java.util.ArrayList;
+import modul.CuaHang;
+
 /**
  *
  * @author admin
  */
 public class CuaHangRepository {
+    private static Session session = HibernateConfig.getFACTORY().openSession();
     
 }

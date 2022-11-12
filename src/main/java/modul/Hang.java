@@ -43,7 +43,7 @@ public class Hang implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idHang", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idHang", fetch = FetchType.EAGER)
     private ArrayList<DongSp> dongSps;
 
     public Hang() {

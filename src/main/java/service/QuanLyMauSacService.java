@@ -4,10 +4,18 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.MauSac;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyMauSacService {
-    
+    ArrayList<MauSac> select();
+    void insert(MauSac h);
+    void update(String id, MauSac ms);
+    void delete(String id);
+    boolean checkMa(MauSac ms);
+    boolean checkData(MauSac ms);
 }
