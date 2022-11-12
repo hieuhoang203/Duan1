@@ -6,6 +6,7 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.CoSo;
+import repository.CoSoRepository;
 import service.QuanLyCoSoService;
 
 /**
@@ -13,35 +14,53 @@ import service.QuanLyCoSoService;
  * @author admin
  */
 public class CoSoServiceImpl implements QuanLyCoSoService{
-
+    private static CoSoRepository coSoRepository = new CoSoRepository();
     @Override
     public ArrayList<CoSo> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return coSoRepository.select();
     }
 
     @Override
-    public void insert(CoSo cs) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean insert(CoSo cs) {
+        if (checkData(cs) && checkMa(cs)) {
+            coSoRepository.insert(cs);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void update(String id, CoSo cs) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean update(String id, CoSo cs) {
+        if (checkData(cs)) {
+            coSoRepository.update(id, cs);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        coSoRepository.delete(id);
     }
 
     @Override
     public boolean checkMa(CoSo cs) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (coSoRepository.selectMa().contains(cs.getMa())) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
     public boolean checkData(CoSo cs) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!cs.getMa().equals("") && !cs.getTen().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

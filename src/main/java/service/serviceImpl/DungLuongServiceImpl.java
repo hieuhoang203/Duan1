@@ -20,12 +20,12 @@ public class DungLuongServiceImpl implements QuanLyDungLuongService{
     }
 
     @Override
-    public void insert(DungLuong dsp) {
+    public boolean insert(DungLuong dsp) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(String id, DungLuong dl) {
+    public boolean update(String id, DungLuong dl) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

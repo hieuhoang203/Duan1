@@ -13,8 +13,8 @@ import modul.Hang;
  */
 public interface QuanLyHangService {
     ArrayList<Hang> select();
-    void insert(Hang h);
-    void update(String id, Hang h);
+    boolean insert(Hang h);
+    boolean update(String id, Hang h);
     void delete(String id);
     boolean checkMa(Hang h);
     boolean checkData(Hang h);

@@ -13,8 +13,8 @@ import modul.CuaHang;
  */
 public interface QuanLyCuaHangService {
     ArrayList<CuaHang> select();
-    void insert(CuaHang ch);
-    void update(String id, CuaHang ch);
+    boolean insert(CuaHang ch);
+    boolean update(String id, CuaHang ch);
     void delete(String id);
     boolean checkMa(CuaHang ch);
     boolean checkData(CuaHang ch);

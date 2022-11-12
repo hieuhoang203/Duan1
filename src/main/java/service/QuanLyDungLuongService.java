@@ -13,8 +13,8 @@ import modul.DungLuong;
  */
 public interface QuanLyDungLuongService {
     ArrayList<DungLuong> select();
-    void insert(DungLuong dsp);
-    void update(String id, DungLuong dl);
+    boolean insert(DungLuong dsp);
+    boolean update(String id, DungLuong dl);
     void delete(String id);
     boolean checkMa(DungLuong dl);
     boolean checkData(DungLuong dl);

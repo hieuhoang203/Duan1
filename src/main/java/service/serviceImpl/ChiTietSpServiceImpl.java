@@ -20,12 +20,12 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     }
 
     @Override
-    public void insert(ChiTietSP ctsp) {
+    public boolean insert(ChiTietSP ctsp) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(String id, ChiTietSP ctsp) {
+    public boolean update(String id, ChiTietSP ctsp) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

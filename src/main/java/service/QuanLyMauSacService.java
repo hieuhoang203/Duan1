@@ -13,8 +13,8 @@ import modul.MauSac;
  */
 public interface QuanLyMauSacService {
     ArrayList<MauSac> select();
-    void insert(MauSac h);
-    void update(String id, MauSac ms);
+    boolean insert(MauSac h);
+    boolean update(String id, MauSac ms);
     void delete(String id);
     boolean checkMa(MauSac ms);
     boolean checkData(MauSac ms);

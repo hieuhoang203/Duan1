@@ -20,12 +20,12 @@ public class DongSpServiceImpl implements QuanLyDongSPService{
     }
 
     @Override
-    public void insert(DongSp dsp) {
+    public boolean insert(DongSp dsp) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(String id, DongSp dsp) {
+    public boolean update(String id, DongSp dsp) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

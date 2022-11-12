@@ -13,8 +13,8 @@ import modul.CoSo;
  */
 public interface QuanLyCoSoService {
     ArrayList<CoSo> select();
-    void insert(CoSo cs);
-    void update(String id, CoSo cs);
+    boolean insert(CoSo cs);
+    boolean update(String id, CoSo cs);
     void delete(String id);
     boolean checkMa(CoSo cs);
     boolean checkData(CoSo cs);

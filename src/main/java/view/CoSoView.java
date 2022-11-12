@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modul.CoSo;
 import service.serviceImpl.CoSoServiceImpl;
@@ -34,7 +35,15 @@ public class CoSoView extends javax.swing.JFrame {
     public void addRows(){
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
-        
+        for (CoSo coSo : coSoServiceImpl.select()) {
+            tableModel.addRow(new Object[]{
+                coSo.getId(),
+                coSo.getMa(),
+                coSo.getTen(),
+                coSo.getNgayThem(),
+                coSo.getNgaySua()
+            });
+        }
     }
     
     public void fillData(int row){
@@ -133,9 +142,19 @@ public class CoSoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_list);
 
         btn_them.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\add.png")); // NOI18N
+        btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_themMouseClicked(evt);
+            }
+        });
 
         btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
 
@@ -232,6 +251,23 @@ public class CoSoView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
+        // TODO add your handling code here:
+        if (coSoServiceImpl.insert(create())) {
+            addRows();
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
+            clear();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Thêm không thành công !");
+        }
+    }//GEN-LAST:event_btn_themMouseClicked
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tb_listMouseClicked
 
     /**
      * @param args the command line arguments

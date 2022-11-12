@@ -13,8 +13,8 @@ import modul.ChiTietSP;
  */
 public interface QuanLyChiTietSPService {
     ArrayList<ChiTietSP> select();
-    void insert(ChiTietSP ctsp);
-    void update(String id, ChiTietSP ctsp);
+    boolean insert(ChiTietSP ctsp);
+    boolean update(String id, ChiTietSP ctsp);
     void delete(String id);
     boolean checkMa(ChiTietSP ctsp);
     boolean checkData(ChiTietSP ctsp);

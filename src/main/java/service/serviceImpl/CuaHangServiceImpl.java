@@ -20,12 +20,12 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
     }
 
     @Override
-    public void insert(CuaHang ch) {
+    public boolean insert(CuaHang ch) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(String id, CuaHang ch) {
+    public boolean update(String id, CuaHang ch) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

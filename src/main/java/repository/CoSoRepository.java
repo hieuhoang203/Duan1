@@ -18,7 +18,7 @@ public class CoSoRepository {
     private static Session session = HibernateConfig.getFACTORY().openSession();
     private static CuaHangRepository cuaHangRepository = new CuaHangRepository();
     
-    public static ArrayList<CoSo> select(){
+    public ArrayList<CoSo> select(){
         session.beginTransaction();
         Query q = session.createQuery("From CoSo");
         ArrayList<CoSo> list = (ArrayList<CoSo>) q.getResultList();

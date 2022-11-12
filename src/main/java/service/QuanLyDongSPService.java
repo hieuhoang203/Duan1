@@ -13,8 +13,8 @@ import modul.DongSp;
  */
 public interface QuanLyDongSPService {
     ArrayList<DongSp> select();
-    void insert(DongSp dsp);
-    void update(String id, DongSp dsp);
+    boolean insert(DongSp dsp);
+    boolean update(String id, DongSp dsp);
     void delete(String id);
     boolean checkMa(DongSp dsp);
     boolean checkData(DongSp dsp);

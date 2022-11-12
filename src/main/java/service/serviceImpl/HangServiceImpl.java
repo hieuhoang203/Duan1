@@ -20,12 +20,12 @@ public class HangServiceImpl implements QuanLyHangService{
     }
 
     @Override
-    public void insert(Hang h) {
+    public boolean insert(Hang h) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(String id, Hang h) {
+    public boolean update(String id, Hang h) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
