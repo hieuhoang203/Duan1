@@ -14,7 +14,8 @@ import service.QuanLyCoSoService;
  * @author admin
  */
 public class CoSoServiceImpl implements QuanLyCoSoService{
-    private static CoSoRepository coSoRepository = new CoSoRepository();
+    private CoSoRepository coSoRepository = new CoSoRepository();
+    
     @Override
     public ArrayList<CoSo> select() {
         return coSoRepository.select();

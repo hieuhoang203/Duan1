@@ -7,6 +7,7 @@ package view;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modul.CoSo;
+import service.QuanLyCoSoService;
 import service.serviceImpl.CoSoServiceImpl;
 
 /**
@@ -15,7 +16,7 @@ import service.serviceImpl.CoSoServiceImpl;
  */
 public class CoSoView extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
-    private CoSoServiceImpl coSoServiceImpl = new CoSoServiceImpl();
+    private QuanLyCoSoService coSoServiceImpl = new CoSoServiceImpl();
     /**
      * Creates new form CoSoView
      */

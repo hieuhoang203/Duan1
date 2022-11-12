@@ -4,9 +4,9 @@
  */
 package modul;
 
+import java.util.List;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,9 +25,9 @@ import javax.persistence.Temporal;
 @Table(name = "CoSo")
 public class CoSo implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -44,12 +44,12 @@ public class CoSo implements Serializable{
     private Date ngaySua;
     
     @OneToMany(mappedBy = "idCoSo", fetch = FetchType.EAGER)
-    private ArrayList<CuaHang> cuaHangs;
+    private List<CuaHang> cuaHangs;
 
     public CoSo() {
     }
 
-    public CoSo(String id, String ma, String ten, Date ngayThem, Date ngaySuaDate, ArrayList<CuaHang> cuaHangs) {
+    public CoSo(Integer id, String ma, String ten, Date ngayThem, Date ngaySuaDate, List<CuaHang> cuaHangs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -58,11 +58,11 @@ public class CoSo implements Serializable{
         this.cuaHangs = cuaHangs;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -98,11 +98,11 @@ public class CoSo implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public ArrayList<CuaHang> getCuaHangs() {
+    public List<CuaHang> getCuaHangs() {
         return cuaHangs;
     }
 
-    public void setCuaHangs(ArrayList<CuaHang> cuaHangs) {
+    public void setCuaHangs(List<CuaHang> cuaHangs) {
         this.cuaHangs = cuaHangs;
     }
 

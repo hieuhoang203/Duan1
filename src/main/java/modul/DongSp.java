@@ -5,14 +5,17 @@
 package modul;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -24,9 +27,9 @@ import javax.persistence.Temporal;
 @Table(name = "DongSP")
 public class DongSp implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -51,26 +54,30 @@ public class DongSp implements Serializable{
     @Column(name = "NgaySua")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
-
+    
+    @OneToMany(mappedBy = "idDongSp", fetch = FetchType.EAGER)
+    private List<ChiTietSP> chiTietSPs;
+    
     public DongSp() {
     }
 
-    public DongSp(String id, String ma, String Ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua) {
+    public DongSp(Integer id, String ma, String Ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.Ten = Ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new Date(new Date().getTime());
         this.ngaySua = ngaySua;
+        this.chiTietSPs = chiTietSPs;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -130,6 +137,14 @@ public class DongSp implements Serializable{
         this.ngaySua = ngaySua;
     }
 
+    public List<ChiTietSP> getChiTietSPs() {
+        return chiTietSPs;
+    }
+
+    public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
+        this.chiTietSPs = chiTietSPs;
+    }
+    
     @Override
     public String toString() {
         return Ten;
