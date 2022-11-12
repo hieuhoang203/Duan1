@@ -20,6 +20,7 @@ public class CoSoView extends javax.swing.JFrame {
      */
     public CoSoView() {
         initComponents();
+        addRows();
     }
 
     public void clear(){
@@ -28,6 +29,12 @@ public class CoSoView extends javax.swing.JFrame {
         txt_ngaySua.setText("");
         txt_ngayThem.setText("");
         txt_ten.setText("");
+    }
+    
+    public void addRows(){
+        tableModel = (DefaultTableModel) tb_list.getModel();
+        tableModel.setRowCount(0);
+        
     }
     
     public void fillData(int row){
@@ -41,9 +48,12 @@ public class CoSoView extends javax.swing.JFrame {
             txt_ngaySua.setText("");
         }
     }
+    
     public CoSo create(){
+        // Can sua lai khi hoan thien Service
         return new CoSo("", txt_ma.getText().trim(), txt_ten.getText().trim(), null, null, null);
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
