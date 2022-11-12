@@ -14,8 +14,8 @@ import modul.CoSo;
 public interface QuanLyCoSoService {
     ArrayList<CoSo> select();
     boolean insert(CoSo cs);
-    boolean update(String id, CoSo cs);
-    void delete(String id);
+    boolean update(Integer id, CoSo cs);
+    void delete(Integer id);
     boolean checkMa(CoSo cs);
     boolean checkData(CoSo cs);
 }

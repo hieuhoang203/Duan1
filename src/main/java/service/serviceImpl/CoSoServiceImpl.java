@@ -32,7 +32,7 @@ public class CoSoServiceImpl implements QuanLyCoSoService{
     }
 
     @Override
-    public boolean update(String id, CoSo cs) {
+    public boolean update(Integer id, CoSo cs) {
         if (checkData(cs)) {
             coSoRepository.update(id, cs);
             return true;
@@ -42,7 +42,7 @@ public class CoSoServiceImpl implements QuanLyCoSoService{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         coSoRepository.delete(id);
     }
 

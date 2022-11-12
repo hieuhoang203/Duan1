@@ -25,12 +25,12 @@ public class DungLuongServiceImpl implements QuanLyDungLuongService{
     }
 
     @Override
-    public boolean update(String id, DungLuong dl) {
+    public boolean update(Integer id, DungLuong dl) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

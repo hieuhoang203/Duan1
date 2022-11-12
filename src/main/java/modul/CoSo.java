@@ -6,6 +6,7 @@ package modul;
 
 import java.util.List;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +44,7 @@ public class CoSo implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idCoSo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idCoSo", fetch = FetchType.LAZY)
     private List<CuaHang> cuaHangs;
 
     public CoSo() {
@@ -53,7 +54,7 @@ public class CoSo implements Serializable{
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySuaDate;
         this.cuaHangs = cuaHangs;
     }

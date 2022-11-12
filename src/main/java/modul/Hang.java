@@ -53,7 +53,7 @@ public class Hang implements Serializable{
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.dongSps = dongSps;
     }

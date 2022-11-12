@@ -14,8 +14,8 @@ import modul.CuaHang;
 public interface QuanLyCuaHangService {
     ArrayList<CuaHang> select();
     boolean insert(CuaHang ch);
-    boolean update(String id, CuaHang ch);
-    void delete(String id);
+    boolean update(Integer id, CuaHang ch);
+    void delete(Integer id);
     boolean checkMa(CuaHang ch);
     boolean checkData(CuaHang ch);
 }

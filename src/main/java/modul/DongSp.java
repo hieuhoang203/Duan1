@@ -68,7 +68,7 @@ public class DongSp implements Serializable{
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
-        this.ngayThem = new Date(new Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
     }

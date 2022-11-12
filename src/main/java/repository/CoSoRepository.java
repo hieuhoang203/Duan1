@@ -30,22 +30,26 @@ public class CoSoRepository {
         session.getTransaction().commit();
     }
     
-    public void update(String id, CoSo cs){
-        String query = "update CoSo set ma =:ma,"
-                + "ten =:ten, ngaySua =:ngayThem where id =:id";
+    public void update(Integer id, CoSo cs){
+        session.beginTransaction();
+        String query = "update CoSo set ma =:ma, "
+                + "ten =:ten, ngaySua =:ngaySua where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("ma", cs.getMa());
         q.setParameter("ten", cs.getTen());
         q.setParameter("ngaySua", cs.getNgayThem());
         q.setParameter("id", id);
         q.executeUpdate();
+        session.getTransaction().commit();
     }
     
-    public void delete(String id){
+    public void delete(Integer id){
+        session.beginTransaction();
         String query = "Delete from CoSo where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("id", id);
         q.executeUpdate();
+        session.getTransaction().commit();
     }
     
     public ArrayList<String> selectMa(){

@@ -15,8 +15,10 @@ import service.serviceImpl.CoSoServiceImpl;
  * @author admin
  */
 public class CoSoView extends javax.swing.JFrame {
+
     private DefaultTableModel tableModel;
     private QuanLyCoSoService coSoServiceImpl = new CoSoServiceImpl();
+
     /**
      * Creates new form CoSoView
      */
@@ -25,15 +27,15 @@ public class CoSoView extends javax.swing.JFrame {
         addRows();
     }
 
-    public void clear(){
+    public void clear() {
         txt_id.setText("");
         txt_ma.setText("");
         txt_ngaySua.setText("");
         txt_ngayThem.setText("");
         txt_ten.setText("");
     }
-    
-    public void addRows(){
+
+    public void addRows() {
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
         for (CoSo coSo : coSoServiceImpl.select()) {
@@ -46,8 +48,8 @@ public class CoSoView extends javax.swing.JFrame {
             });
         }
     }
-    
-    public void fillData(int row){
+
+    public void fillData(int row) {
         txt_id.setText(tb_list.getValueAt(row, 0).toString());
         txt_ma.setText(tb_list.getValueAt(row, 1).toString());
         txt_ten.setText(tb_list.getValueAt(row, 2).toString());
@@ -58,12 +60,11 @@ public class CoSoView extends javax.swing.JFrame {
             txt_ngaySua.setText("");
         }
     }
-    
-    public CoSo create(){
-        // Can sua lai khi hoan thien Service
-        return new CoSo("", txt_ma.getText().trim(), txt_ten.getText().trim(), null, null, null);
+
+    public CoSo create() {
+        return new CoSo(null, txt_ma.getText().trim(), txt_ten.getText().trim(), null, null, null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,10 +159,25 @@ public class CoSoView extends javax.swing.JFrame {
         });
 
         btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
+        btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_suaMouseClicked(evt);
+            }
+        });
 
         btn_xoa.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\delete.png")); // NOI18N
+        btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoaMouseClicked(evt);
+            }
+        });
 
         btn_clear.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\clear.png")); // NOI18N
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,7 +276,13 @@ public class CoSoView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             clear();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Thêm không thành công !");
+            if (create().getMa().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
+            } else if (create().getTen().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Mã đã tồn tại !");
+            }
         }
     }//GEN-LAST:event_btn_themMouseClicked
 
@@ -269,6 +291,52 @@ public class CoSoView extends javax.swing.JFrame {
         int row = tb_list.getSelectedRow();
         fillData(row);
     }//GEN-LAST:event_tb_listMouseClicked
+
+    private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            if (coSoServiceImpl.update(id, create())) {
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Mở lại để cập nhật dữ liệu !");
+                clear();
+            } else {
+                if (create().getMa().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
+                } else if (create().getTen().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_suaMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
+
+    private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                coSoServiceImpl.delete(id);
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Hủy xóa !");
+                clear();
+            }
+        }
+    }//GEN-LAST:event_btn_xoaMouseClicked
 
     /**
      * @param args the command line arguments

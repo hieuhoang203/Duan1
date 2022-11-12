@@ -14,8 +14,8 @@ import modul.DungLuong;
 public interface QuanLyDungLuongService {
     ArrayList<DungLuong> select();
     boolean insert(DungLuong dsp);
-    boolean update(String id, DungLuong dl);
-    void delete(String id);
+    boolean update(Integer id, DungLuong dl);
+    void delete(Integer id);
     boolean checkMa(DungLuong dl);
     boolean checkData(DungLuong dl);
 }

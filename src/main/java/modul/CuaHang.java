@@ -64,7 +64,7 @@ public class CuaHang implements Serializable{
         this.ten = ten;
         this.diaChi = diaChi;
         this.idCoSo = idCoSo;
-        this.ngayThem = new Date(new Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
     }

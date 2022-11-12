@@ -14,8 +14,8 @@ import modul.DongSp;
 public interface QuanLyDongSPService {
     ArrayList<DongSp> select();
     boolean insert(DongSp dsp);
-    boolean update(String id, DongSp dsp);
-    void delete(String id);
+    boolean update(Integer id, DongSp dsp);
+    void delete(Integer id);
     boolean checkMa(DongSp dsp);
     boolean checkData(DongSp dsp);
 }

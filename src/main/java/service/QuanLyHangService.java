@@ -14,8 +14,8 @@ import modul.Hang;
 public interface QuanLyHangService {
     ArrayList<Hang> select();
     boolean insert(Hang h);
-    boolean update(String id, Hang h);
-    void delete(String id);
+    boolean update(Integer id, Hang h);
+    void delete(Integer id);
     boolean checkMa(Hang h);
     boolean checkData(Hang h);
 }

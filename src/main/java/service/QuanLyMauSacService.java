@@ -14,8 +14,8 @@ import modul.MauSac;
 public interface QuanLyMauSacService {
     ArrayList<MauSac> select();
     boolean insert(MauSac h);
-    boolean update(String id, MauSac ms);
-    void delete(String id);
+    boolean update(Integer id, MauSac ms);
+    void delete(Integer id);
     boolean checkMa(MauSac ms);
     boolean checkData(MauSac ms);
 }

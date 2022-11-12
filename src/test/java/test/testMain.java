@@ -4,7 +4,10 @@
  */
 package test;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -12,8 +15,10 @@ import java.sql.Date;
  * @author admin
  */
 public class testMain {
-    public static void main(String[] args) {
-        Date d = new Date(new java.util.Date().getTime());
+    public static void main(String[] args) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String date = sdf.format(new Date());
+        Date d = new java.sql.Date(new Date().getTime());
         System.out.println(d);
     }
 }

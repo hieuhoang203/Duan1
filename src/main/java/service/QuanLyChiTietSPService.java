@@ -14,9 +14,9 @@ import modul.ChiTietSP;
 public interface QuanLyChiTietSPService {
     ArrayList<ChiTietSP> select();
     boolean insert(ChiTietSP ctsp);
-    boolean update(String id, ChiTietSP ctsp);
-    void delete(String id);
+    boolean update(Integer id, ChiTietSP ctsp);
+    void delete(Integer id);
     boolean checkMa(ChiTietSP ctsp);
     boolean checkData(ChiTietSP ctsp);
-    ChiTietSP search(String id);
+    ChiTietSP search(Integer id);
 }

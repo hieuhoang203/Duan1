@@ -69,7 +69,7 @@ public class ChiTietSP implements Serializable{
         this.idMauSac = idMauSac;
         this.idDungLuong = idDungLuong;
         this.idCuaHang = idCuaHang;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.soLuong = soLuong;
         this.trangThai = trangThai;

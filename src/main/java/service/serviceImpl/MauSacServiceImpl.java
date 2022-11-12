@@ -25,12 +25,12 @@ public class MauSacServiceImpl implements QuanLyMauSacService{
     }
 
     @Override
-    public boolean update(String id, MauSac ms) {
+    public boolean update(Integer id, MauSac ms) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

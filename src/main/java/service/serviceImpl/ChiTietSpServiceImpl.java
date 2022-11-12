@@ -25,12 +25,12 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     }
 
     @Override
-    public boolean update(String id, ChiTietSP ctsp) {
+    public boolean update(Integer id, ChiTietSP ctsp) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -45,7 +45,7 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     }
 
     @Override
-    public ChiTietSP search(String id) {
+    public ChiTietSP search(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
