@@ -5,22 +5,37 @@
 package view;
 
 import javax.swing.table.DefaultTableModel;
+import modul.DungLuong;
+import service.QuanLyDungLuongService;
+import service.serviceImpl.DungLuongServiceImpl;
 
 /**
  *
  * @author admin
  */
 public class DungLuongView extends javax.swing.JFrame {
-    private DefaultTableModel tableModel;
-    
+private QuanLyDungLuongService qldl= new DungLuongServiceImpl();
+    private DefaultTableModel defaulttablemodel= new DefaultTableModel();
+
     /**
      * Creates new form DungLuongView
      */
     public DungLuongView() {
         initComponents();
+        addRow();
     }
 
-    public void fillData(int row){
+    public void addRow() {
+        defaulttablemodel=(DefaultTableModel) tb_list.getModel();
+        defaulttablemodel.setRowCount(0);
+        for (DungLuong dl : qldl.select()) {
+            defaulttablemodel.addRow(new Object[]{
+                dl.getId(), dl.getMa(), dl.getTen(), dl.getNgayThem(), dl.getNgaySua()
+            });
+        }
+    }
+
+    public void fillData(int row) {
         txt_id.setText(tb_list.getValueAt(row, 0).toString());
         txt_ma.setText(tb_list.getValueAt(row, 1).toString());
         txt_ten.setText(tb_list.getValueAt(row, 2).toString());
@@ -31,18 +46,15 @@ public class DungLuongView extends javax.swing.JFrame {
             txt_ngaysua.setText("");
         }
     }
-    
-    
-    public void clear(){
+
+    public void clear() {
         txt_id.setText("");
         txt_ma.setText("");
         txt_ten.setText("");
         txt_ngaythem.setText("");
         txt_ngaysua.setText("");
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,13 +143,11 @@ public class DungLuongView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_list);
 
-        btn_them.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\add.png")); // NOI18N
-
-        btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
-
-        btn_xoa.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\delete.png")); // NOI18N
-
-        btn_clear.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\clear.png")); // NOI18N
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,6 +241,11 @@ public class DungLuongView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btn_themActionPerformed
 
     /**
      * @param args the command line arguments

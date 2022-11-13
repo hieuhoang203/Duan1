@@ -319,11 +319,7 @@ public MauSac create(){
     private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
         // TODO add your handling code here:
         int row=tb_list.getSelectedRow();
-        txt_id.setText(tb_list.getValueAt(row, 0).toString());
-        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
-        txt_ten.setText(tb_list.getValueAt(row, 2).toString());
-        txt_ngaythem.setText(tb_list.getValueAt(row, 3).toString());    
-        txt_ngaysua.setText(tb_list.getValueAt(row, 4).toString());
+        fillData(row);
     }//GEN-LAST:event_tb_listMouseClicked
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed

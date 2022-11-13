@@ -197,6 +197,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_listMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -275,6 +278,7 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_them">
+<<<<<<< HEAD
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\add.png"/>
@@ -287,6 +291,16 @@
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\update.png"/>
             </Property>
           </Properties>
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_sua">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaActionPerformed"/>
+          </Events>
+>>>>>>> 185b248fe27c5374227fba4a7643c7fb1c0d4e2e
         </Component>
         <Component class="javax.swing.JButton" name="btn_xoa">
           <Properties>
@@ -296,11 +310,17 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_clear">
+<<<<<<< HEAD
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\clear.png"/>
             </Property>
           </Properties>
+=======
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clearActionPerformed"/>
+          </Events>
+>>>>>>> 185b248fe27c5374227fba4a7643c7fb1c0d4e2e
         </Component>
       </SubComponents>
     </Container>

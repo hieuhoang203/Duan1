@@ -32,7 +32,7 @@ public class Hang implements Serializable{
     @Column(name = "Ma")
     private String ma;
     
-    @Column(name = "Ten")
+    @Column(name = "TenHang")
     private String ten;
     
     @Column(name = "NgayThem")
@@ -43,7 +43,7 @@ public class Hang implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idHang", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idHang", fetch = FetchType.LAZY)
     private List<DongSp> dongSps;
 
     public Hang() {

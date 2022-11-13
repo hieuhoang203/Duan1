@@ -6,6 +6,7 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.Hang;
+import repository.HangRepository;
 import service.QuanLyHangService;
 
 /**
@@ -13,35 +14,54 @@ import service.QuanLyHangService;
  * @author admin
  */
 public class HangServiceImpl implements QuanLyHangService{
-
+private HangRepository hangRepository= new HangRepository();
     @Override
     public ArrayList<Hang> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     return hangRepository.select();
     }
 
     @Override
     public boolean insert(Hang h) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(h)&&checkMa(h)) {
+            hangRepository.insert(h);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
     public boolean update(Integer id, Hang h) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(h)) {
+            hangRepository.update(id, h);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   hangRepository.delete(id);
     }
 
     @Override
     public boolean checkMa(Hang h) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (hangRepository.selectMa().contains(h.getMa())) {
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 
     @Override
     public boolean checkData(Hang h) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!h.getMa().equals("")&&!h.getTen().equals("")) {
+            return true;
+        }else{
+            return false;
+        }
     }
     
 }

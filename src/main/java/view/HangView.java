@@ -4,19 +4,55 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modul.Hang;
+import service.QuanLyHangService;
+import service.serviceImpl.HangServiceImpl;
+
 /**
  *
  * @author admin
  */
 public class HangView extends javax.swing.JFrame {
-    
+    private QuanLyHangService qlh= new HangServiceImpl();
+    private DefaultTableModel defaulttablemodel= new DefaultTableModel();
     /**
      * Creates new form HangView
      */
     public HangView() {
         initComponents();
+        addRow();
     }
-
+public void addRow(){
+    defaulttablemodel=(DefaultTableModel) tb_list.getModel();
+    defaulttablemodel.setRowCount(0);
+    for (Hang h : qlh.select()) {
+        defaulttablemodel.addRow(new Object[]{
+            h.getId(), h.getMa(), h.getTen(), h.getNgayThem(), h.getNgaySua()
+        });
+    }
+}
+public void clear(){
+    txt_id.setText("");
+    txt_ma.setText("");
+    txt_ten.setText("");
+    txt_ngaythem.setText("");
+     txt_ngaysua.setText("");   
+   
+}
+public void fillData(int row){
+    txt_id.setText(tb_list.getValueAt(row, 0).toString());
+    txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+    txt_ten.setText(tb_list.getValueAt(row, 2).toString());
+    txt_ngaythem.setText(tb_list.getValueAt(row, 3).toString());
+    try {
+      txt_ngaysua.setText(tb_list.getValueAt(row, 4).toString());  
+    } catch (Exception e) {
+        txt_ngaysua.setText("");
+    }
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +113,11 @@ public class HangView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_list);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -105,13 +146,23 @@ public class HangView extends javax.swing.JFrame {
 
         txt_ngaysua.setEditable(false);
 
-        btn_them.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\add.png")); // NOI18N
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
-        btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
 
-        btn_xoa.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\delete.png")); // NOI18N
-
-        btn_clear.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\clear.png")); // NOI18N
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,6 +255,53 @@ public class HangView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+public Hang create(){
+    return new Hang(null, txt_ma.getText().trim(), txt_ten.getText().trim(), null, null, null);
+}
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        if (qlh.insert(create())) {
+            addRow();
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+            clear();
+        } else {
+            if (qlh.checkMa(create())) {
+                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng");
+            } else if(qlh.checkData(create())){
+                JOptionPane.showMessageDialog(rootPane, "Dữ liệu không được để trống");
+            }
+        }
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+      int row=tb_list.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tb_listMouseClicked
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+        int row=tb_list.getSelectedRow();
+        Integer id=(Integer) tb_list.getValueAt(row, 0);
+        if (id==null) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn bản ghi");
+        } else {
+            if (!qlh.checkData(create())) {
+                JOptionPane.showMessageDialog(rootPane, "Dữ liệu không được để trống");
+            } else if(qlh.update(id, create())){
+                
+                addRow();
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                clear();
+            }
+        }
+                
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearActionPerformed
 
     /**
      * @param args the command line arguments
