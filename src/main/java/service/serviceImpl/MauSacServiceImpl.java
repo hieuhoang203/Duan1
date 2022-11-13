@@ -6,42 +6,61 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.MauSac;
+import repository.MauSacRepository;
 import service.QuanLyMauSacService;
 
 /**
  *
  * @author admin
  */
-public class MauSacServiceImpl implements QuanLyMauSacService{
+public class MauSacServiceImpl implements QuanLyMauSacService {
+
+    private MauSacRepository mauSacRepository = new MauSacRepository();
 
     @Override
     public ArrayList<MauSac> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return mauSacRepository.select();
     }
-
+    
     @Override
-    public boolean insert(MauSac h) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean insert(MauSac ms) {
+        if (checkData(ms) && checkMa(ms)) {
+            mauSacRepository.insert(ms);
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     @Override
     public boolean update(Integer id, MauSac ms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(ms)) {
+            mauSacRepository.update(id, ms);
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        mauSacRepository.delete(id);
     }
-
+    
     @Override
     public boolean checkMa(MauSac ms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (mauSacRepository.selectMa().contains(ms.getMa())) {
+            return false;
+        }
+        return true;
     }
-
+    
     @Override
     public boolean checkData(MauSac ms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!ms.getMa().equals("") && !ms.getTen().equals("")) {
+            return true;
+        }
+        return false;
     }
     
 }

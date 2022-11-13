@@ -4,10 +4,58 @@
  */
 package repository;
 
+import hibernateConfig.HibernateConfig;
+import java.util.ArrayList;
+import javax.persistence.Query;
+import modul.MauSac;
+import org.hibernate.Session;
+
 /**
  *
  * @author admin
  */
 public class MauSacRepository {
-    
+
+    private Session session = HibernateConfig.getFACTORY().openSession();
+
+    public ArrayList<MauSac> select() {
+        String query = "from MauSac";
+        Query q = session.createQuery(query);
+        ArrayList<MauSac> list = (ArrayList<MauSac>) q.getResultList();
+        return list;
+    }
+
+    public void insert(MauSac ms) {
+        session.beginTransaction();
+        session.save(ms);
+        session.getTransaction().commit();
+    }
+
+    public void update(Integer id, MauSac ms) {
+        session.beginTransaction();
+        String query = "Update MauSac set ma= : ma, ten= : ten, ngaySua= : ngaySua Where id= : id";
+        Query q = session.createQuery(query);
+        q.setParameter("ma", ms.getMa());
+        q.setParameter("ten", ms.getTen());
+        q.setParameter("ngaySua", ms.getNgayThem());
+        q.setParameter("id", id);
+        q.executeUpdate();
+        session.getTransaction().commit();
+    }
+
+    public void delete(Integer id) {
+        session.beginTransaction();
+        String query = "DELETE from MauSac WHERE id= : id";
+        Query q = session.createQuery(query);
+        q.setParameter("id", id);
+        q.executeUpdate();
+        session.getTransaction().commit();
+    }
+
+    public ArrayList<String> selectMa() {
+        String query = "SELECT ms.ma from MauSac ms";
+        Query q = session.createQuery(query);
+        ArrayList<String> list = (ArrayList<String>) q.getResultList();
+        return list;
+    }
 }

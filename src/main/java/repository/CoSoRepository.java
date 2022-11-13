@@ -16,7 +16,6 @@ import modul.CoSo;
  */
 public class CoSoRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
-    private CuaHangRepository cuaHangRepository = new CuaHangRepository();
     
     public ArrayList<CoSo> select(){
         Query q = session.createQuery("From CoSo");

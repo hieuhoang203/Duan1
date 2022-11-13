@@ -4,10 +4,14 @@
  */
 package repository;
 
+import hibernateConfig.HibernateConfig;
+import org.hibernate.Session;
+
 /**
  *
  * @author admin
  */
 public class HangRepository {
-    
+   private Session session=HibernateConfig.getFACTORY().openSession();
+  
 }

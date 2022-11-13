@@ -4,37 +4,58 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modul.MauSac;
+import service.QuanLyMauSacService;
+import service.serviceImpl.MauSacServiceImpl;
+
 /**
  *
  * @author admin
  */
 public class MauSacView extends javax.swing.JFrame {
+private QuanLyMauSacService qlms= new MauSacServiceImpl();
+private DefaultTableModel defaultTableModel= new DefaultTableModel();
 
     /**
      * Creates new form MauSacView
      */
     public MauSacView() {
         initComponents();
+        addRow();
     }
-    private void fillData(int row){
+
+    public void fillData(int row) {
         txt_id.setText(tb_list.getValueAt(row, 0).toString());
         txt_ma.setText(tb_list.getValueAt(row, 1).toString());
         txt_ten.setText(tb_list.getValueAt(row, 2).toString());
         txt_ngaythem.setText(tb_list.getValueAt(row, 3).toString());
         try {
-          txt_ngaysua.setText(tb_list.getValueAt(row, 4).toString());   
+            txt_ngaysua.setText(tb_list.getValueAt(row, 4).toString());
         } catch (Exception e) {
             txt_ngaysua.setText("");
         }
-       
-        
+
     }
-private void clear(){
-    txt_id.setText("");
-    txt_ma.setText("");
-    txt_ten.setText("");
-    txt_ngaythem.setText("");
-    txt_ngaysua.setText("");
+public void addRow(){
+    defaultTableModel=(DefaultTableModel) tb_list.getModel();
+    defaultTableModel.setRowCount(0);
+    for (MauSac ms : qlms.select()) {
+        defaultTableModel.addRow(new Object[]{
+            ms.getId(), ms.getMa(), ms.getTen(), ms.getNgayThem(), ms.getNgaySua()
+        });
+    }
+}
+    public void clear() {
+        txt_id.setText("");
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_ngaythem.setText("");
+        txt_ngaysua.setText("");
+    }
+public MauSac create(){
+    return new MauSac(null, txt_ma.getText().trim(), txt_ten.getText().trim(), null, null, null);
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,15 +155,36 @@ private void clear(){
                 return canEdit [columnIndex];
             }
         });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_list);
 
-        btn_them.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\add.png")); // NOI18N
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
-        btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
 
-        btn_xoa.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\delete.png")); // NOI18N
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
-        btn_clear.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\clear.png")); // NOI18N
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -236,6 +278,68 @@ private void clear(){
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        if (qlms.insert(create())) {
+            addRow();
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            clear();
+        }else{
+            if (!qlms.checkMa(create())) {
+                JOptionPane.showMessageDialog(this, "Mã bị trùng");
+            }else if(!qlms.checkData(create())){
+                JOptionPane.showMessageDialog(this, "Dữ liệu không được để trống");
+            }
+        }
+        
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+        int row=tb_list.getSelectedRow();
+        Integer id= (Integer) tb_list.getValueAt(row, 0);
+        if (id==null) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn bản ghi");
+        }else{
+            if (qlms.update(id, create())) {
+                addRow();
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                clear();
+            }else if(qlms.checkData(create())){
+                JOptionPane.showMessageDialog(rootPane, "Dữ liệu k được để trống");
+            }
+        }
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+        int row=tb_list.getSelectedRow();
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+        txt_ten.setText(tb_list.getValueAt(row, 2).toString());
+        txt_ngaythem.setText(tb_list.getValueAt(row, 3).toString());    
+        txt_ngaysua.setText(tb_list.getValueAt(row, 4).toString());
+    }//GEN-LAST:event_tb_listMouseClicked
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        int row=tb_list.getSelectedRow();
+        Integer id=(Integer) tb_list.getValueAt(row, 0);
+        if (id==null) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn bản ghi");
+        } else{
+            qlms.delete(id);
+            addRow();
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+            clear();
+        }
+    }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearActionPerformed
 
     /**
      * @param args the command line arguments
