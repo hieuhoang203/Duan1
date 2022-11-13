@@ -4,19 +4,84 @@
  */
 package view;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import modul.CoSo;
+import modul.CuaHang;
+import service.QuanLyCoSoService;
+import service.QuanLyCuaHangService;
+import service.serviceImpl.CoSoServiceImpl;
+import service.serviceImpl.CuaHangServiceImpl;
 
 /**
  *
  * @author admin
  */
 public class CuaHangView extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    private DefaultComboBoxModel cbxCoSo = new DefaultComboBoxModel();
+    private QuanLyCuaHangService quanLyCuaHangService = new CuaHangServiceImpl();
+    private QuanLyCoSoService quanLyCoSoService = new CoSoServiceImpl();
     /**
      * Creates new form CuaHang
      */
     public CuaHangView() {
         initComponents();
+        addCbx();
+    }
+    
+    public void addCbx(){
+        cbxCoSo = (DefaultComboBoxModel) cbx_coso.getModel();
+        cbxCoSo.addAll(quanLyCoSoService.select());
+        cbx_coso.setSelectedIndex(0);
+    }
+    
+    public void clear(){
+        txt_id.setText("");
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txa_diachi.setText("");
+        cbx_coso.setSelectedIndex(0);
+        txt_ngaythem.setText("");
+        txt_ngaysua.setText("");
+    }
+    
+    public void addRows(){
+        tableModel = (DefaultTableModel) tb_list.getModel();
+        tableModel.setRowCount(0);
+        for (CuaHang cuaHang : quanLyCuaHangService.select()) {
+            tableModel.addRow(new Object[]{
+                cuaHang.getId(),
+                cuaHang.getMa(),
+                cuaHang.getTen(),
+                cuaHang.getDiaChi(),
+                cuaHang.getIdCoSo(),
+                cuaHang.getNgayThem(),
+                cuaHang.getNgaySua()
+            });
+        }
+    }
+    
+    public void fillData(int row){
+        cbxCoSo = (DefaultComboBoxModel) cbx_coso.getModel();
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+        txt_ten.setText(tb_list.getValueAt(row, 2).toString());
+        txa_diachi.setText(tb_list.getValueAt(row, 4).toString());
+        cbxCoSo.setSelectedItem(tb_list.getValueAt(row, 5));
+        txt_ngaythem.setText(tb_list.getValueAt(row, 6).toString());
+        try {
+            txt_ngaysua.setText(tb_list.getValueAt(row, 7).toString());
+        } catch (Exception e) {
+            txt_ngaysua.setText("");
+        }
+    }
+    
+    public CuaHang create(){
+        return new CuaHang(null, txt_ma.getText().trim(), 
+                            txt_ten.getText().trim(), txa_diachi.getText().trim(), 
+                            (CoSo) cbx_coso.getSelectedItem(), null, null, null);
     }
 
     /**

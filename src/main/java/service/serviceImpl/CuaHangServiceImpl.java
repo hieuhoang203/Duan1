@@ -6,6 +6,7 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.CuaHang;
+import repository.CuaHangRepository;
 import service.QuanLyCuaHangService;
 
 /**
@@ -13,15 +14,18 @@ import service.QuanLyCuaHangService;
  * @author admin
  */
 public class CuaHangServiceImpl implements QuanLyCuaHangService{
-
+    private CuaHangRepository cuaHangRepository = new CuaHangRepository();  
+    
     @Override
     public ArrayList<CuaHang> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return cuaHangRepository.select();
     }
 
     @Override
     public boolean insert(CuaHang ch) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(ch) && checkMa(ch)) {
+            
+        }
     }
 
     @Override
@@ -36,12 +40,20 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
 
     @Override
     public boolean checkMa(CuaHang ch) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (cuaHangRepository.selectMa().contains(ch.getMa())) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
     public boolean checkData(CuaHang ch) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!ch.getMa().equals("") && !ch.getTen().equals("") && !ch.getDiaChi().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }
