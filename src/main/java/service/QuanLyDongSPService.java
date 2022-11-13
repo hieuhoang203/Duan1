@@ -4,10 +4,18 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.DongSp;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyDongSPService {
-    
+    ArrayList<DongSp> select();
+    boolean insert(DongSp dsp);
+    boolean update(Integer id, DongSp dsp);
+    void delete(Integer id);
+    boolean checkMa(DongSp dsp);
+    boolean checkData(DongSp dsp);
 }

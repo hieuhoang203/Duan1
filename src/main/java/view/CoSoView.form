@@ -271,6 +271,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_listMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -280,6 +283,9 @@
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\add.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_themMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_sua">
           <Properties>
@@ -287,6 +293,9 @@
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\update.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_suaMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_xoa">
           <Properties>
@@ -294,6 +303,9 @@
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\delete.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_xoaMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_clear">
           <Properties>
@@ -301,6 +313,9 @@
               <Image iconType="2" name="E:\DuAn1\ProjectDuAn1\src\main\java\img\clear.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_clearMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

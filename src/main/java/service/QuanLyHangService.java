@@ -4,10 +4,18 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.Hang;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyHangService {
-    
+    ArrayList<Hang> select();
+    boolean insert(Hang h);
+    boolean update(Integer id, Hang h);
+    void delete(Integer id);
+    boolean checkMa(Hang h);
+    boolean checkData(Hang h);
 }

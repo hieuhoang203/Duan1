@@ -5,8 +5,8 @@
 package modul;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,9 +24,9 @@ import javax.persistence.Temporal;
 @Table(name = "MauSac")
 public class MauSac implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -43,26 +43,26 @@ public class MauSac implements Serializable{
     private Date ngaySua;
     
     @OneToMany(mappedBy = "idMauSac")
-    private ArrayList<ChiTietSP> chiTietSPs;
+    private List<ChiTietSP> chiTietSPs;
 
     public MauSac() {
         
     }
 
-    public MauSac(String id, String ma, String ten, Date ngayThem, Date ngaySuaDate, ArrayList<ChiTietSP> chiTietSPs) {
+    public MauSac(Integer id, String ma, String ten, Date ngayThem, Date ngaySuaDate, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySuaDate;
         this.chiTietSPs = chiTietSPs;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -98,11 +98,11 @@ public class MauSac implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public ArrayList<ChiTietSP> getChiTietSPs() {
+    public List<ChiTietSP> getChiTietSPs() {
         return chiTietSPs;
     }
 
-    public void setChiTietSPs(ArrayList<ChiTietSP> chiTietSPs) {
+    public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
         this.chiTietSPs = chiTietSPs;
     }
 

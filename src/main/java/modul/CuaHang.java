@@ -5,7 +5,8 @@
 package modul;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -25,9 +27,9 @@ import javax.persistence.Temporal;
 @Table(name = "CuaHang")
 public class CuaHang implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -38,7 +40,7 @@ public class CuaHang implements Serializable{
     @Column(name = "DiaChi")
     private String diaChi;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdCoSo")
     private CoSo idCoSo;
     
@@ -50,24 +52,28 @@ public class CuaHang implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
 
+    @OneToMany(mappedBy = "idCuaHang", fetch = FetchType.EAGER)
+    private List<ChiTietSP> chiTietSPs;
+    
     public CuaHang() {
     }
 
-    public CuaHang(String id, String ma, String ten, String diaChi, CoSo idCoSo, Date ngayThem, Date ngaySua) {
+    public CuaHang(Integer id, String ma, String ten, String diaChi, CoSo idCoSo, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.diaChi = diaChi;
         this.idCoSo = idCoSo;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
+        this.chiTietSPs = chiTietSPs;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -117,6 +123,14 @@ public class CuaHang implements Serializable{
 
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    public List<ChiTietSP> getChiTietSPs() {
+        return chiTietSPs;
+    }
+
+    public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
+        this.chiTietSPs = chiTietSPs;
     }
 
     @Override

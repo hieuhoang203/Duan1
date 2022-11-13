@@ -5,7 +5,7 @@
 package modul;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,24 +25,24 @@ import javax.persistence.Temporal;
 @Table(name = "ChiTietSP")
 public class ChiTietSP implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private String id;
      
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdDongSP")
     private DongSp idDongSp;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdMauSac")
     private MauSac idMauSac;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdDungLuong")
     private DungLuong idDungLuong;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdCuaHang")
     private CuaHang idCuaHang;
     
@@ -69,7 +69,7 @@ public class ChiTietSP implements Serializable{
         this.idMauSac = idMauSac;
         this.idDungLuong = idDungLuong;
         this.idCuaHang = idCuaHang;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.soLuong = soLuong;
         this.trangThai = trangThai;

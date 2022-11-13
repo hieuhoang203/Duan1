@@ -4,10 +4,18 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.CoSo;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyCoSoService {
-    
+    ArrayList<CoSo> select();
+    boolean insert(CoSo cs);
+    boolean update(Integer id, CoSo cs);
+    void delete(Integer id);
+    boolean checkMa(CoSo cs);
+    boolean checkData(CoSo cs);
 }

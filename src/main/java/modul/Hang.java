@@ -5,8 +5,8 @@
 package modul;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,9 +25,9 @@ import javax.persistence.Temporal;
 @Table(name = "Hang")
 public class Hang implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -43,26 +43,26 @@ public class Hang implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idHang", fetch = FetchType.LAZY)
-    private ArrayList<DongSp> dongSps;
+    @OneToMany(mappedBy = "idHang", fetch = FetchType.EAGER)
+    private List<DongSp> dongSps;
 
     public Hang() {
     }
 
-    public Hang(String id, String ma, String ten, Date ngayThem, Date ngaySua, ArrayList<DongSp> dongSps) {
+    public Hang(Integer id, String ma, String ten, Date ngayThem, Date ngaySua, List<DongSp> dongSps) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngayThem = new Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.dongSps = dongSps;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -98,11 +98,11 @@ public class Hang implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public ArrayList<DongSp> getDongSps() {
+    public List<DongSp> getDongSps() {
         return dongSps;
     }
 
-    public void setDongSps(ArrayList<DongSp> dongSps) {
+    public void setDongSps(List<DongSp> dongSps) {
         this.dongSps = dongSps;
     }
 

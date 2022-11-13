@@ -1,6 +1,7 @@
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\Hang.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\HangRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\view\CoSoView.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\CuaHangView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\DongSpServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\ChiTietSpServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyDongSPService.java
@@ -19,12 +20,17 @@ E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\CoSoServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\CuaHang.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\CoSoRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\CuaHangServiceImpl.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\ChiTietSPView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyChiTietSPService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\DongSpRepository.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\DongSPView.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\DungLuongView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\CuaHangRepository.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\MauSacView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\ChiTietSpRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\DungLuongServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyDungLuongService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyCuaHangService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyHangService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\CoSo.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\HangView.java
