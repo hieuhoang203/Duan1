@@ -6,42 +6,63 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.DungLuong;
+import repository.DungLuongRepository;
 import service.QuanLyDungLuongService;
 
 /**
  *
  * @author admin
  */
-public class DungLuongServiceImpl implements QuanLyDungLuongService{
+public class DungLuongServiceImpl implements QuanLyDungLuongService {
 
+    private DungLuongRepository dungLuongRepository = new DungLuongRepository();
+    
     @Override
     public ArrayList<DungLuong> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return dungLuongRepository.select();
     }
-
+    
     @Override
-    public boolean insert(DungLuong dsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean insert(DungLuong dl) {
+        if (checkData(dl) && checkMa(dl)) {
+            dungLuongRepository.insert(dl);
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     @Override
     public boolean update(Integer id, DungLuong dl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(dl)) {
+            dungLuongRepository.update(id, dl);
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        dungLuongRepository.delete(id);
     }
-
+    
     @Override
     public boolean checkMa(DungLuong dl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (dungLuongRepository.selectMa().contains(dl.getMa())) {
+            return false;
+        } else {
+            return true;
+        }
     }
-
+    
     @Override
     public boolean checkData(DungLuong dl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!dl.getMa().equals("") && !dl.getTen().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

@@ -197,6 +197,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_listMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -275,12 +278,21 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_them">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_sua">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_xoa">
         </Component>
         <Component class="javax.swing.JButton" name="btn_clear">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_clearActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
