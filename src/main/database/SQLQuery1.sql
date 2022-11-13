@@ -29,7 +29,7 @@ CREATE TABLE CoSo(
 	NgaySua DATE
 )
 -- Tao bang CuaHang
-CREATE TABLE CuaHang(
+create TABLE CuaHang(
 	Id int identity(1,1) PRIMARY KEY NOT NULL,
 	Ma VARCHAR(10) NOT NULL,
 	Ten NVARCHAR(50) NOT NULL,
@@ -159,4 +159,3 @@ CREATE TABLE Account(
 	Pass varchar(18) not null,
 	IdNguoiDung int FOREIGN KEY REFERENCES dbo.NguoiDung(Id) NOT NULL,
 )
-

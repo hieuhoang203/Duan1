@@ -34,8 +34,8 @@ public class DongSp implements Serializable{
     @Column(name = "Ma")
     private String ma;
     
-    @Column(name = "Ten")
-    private String Ten;
+    @Column(name = "TenDongSP")
+    private String ten;
     
     @Column(name = "GiaNhap")
     private int giaNhap;
@@ -55,7 +55,7 @@ public class DongSp implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idDongSp", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idDongSp", fetch = FetchType.LAZY)
     private List<ChiTietSP> chiTietSPs;
     
     public DongSp() {
@@ -64,7 +64,7 @@ public class DongSp implements Serializable{
     public DongSp(Integer id, String ma, String Ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
-        this.Ten = Ten;
+        this.ten = Ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
@@ -90,11 +90,11 @@ public class DongSp implements Serializable{
     }
 
     public String getTen() {
-        return Ten;
+        return ten;
     }
 
     public void setTen(String Ten) {
-        this.Ten = Ten;
+        this.ten = Ten;
     }
 
     public int getGiaNhap() {
@@ -147,7 +147,7 @@ public class DongSp implements Serializable{
     
     @Override
     public String toString() {
-        return Ten;
+        return ten;
     }
     
 }

@@ -6,6 +6,7 @@ package service;
 
 import java.util.ArrayList;
 import modul.ChiTietSP;
+import modul.DongSp;
 
 /**
  *
@@ -16,7 +17,7 @@ public interface QuanLyChiTietSPService {
     boolean insert(ChiTietSP ctsp);
     boolean update(Integer id, ChiTietSP ctsp);
     void delete(Integer id);
-    boolean checkMa(ChiTietSP ctsp);
     boolean checkData(ChiTietSP ctsp);
-    ChiTietSP search(Integer id);
+    ArrayList<ChiTietSP> search(Integer id);
+    long totalUnsold(int trangThai, DongSp idDongSp); 
 }

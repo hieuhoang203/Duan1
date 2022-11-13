@@ -24,18 +24,26 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
     @Override
     public boolean insert(CuaHang ch) {
         if (checkData(ch) && checkMa(ch)) {
-            
+            cuaHangRepository.insert(ch);
+            return true;
+        } else {
+            return false;
         }
     }
 
     @Override
     public boolean update(Integer id, CuaHang ch) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(ch)) {
+            cuaHangRepository.update(id, ch);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        cuaHangRepository.delete(id);
     }
 
     @Override

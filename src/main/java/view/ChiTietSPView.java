@@ -4,15 +4,22 @@
  */
 package view;
 
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modul.ChiTietSP;
 import modul.CuaHang;
 import modul.DongSp;
 import modul.DungLuong;
 import modul.MauSac;
+import service.QuanLyChiTietSPService;
+import service.QuanLyCuaHangService;
+import service.QuanLyDongSPService;
+import service.QuanLyDungLuongService;
+import service.QuanLyMauSacService;
+import service.serviceImpl.ChiTietSpServiceImpl;
 import service.serviceImpl.CuaHangServiceImpl;
 import service.serviceImpl.DongSpServiceImpl;
 import service.serviceImpl.DungLuongServiceImpl;
@@ -24,14 +31,15 @@ import service.serviceImpl.MauSacServiceImpl;
  */
 public class ChiTietSPView extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
-    private ComboBoxModel cbxDongSp;
-    private ComboBoxModel cbxMauSac;
-    private ComboBoxModel cbxDungLuong;
-    private ComboBoxModel cbxCuaHang;
-    private DongSpServiceImpl dongSpServiceImpl = new DongSpServiceImpl();
-    private MauSacServiceImpl mauSacServiceImpl = new MauSacServiceImpl();
-    private DungLuongServiceImpl dungLuongServiceImpl = new DungLuongServiceImpl();
-    private CuaHangServiceImpl cuaHangServiceImpl = new CuaHangServiceImpl();
+    private DefaultComboBoxModel cbxDongSp;
+    private DefaultComboBoxModel cbxMauSac;
+    private DefaultComboBoxModel cbxDungLuong;
+    private DefaultComboBoxModel cbxCuaHang;
+    private QuanLyDongSPService dongSpServiceImpl = new DongSpServiceImpl();
+    private QuanLyMauSacService mauSacServiceImpl = new MauSacServiceImpl();
+    private QuanLyDungLuongService dungLuongServiceImpl = new DungLuongServiceImpl();
+    private QuanLyCuaHangService cuaHangServiceImpl = new CuaHangServiceImpl();
+    private QuanLyChiTietSPService chiTietSPService = new ChiTietSpServiceImpl();
     /**
      * Creates new form ChiTietSPView
      */
@@ -42,6 +50,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         addCbxDungLuong();
         addCbxCuaHang();
         addTrangThai();
+        addRows(chiTietSPService.select());
     }
     
     public void addTrangThai(){
@@ -52,22 +61,44 @@ public class ChiTietSPView extends javax.swing.JFrame {
     
     public void addCbxDongSp(){
         cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
+        cbxDongSp.addAll(dongSpServiceImpl.select());
         cbx_dongsp.setSelectedIndex(0);
     }
     
     public void addCbxMauSac(){
         cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
+        cbxMauSac.addAll(mauSacServiceImpl.select());
         cbx_mausac.setSelectedIndex(0);
     }
     
     public void addCbxDungLuong(){
         cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
+        cbxDungLuong.addAll(dungLuongServiceImpl.select());
         cbx_dungluong.setSelectedIndex(0);
     }
     
     public void addCbxCuaHang(){
         cbxCuaHang = (DefaultComboBoxModel) cbx_cuahang.getModel();
+        cbxCuaHang.addAll(cuaHangServiceImpl.select());
         cbx_cuahang.setSelectedIndex(0);
+    }
+    
+    public void addRows(ArrayList<ChiTietSP> list){
+        tableModel = (DefaultTableModel) tb_list.getModel();
+        tableModel.setRowCount(0);
+        for (ChiTietSP chiTietSP : list) {
+            tableModel.addRow(new Object[]{
+                chiTietSP.getId(),
+                chiTietSP.getIdDongSp(),
+                chiTietSP.getIdMauSac(),
+                chiTietSP.getIdDungLuong(),
+                chiTietSP.getIdCuaHang(),
+                chiTietSP.getNgayThem(),
+                chiTietSP.getNgaySua(),
+                chiTietSP.getSoLuong(),
+                chiTietSP.getTrangThai()
+            });
+        }
     }
     
     public void fillData(int row){
@@ -95,6 +126,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
     }
     
     public void clear(){
+        ButtonGroup group = new ButtonGroup();
+        group.add(rd_chuaban);
+        group.add(rd_daban);
         txt_id.setText("");
         cbx_dongsp.setSelectedIndex(0);
         cbx_mausac.setSelectedIndex(0);
@@ -103,13 +137,22 @@ public class ChiTietSPView extends javax.swing.JFrame {
         txt_ngaythem.setText("");
         txt_ngaysua.setText("");
         txt_soluong.setText("");
+        group.clearSelection();
+        addRows(chiTietSPService.select());
     }
     
     public ChiTietSP create(){
-        return new ChiTietSP("", (DongSp)cbx_dongsp.getSelectedItem(), 
+        if (rd_chuaban.isSelected() == true) {
+            return new ChiTietSP(null, (DongSp)cbx_dongsp.getSelectedItem(), 
                 (MauSac)cbx_mausac.getSelectedItem(), 
                 (DungLuong)cbx_dungluong.getSelectedItem(), 
-                (CuaHang)cbx_cuahang.getSelectedItem(), null, null, 0, 1);
+                (CuaHang)cbx_cuahang.getSelectedItem(), null, null, chiTietSPService.totalUnsold(1, (DongSp)cbx_dongsp.getSelectedItem())+1, 1);
+        } else {
+            return new ChiTietSP(null, (DongSp)cbx_dongsp.getSelectedItem(), 
+                (MauSac)cbx_mausac.getSelectedItem(), 
+                (DungLuong)cbx_dungluong.getSelectedItem(), 
+                (CuaHang)cbx_cuahang.getSelectedItem(), null, null, chiTietSPService.totalUnsold(0, (DongSp) cbx_dongsp.getSelectedItem())-1, 0);
+        }
     }
 
     /**
@@ -237,15 +280,20 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
-        btn_add.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\add.png")); // NOI18N
+        btn_add.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\add.png")); // NOI18N
+        btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addMouseClicked(evt);
+            }
+        });
 
-        btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
+        btn_sua.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\update.png")); // NOI18N
 
-        btn_xoa.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\delete.png")); // NOI18N
+        btn_xoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\delete.png")); // NOI18N
 
-        btn_search.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\search.png")); // NOI18N
+        btn_search.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\search.png")); // NOI18N
 
-        btn_clear.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\clear.png")); // NOI18N
+        btn_clear.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\clear.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -370,6 +418,17 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private void rd_dabanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_dabanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rd_dabanActionPerformed
+
+    private void btn_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseClicked
+        // TODO add your handling code here:
+        if (chiTietSPService.insert(create())) {
+            addRows(chiTietSPService.select());
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
+            clear();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Chưa rõ trạng thái !");
+        }
+    }//GEN-LAST:event_btn_addMouseClicked
 
     /**
      * @param args the command line arguments
