@@ -27,17 +27,12 @@ public class ChiTietSpRepository {
     public void insert(ChiTietSP ctsp){
         session.beginTransaction();
         session.save(ctsp);
-        if (ctsp.getTrangThai() == 1) {
-            updatePlus(ctsp);
-        } else {
-            updateMinus(ctsp);
-        }
         session.getTransaction().commit();
     }
     
     public void update(Integer id, ChiTietSP ctsp){
         session.beginTransaction();
-        String query = "update ChiTietSp set idDongSp =:idDongSp, idMauSac =:idMauSac, "
+        String query = "update ChiTietSP set idDongSp =:idDongSp, idMauSac =:idMauSac, "
                 + "idDungLuong =:idDungLuong, idCuaHang =:idCuaHang, ngaySua =:ngayThem, "
                 + "trangThai =: trangThai where id =:id";
         Query q = session.createQuery(query);
@@ -46,18 +41,13 @@ public class ChiTietSpRepository {
         q.setParameter("idDungLuong", ctsp.getIdDungLuong());
         q.setParameter("idCuaHang", ctsp.getIdCuaHang());
         q.setParameter("trangThai", ctsp.getTrangThai());
-        if (ctsp.getTrangThai() == 1) {
-            updatePlus(ctsp);
-        } else {
-            updateMinus(ctsp);
-        }
         q.executeUpdate();
         session.getTransaction().commit();
     }
     
     public void delete(Integer id){
         session.beginTransaction();
-        String query = "delete from ChiTietSp where id=:id";
+        String query = "delete from ChiTietSP where id=:id";
         Query q = session.createQuery(query);
         q.setParameter("id", id);
         q.executeUpdate();
@@ -65,35 +55,20 @@ public class ChiTietSpRepository {
     }
     
     public ArrayList<ChiTietSP> search(Integer keyWord){
-        String query = "from ChiTietSp where idDongSp =: idDongSp";
+        String query = "from ChiTietSP where idDongSp =: idDongSp";
         Query q = session.createQuery(query);
         q.setParameter("idDongSp", keyWord);
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
     }
     
-    public Long totalUnsold(int trangThai, DongSp idDongSp){
-        String query = "select count(c.id) from ChiTietSP c where trangThai =:trangThai and idDongSp =:idDongSp";
+    public void updateAll(long number, DongSp dongSp){
+        session.beginTransaction();
+        String query = "update ChiTietSP set soLuong =:soLuong where idDongSp =:idDongSp";
         Query q = session.createQuery(query);
-        q.setParameter("trangThai", trangThai);
-        q.setParameter("idDongSp", idDongSp);
-        List list = q.getResultList();
-        return (Long) list.get(0);
-    }
-    
-    public void updatePlus(ChiTietSP ctsp){
-        String query = "update ChiTietSP set soLuong =:soLuong where idDongSp=: idDongSp";
-        Query q = session.createQuery(query);
-        q.setParameter("soLuong", totalUnsold(1, ctsp.getIdDongSp())+1);
-        q.setParameter("idDongSp", ctsp.getIdDongSp());
+        q.setParameter("soLuong", number);
+        q.setParameter("idDongSp", dongSp);
         q.executeUpdate();
-    }
-    
-    public void updateMinus(ChiTietSP ctsp){
-        String query = "update ChiTietSP set soLuong =:soLuong where idDongSp=: idDongSp";
-        Query q = session.createQuery(query);
-        q.setParameter("soLuong", totalUnsold(0, ctsp.getIdDongSp())-1);
-        q.setParameter("idDongSp", ctsp.getIdDongSp());
-        q.executeUpdate();
+        session.getTransaction().commit();
     }
 }

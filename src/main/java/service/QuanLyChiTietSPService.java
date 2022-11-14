@@ -19,5 +19,5 @@ public interface QuanLyChiTietSPService {
     void delete(Integer id);
     boolean checkData(ChiTietSP ctsp);
     ArrayList<ChiTietSP> search(Integer id);
-    long totalUnsold(int trangThai, DongSp idDongSp); 
+    void updateAll(long number, DongSp dongSp);
 }

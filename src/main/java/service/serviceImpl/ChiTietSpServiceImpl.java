@@ -62,8 +62,8 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     }
 
     @Override
-    public long totalUnsold(int trangThai, DongSp idDongSp) {
-        return chiTietSpRepository.totalUnsold(trangThai, idDongSp);
+    public void updateAll(long number, DongSp dongSp) {
+        chiTietSpRepository.updateAll(number, dongSp);
     }
     
 }

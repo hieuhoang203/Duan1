@@ -30,6 +30,7 @@ import service.serviceImpl.MauSacServiceImpl;
  * @author admin
  */
 public class ChiTietSPView extends javax.swing.JFrame {
+
     private DefaultTableModel tableModel;
     private DefaultComboBoxModel cbxDongSp;
     private DefaultComboBoxModel cbxMauSac;
@@ -40,6 +41,8 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private QuanLyDungLuongService dungLuongServiceImpl = new DungLuongServiceImpl();
     private QuanLyCuaHangService cuaHangServiceImpl = new CuaHangServiceImpl();
     private QuanLyChiTietSPService chiTietSPService = new ChiTietSpServiceImpl();
+    private static long number = 0;
+
     /**
      * Creates new form ChiTietSPView
      */
@@ -52,38 +55,38 @@ public class ChiTietSPView extends javax.swing.JFrame {
         addTrangThai();
         addRows(chiTietSPService.select());
     }
-    
-    public void addTrangThai(){
+
+    public void addTrangThai() {
         ButtonGroup group = new ButtonGroup();
         group.add(rd_chuaban);
         group.add(rd_daban);
     }
-    
-    public void addCbxDongSp(){
+
+    public void addCbxDongSp() {
         cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
         cbxDongSp.addAll(dongSpServiceImpl.select());
         cbx_dongsp.setSelectedIndex(0);
     }
-    
-    public void addCbxMauSac(){
+
+    public void addCbxMauSac() {
         cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
         cbxMauSac.addAll(mauSacServiceImpl.select());
         cbx_mausac.setSelectedIndex(0);
     }
-    
-    public void addCbxDungLuong(){
+
+    public void addCbxDungLuong() {
         cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
         cbxDungLuong.addAll(dungLuongServiceImpl.select());
         cbx_dungluong.setSelectedIndex(0);
     }
-    
-    public void addCbxCuaHang(){
+
+    public void addCbxCuaHang() {
         cbxCuaHang = (DefaultComboBoxModel) cbx_cuahang.getModel();
         cbxCuaHang.addAll(cuaHangServiceImpl.select());
         cbx_cuahang.setSelectedIndex(0);
     }
-    
-    public void addRows(ArrayList<ChiTietSP> list){
+
+    public void addRows(ArrayList<ChiTietSP> list) {
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
         for (ChiTietSP chiTietSP : list) {
@@ -100,8 +103,8 @@ public class ChiTietSPView extends javax.swing.JFrame {
             });
         }
     }
-    
-    public void fillData(int row){
+
+    public void fillData(int row) {
         cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
         cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
         cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
@@ -124,8 +127,8 @@ public class ChiTietSPView extends javax.swing.JFrame {
             rd_chuaban.setSelected(true);
         }
     }
-    
-    public void clear(){
+
+    public void clear() {
         ButtonGroup group = new ButtonGroup();
         group.add(rd_chuaban);
         group.add(rd_daban);
@@ -140,18 +143,41 @@ public class ChiTietSPView extends javax.swing.JFrame {
         group.clearSelection();
         addRows(chiTietSPService.select());
     }
-    
-    public ChiTietSP create(){
+
+    public ChiTietSP create() {
         if (rd_chuaban.isSelected() == true) {
-            return new ChiTietSP(null, (DongSp)cbx_dongsp.getSelectedItem(), 
-                (MauSac)cbx_mausac.getSelectedItem(), 
-                (DungLuong)cbx_dungluong.getSelectedItem(), 
-                (CuaHang)cbx_cuahang.getSelectedItem(), null, null, chiTietSPService.totalUnsold(1, (DongSp)cbx_dongsp.getSelectedItem())+1, 1);
+            ChiTietSP ctsp = new ChiTietSP(null, (DongSp) cbx_dongsp.getSelectedItem(),
+                    (MauSac) cbx_mausac.getSelectedItem(),
+                    (DungLuong) cbx_dungluong.getSelectedItem(),
+                    (CuaHang) cbx_cuahang.getSelectedItem(), null, null, ++number, 1);
+            chiTietSPService.updateAll(ctsp.getSoLuong(), ctsp.getIdDongSp());
+            return ctsp;
         } else {
-            return new ChiTietSP(null, (DongSp)cbx_dongsp.getSelectedItem(), 
-                (MauSac)cbx_mausac.getSelectedItem(), 
-                (DungLuong)cbx_dungluong.getSelectedItem(), 
-                (CuaHang)cbx_cuahang.getSelectedItem(), null, null, chiTietSPService.totalUnsold(0, (DongSp) cbx_dongsp.getSelectedItem())-1, 0);
+            return new ChiTietSP(null, (DongSp) cbx_dongsp.getSelectedItem(),
+                    (MauSac) cbx_mausac.getSelectedItem(),
+                    (DungLuong) cbx_dungluong.getSelectedItem(),
+                    (CuaHang) cbx_cuahang.getSelectedItem(), null, null, number, 0);
+        }
+    }
+
+    public ChiTietSP createWhenUpdate(int trangThai) {
+        if (trangThai == 1 && rd_daban.isSelected()) {
+            ChiTietSP ctsp = new ChiTietSP(null, (DongSp) cbx_dongsp.getSelectedItem(),
+                    (MauSac) cbx_mausac.getSelectedItem(),
+                    (DungLuong) cbx_dungluong.getSelectedItem(),
+                    (CuaHang) cbx_cuahang.getSelectedItem(), null, null, ++number, 1);
+            chiTietSPService.updateAll(ctsp.getSoLuong(), ctsp.getIdDongSp());
+            return ctsp;
+        } else if (trangThai == 0 && rd_chuaban.isSelected()) {
+            return new ChiTietSP(null, (DongSp) cbx_dongsp.getSelectedItem(),
+                    (MauSac) cbx_mausac.getSelectedItem(),
+                    (DungLuong) cbx_dungluong.getSelectedItem(),
+                    (CuaHang) cbx_cuahang.getSelectedItem(), null, null, --number, 0);
+        } else {
+            return new ChiTietSP(null, (DongSp) cbx_dongsp.getSelectedItem(),
+                    (MauSac) cbx_mausac.getSelectedItem(),
+                    (DungLuong) cbx_dungluong.getSelectedItem(),
+                    (CuaHang) cbx_cuahang.getSelectedItem(), null, null, number, 0);
         }
     }
 
@@ -288,6 +314,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
         });
 
         btn_sua.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\update.png")); // NOI18N
+        btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_suaMouseClicked(evt);
+            }
+        });
 
         btn_xoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\delete.png")); // NOI18N
 
@@ -429,6 +460,24 @@ public class ChiTietSPView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Chưa rõ trạng thái !");
         }
     }//GEN-LAST:event_btn_addMouseClicked
+
+    private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            int trangThai = Integer.parseInt(tb_list.getValueAt(row, 8).toString());
+            if (chiTietSPService.update(id, createWhenUpdate(trangThai))) {
+                addRows(chiTietSPService.select());
+                JOptionPane.showMessageDialog(rootPane, "Load lại để xem cập nhật !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Chưa rõ trạng thái !");
+            }
+        }
+    }//GEN-LAST:event_btn_suaMouseClicked
 
     /**
      * @param args the command line arguments
