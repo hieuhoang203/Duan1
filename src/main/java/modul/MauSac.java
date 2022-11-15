@@ -34,6 +34,9 @@ public class MauSac implements Serializable{
     @Column(name = "Ten")
     private String ten;
     
+    @Column(name = "TrangThai")
+    private boolean trangThai;
+    
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
@@ -49,15 +52,16 @@ public class MauSac implements Serializable{
         
     }
 
-    public MauSac(Integer id, String ma, String ten, Date ngayThem, Date ngaySuaDate, List<ChiTietSP> chiTietSPs) {
+    public MauSac(Integer id, String ma, String ten, boolean trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngayThem = new java.sql.Date(new Date().getTime());
-        this.ngaySua = ngaySuaDate;
+        this.trangThai = trangThai;
+        this.ngayThem = new java.sql.Date(new java.util.Date().getTime());
+        this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
     }
-
+    
     public Integer getId() {
         return id;
     }
@@ -80,6 +84,14 @@ public class MauSac implements Serializable{
 
     public void setTen(String ten) {
         this.ten = ten;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Date getNgayThem() {
@@ -105,6 +117,8 @@ public class MauSac implements Serializable{
     public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
         this.chiTietSPs = chiTietSPs;
     }
+
+
 
     @Override
     public String toString() {

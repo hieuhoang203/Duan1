@@ -35,6 +35,9 @@ public class CoSo implements Serializable{
     @Column(name = "Ten")
     private String ten;
     
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
@@ -49,12 +52,13 @@ public class CoSo implements Serializable{
     public CoSo() {
     }
 
-    public CoSo(Integer id, String ma, String ten, Date ngayThem, Date ngaySuaDate, List<CuaHang> cuaHangs) {
+    public CoSo(Integer id, String ma, String ten, int trangThai, Date ngayThem, Date ngaySua, List<CuaHang> cuaHangs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+        this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
-        this.ngaySua = ngaySuaDate;
+        this.ngaySua = ngaySua;
         this.cuaHangs = cuaHangs;
     }
 
@@ -80,6 +84,14 @@ public class CoSo implements Serializable{
 
     public void setTen(String ten) {
         this.ten = ten;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Date getNgayThem() {

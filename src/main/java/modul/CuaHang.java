@@ -44,6 +44,9 @@ public class CuaHang implements Serializable{
     @JoinColumn(name = "IdCoSo")
     private CoSo idCoSo;
     
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
@@ -58,12 +61,13 @@ public class CuaHang implements Serializable{
     public CuaHang() {
     }
 
-    public CuaHang(Integer id, String ma, String ten, String diaChi, CoSo idCoSo, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+    public CuaHang(Integer id, String ma, String ten, String diaChi, CoSo idCoSo, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.diaChi = diaChi;
         this.idCoSo = idCoSo;
+        this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
@@ -107,6 +111,14 @@ public class CuaHang implements Serializable{
 
     public void setIdCoSo(CoSo idCoSo) {
         this.idCoSo = idCoSo;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Date getNgayThem() {

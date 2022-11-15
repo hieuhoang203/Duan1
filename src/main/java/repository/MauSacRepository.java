@@ -19,7 +19,7 @@ public class MauSacRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
 
     public ArrayList<MauSac> select() {
-        String query = "from MauSac";
+        String query = "from MauSac where trangThai = git pgit pull";
         Query q = session.createQuery(query);
         ArrayList<MauSac> list = (ArrayList<MauSac>) q.getResultList();
         return list;

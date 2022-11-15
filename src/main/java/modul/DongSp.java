@@ -47,6 +47,9 @@ public class DongSp implements Serializable{
     @JoinColumn(name = "IdHang")
     private Hang idHang;
     
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
@@ -61,13 +64,14 @@ public class DongSp implements Serializable{
     public DongSp() {
     }
 
-    public DongSp(Integer id, String ma, String Ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+    public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
-        this.ten = Ten;
+        this.ten = ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
+        this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
@@ -93,8 +97,8 @@ public class DongSp implements Serializable{
         return ten;
     }
 
-    public void setTen(String Ten) {
-        this.ten = Ten;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public int getGiaNhap() {
@@ -121,6 +125,14 @@ public class DongSp implements Serializable{
         this.idHang = idHang;
     }
 
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public Date getNgayThem() {
         return ngayThem;
     }
@@ -144,7 +156,7 @@ public class DongSp implements Serializable{
     public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
         this.chiTietSPs = chiTietSPs;
     }
-    
+
     @Override
     public String toString() {
         return ten;
