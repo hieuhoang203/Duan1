@@ -26,6 +26,7 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
         if (checkData(ch) && checkMa(ch)) {
             
         }
+        return false;
     }
 
     @Override
