@@ -43,7 +43,7 @@ public class DungLuong implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "idDungLuong", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idDungLuong", fetch = FetchType.LAZY)
     private List<ChiTietSP> chiTietSPs;
 
     public DungLuong() {

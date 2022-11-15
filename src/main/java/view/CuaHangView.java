@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modul.CoSo;
 import modul.CuaHang;
@@ -19,25 +20,28 @@ import service.serviceImpl.CuaHangServiceImpl;
  * @author admin
  */
 public class CuaHangView extends javax.swing.JFrame {
+
     private DefaultTableModel tableModel;
     private DefaultComboBoxModel cbxCoSo = new DefaultComboBoxModel();
     private QuanLyCuaHangService quanLyCuaHangService = new CuaHangServiceImpl();
     private QuanLyCoSoService quanLyCoSoService = new CoSoServiceImpl();
+
     /**
      * Creates new form CuaHang
      */
     public CuaHangView() {
         initComponents();
         addCbx();
+        addRows();
     }
-    
-    public void addCbx(){
+
+    public void addCbx() {
         cbxCoSo = (DefaultComboBoxModel) cbx_coso.getModel();
         cbxCoSo.addAll(quanLyCoSoService.select());
         cbx_coso.setSelectedIndex(0);
     }
-    
-    public void clear(){
+
+    public void clear() {
         txt_id.setText("");
         txt_ma.setText("");
         txt_ten.setText("");
@@ -46,8 +50,8 @@ public class CuaHangView extends javax.swing.JFrame {
         txt_ngaythem.setText("");
         txt_ngaysua.setText("");
     }
-    
-    public void addRows(){
+
+    public void addRows() {
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
         for (CuaHang cuaHang : quanLyCuaHangService.select()) {
@@ -62,26 +66,26 @@ public class CuaHangView extends javax.swing.JFrame {
             });
         }
     }
-    
-    public void fillData(int row){
+
+    public void fillData(int row) {
         cbxCoSo = (DefaultComboBoxModel) cbx_coso.getModel();
         txt_id.setText(tb_list.getValueAt(row, 0).toString());
         txt_ma.setText(tb_list.getValueAt(row, 1).toString());
         txt_ten.setText(tb_list.getValueAt(row, 2).toString());
-        txa_diachi.setText(tb_list.getValueAt(row, 4).toString());
-        cbxCoSo.setSelectedItem(tb_list.getValueAt(row, 5));
-        txt_ngaythem.setText(tb_list.getValueAt(row, 6).toString());
+        txa_diachi.setText(tb_list.getValueAt(row, 3).toString());
+        cbxCoSo.setSelectedItem(tb_list.getValueAt(row, 4));
+        txt_ngaythem.setText(tb_list.getValueAt(row, 5).toString());
         try {
             txt_ngaysua.setText(tb_list.getValueAt(row, 7).toString());
         } catch (Exception e) {
             txt_ngaysua.setText("");
         }
     }
-    
-    public CuaHang create(){
-        return new CuaHang(null, txt_ma.getText().trim(), 
-                            txt_ten.getText().trim(), txa_diachi.getText().trim(), 
-                            (CoSo) cbx_coso.getSelectedItem(), null, null, null);
+
+    public CuaHang create() {
+        return new CuaHang(null, txt_ma.getText().trim(),
+                txt_ten.getText().trim(), txa_diachi.getText().trim(),
+                (CoSo) cbx_coso.getSelectedItem(), null, null, null);
     }
 
     /**
@@ -187,15 +191,40 @@ public class CuaHangView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_list);
 
-        btn_them.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\add.png")); // NOI18N
+        btn_them.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\add.png")); // NOI18N
+        btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_themMouseClicked(evt);
+            }
+        });
 
-        btn_sua.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\update.png")); // NOI18N
+        btn_sua.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\update.png")); // NOI18N
+        btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_suaMouseClicked(evt);
+            }
+        });
 
-        btn_xoa.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\delete.png")); // NOI18N
+        btn_xoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\delete.png")); // NOI18N
+        btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoaMouseClicked(evt);
+            }
+        });
 
-        btn_clear.setIcon(new javax.swing.ImageIcon("E:\\DuAn1\\ProjectDuAn1\\src\\main\\java\\img\\clear.png")); // NOI18N
+        btn_clear.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\clear.png")); // NOI18N
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -306,6 +335,79 @@ public class CuaHangView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
+        // TODO add your handling code here:
+        if (quanLyCuaHangService.insert(create())) {
+            addRows();
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
+            clear();
+        } else {
+            if (quanLyCuaHangService.checkMa(create())) {
+                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
+            } else if (create().getMa().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+            } else if (create().getTen().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+            } else if (create().getDiaChi().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Địa bị được trống !");
+            }
+    }//GEN-LAST:event_btn_themMouseClicked
+    }
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tb_listMouseClicked
+
+    private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            if (quanLyCuaHangService.update(id, create())) {
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Load lại để xem !");
+                clear();
+            } else {
+                if (create().getMa().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                } else if (create().getTen().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                } else if (create().getDiaChi().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Địa bị được trống !");
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_suaMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
+
+    private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyCuaHangService.delete(id);
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Hủy xóa !");
+                clear();
+            }
+        }
+    }//GEN-LAST:event_btn_xoaMouseClicked
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,8 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.ChiTietSP;
+import modul.DongSp;
+import repository.ChiTietSpRepository;
 import service.QuanLyChiTietSPService;
 
 /**
@@ -13,40 +15,55 @@ import service.QuanLyChiTietSPService;
  * @author admin
  */
 public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
-
+    private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
+    
     @Override
     public ArrayList<ChiTietSP> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return chiTietSpRepository.select();
     }
 
     @Override
     public boolean insert(ChiTietSP ctsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(ctsp)) {
+            chiTietSpRepository.insert(ctsp);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean update(Integer id, ChiTietSP ctsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(ctsp)) {
+            chiTietSpRepository.update(id, ctsp);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean checkMa(ChiTietSP ctsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        chiTietSpRepository.delete(id);
     }
 
     @Override
     public boolean checkData(ChiTietSP ctsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (ctsp.getTrangThai() == 0 || ctsp.getTrangThai() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public ChiTietSP search(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<ChiTietSP> search(Integer id) {
+        return chiTietSpRepository.search(id);
+    }
+
+    @Override
+    public void updateAll(long number, DongSp dongSp) {
+        chiTietSpRepository.updateAll(number, dongSp);
     }
     
 }

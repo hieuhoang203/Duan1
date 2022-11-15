@@ -30,19 +30,19 @@ public class ChiTietSP implements Serializable{
     private String id;
      
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdDongSP")
     private DongSp idDongSp;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdMauSac")
     private MauSac idMauSac;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdDungLuong")
     private DungLuong idDungLuong;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdCuaHang")
     private CuaHang idCuaHang;
     
@@ -55,7 +55,7 @@ public class ChiTietSP implements Serializable{
     private Date ngaySua;
     
     @Column(name = "SoLuong")
-    private int soLuong;
+    private long soLuong;
     
     @Column(name = "TrangThai")
     private int trangThai;
@@ -63,7 +63,7 @@ public class ChiTietSP implements Serializable{
     public ChiTietSP() {
     }
 
-    public ChiTietSP(String id, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, CuaHang idCuaHang, Date ngayThem, Date ngaySua, int soLuong, int trangThai) {
+    public ChiTietSP(String id, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, CuaHang idCuaHang, Date ngayThem, Date ngaySua, long soLuong, int trangThai) {
         this.id = id;
         this.idDongSp = idDongSp;
         this.idMauSac = idMauSac;
@@ -131,11 +131,11 @@ public class ChiTietSP implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public int getSoLuong() {
+    public long getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(long soLuong) {
         this.soLuong = soLuong;
     }
 

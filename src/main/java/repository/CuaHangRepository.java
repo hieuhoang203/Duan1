@@ -32,7 +32,7 @@ public class CuaHangRepository {
     public void update(Integer id, CuaHang ch){
         session.beginTransaction();
         String query = "update CuaHang set ma =:ma, ten =:ten, "
-                + "diaChi =:diaChi, idCoSo =:idCoSo, ngaySua=: ngayThem where id =:id";
+                + "diaChi =:diaChi, idCoSo =:idCoSo, ngaySua=: ngaySua where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("ma", ch.getMa());
         q.setParameter("ten", ch.getTen());
@@ -54,7 +54,7 @@ public class CuaHangRepository {
     }
     
     public ArrayList<String> selectMa(){
-        Query q = session.createQuery("select CuaHang.ma from CuaHang");
+        Query q = session.createQuery("select h.ma from CuaHang h");
         ArrayList<String> list = (ArrayList<String>) q.getResultList();
         return list;
     }

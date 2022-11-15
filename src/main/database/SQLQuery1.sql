@@ -7,7 +7,8 @@ CREATE TABLE Hang(
 	Ma VARCHAR(10) NOT NULL,
 	TenHang NVARCHAR(30) NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang DongSp
 CREATE TABLE DongSP(
@@ -18,7 +19,8 @@ CREATE TABLE DongSP(
 	GiaBan BIGINT NOT NULL,
 	IdHang int NOT NULL FOREIGN KEY REFERENCES dbo.Hang(Id),
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang CoSo
 CREATE TABLE CoSo(
@@ -26,17 +28,19 @@ CREATE TABLE CoSo(
 	Ma VARCHAR(10) NOT NULL,
 	Ten NVARCHAR(50) NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang CuaHang
-CREATE TABLE CuaHang(
+create TABLE CuaHang(
 	Id int identity(1,1) PRIMARY KEY NOT NULL,
 	Ma VARCHAR(10) NOT NULL,
 	Ten NVARCHAR(50) NOT NULL,
 	DiaChi VARCHAR(MAX) NOT NULL,
 	IdCoSo int NOT NULL FOREIGN KEY REFERENCES dbo.CoSo(Id),
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang DungLuong
 CREATE TABLE DungLuong(
@@ -44,7 +48,8 @@ CREATE TABLE DungLuong(
 	Ma VARCHAR(10) NOT NULL,
 	Ten NVARCHAR(10) NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang MauSac
 CREATE TABLE MauSac(
@@ -52,18 +57,22 @@ CREATE TABLE MauSac(
 	Ma VARCHAR(10) NOT NULL,
 	Ten NVARCHAR(50) NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
+)
+-- Tao bang LoaiSanPham
+create table LoaiSanPham(
+	Id int identity(1,1) not null primary key,
+	Ma varchar(10) not null,
+
 )
 -- Tao bang ChiTietSP
 CREATE TABLE ChiTietSP(
 	Id int identity(1,1) NOT NULL PRIMARY KEY,
-	IdDongSP int NOT NULL FOREIGN KEY REFERENCES dbo.DongSP(Id),
-	IdMauSac int NOT NULL FOREIGN KEY REFERENCES dbo.MauSac(Id),
-	IdDungLuong int NOT NULL FOREIGN KEY REFERENCES dbo.DungLuong(Id),
+	Imei varchar(15) not null,
 	IdCuaHang int NOT NULL FOREIGN KEY REFERENCES dbo.CuaHang(Id),
 	NgayThem DATE,
 	NgaySua DATE,
-	SoLuong INT NOT NULL,
 	TrangThai BIT NOT NULL
 )
 -- Tao bang ChucVu 
@@ -72,7 +81,8 @@ CREATE TABLE ChucVu(
 	Ma VARCHAR(10) NOT NULL,
 	Ten VARCHAR(50) NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE, 
+	TrangThai bit
 )
 -- Tao bang Rank
 CREATE TABLE Rank(
@@ -81,7 +91,8 @@ CREATE TABLE Rank(
 	Ten NVARCHAR(50) NOT NULL,
 	MucChi BIGINT NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang NguoiDung 
 CREATE TABLE NguoiDung(
@@ -96,7 +107,8 @@ CREATE TABLE NguoiDung(
 	IdChucVu int NOT NULL FOREIGN KEY REFERENCES dbo.ChucVu(Id),
 	IdRank int NOT NULL FOREIGN KEY REFERENCES dbo.Rank(Id),
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang BaoHanh
 CREATE TABLE BaoHanh(
@@ -106,7 +118,8 @@ CREATE TABLE BaoHanh(
 	ThoiGian INT,
 	Gia BIGINT NOT NULL,
 	NgayThem DATE,
-	NgaySua DATE
+	NgaySua DATE,
+	TrangThai bit
 )
 -- Tao bang HoaDon 
 CREATE TABLE HoaDon(
@@ -133,7 +146,7 @@ CREATE TABLE HoaDonChiTiet(
 	IdSanPham int FOREIGN KEY REFERENCES dbo.ChiTietSP(Id) NOT NULL,
 	SoLuong INT NOT NULL,
 	DonGia BIGINT NOT NULL,
-	ThanhTien BIGINT NOT NULL
+	ThanhTien BIGINT NOT NULL,
 )
 -- Tao bang GioHang
 CREATE TABLE GioHang(
@@ -159,4 +172,3 @@ CREATE TABLE Account(
 	Pass varchar(18) not null,
 	IdNguoiDung int FOREIGN KEY REFERENCES dbo.NguoiDung(Id) NOT NULL,
 )
-

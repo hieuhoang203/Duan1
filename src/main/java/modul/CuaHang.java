@@ -40,7 +40,7 @@ public class CuaHang implements Serializable{
     @Column(name = "DiaChi")
     private String diaChi;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdCoSo")
     private CoSo idCoSo;
     

@@ -6,6 +6,7 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.DongSp;
+import repository.DongSpRepository;
 import service.QuanLyDongSPService;
 
 /**
@@ -13,35 +14,55 @@ import service.QuanLyDongSPService;
  * @author admin
  */
 public class DongSpServiceImpl implements QuanLyDongSPService{
-
+    private DongSpRepository dongSpRepository = new DongSpRepository();
+    
     @Override
     public ArrayList<DongSp> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return dongSpRepository.select();
     }
 
     @Override
     public boolean insert(DongSp dsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(dsp) && checkMa(dsp)) {
+            dongSpRepository.insert(dsp);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean update(Integer id, DongSp dsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(dsp)) {
+            dongSpRepository.update(id, dsp);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        dongSpRepository.delete(id);
     }
 
     @Override
     public boolean checkMa(DongSp dsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (dongSpRepository.selectMa().contains(dsp.getMa())) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
     public boolean checkData(DongSp dsp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!dsp.getMa().equals("") && !dsp.getTen().equals("") && 
+                dsp.getGiaNhap()>0 && dsp.getGiaBan()>0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }
