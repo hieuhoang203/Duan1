@@ -1,4 +1,4 @@
-create database DuAn1_CuaHangDienThoai
+drop database DuAn1_CuaHangDienThoai
 go
 use DuAn1_CuaHangDienThoai
 go
@@ -67,7 +67,9 @@ create table LoaiSanPham(
 	IdDongSp int FOREIGN KEY REFERENCES DongSP(Id),
 	IdMauSac int FOREIGN KEY REFERENCES MauSac(Id),
 	IdDungLuong int FOREIGN KEY REFERENCES DungLuong(Id),
-	TrangThai bit
+	TrangThai bit,
+	NgayTao Date,
+	NgaySua Date
 )
 -- Tao bang ChiTietSP
 CREATE TABLE ChiTietSP(
