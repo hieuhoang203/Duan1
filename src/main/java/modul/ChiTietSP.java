@@ -23,128 +23,33 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "ChiTietSP")
-public class ChiTietSP implements Serializable{
+public class ChiTietSP implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private String id;
-     
+
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdDongSP")
-    private DongSp idDongSp;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdMauSac")
-    private MauSac idMauSac;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdDungLuong")
-    private DungLuong idDungLuong;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdCuaHang")
     private CuaHang idCuaHang;
-    
+
+    @Column(name = "TrangThai")
+    private int trangThai;
+
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
-    
+
     @Column(name = "NgaySua")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
-    
-    @Column(name = "SoLuong")
-    private long soLuong;
-    
-    @Column(name = "TrangThai")
-    private int trangThai;
 
     public ChiTietSP() {
     }
 
-    public ChiTietSP(String id, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, CuaHang idCuaHang, Date ngayThem, Date ngaySua, long soLuong, int trangThai) {
-        this.id = id;
-        this.idDongSp = idDongSp;
-        this.idMauSac = idMauSac;
-        this.idDungLuong = idDungLuong;
-        this.idCuaHang = idCuaHang;
-        this.ngayThem = new java.sql.Date(new Date().getTime());
-        this.ngaySua = ngaySua;
-        this.soLuong = soLuong;
-        this.trangThai = trangThai;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public DongSp getIdDongSp() {
-        return idDongSp;
-    }
-
-    public void setIdDongSp(DongSp idDongSp) {
-        this.idDongSp = idDongSp;
-    }
-
-    public MauSac getIdMauSac() {
-        return idMauSac;
-    }
-
-    public void setIdMauSac(MauSac idMauSac) {
-        this.idMauSac = idMauSac;
-    }
-
-    public DungLuong getIdDungLuong() {
-        return idDungLuong;
-    }
-
-    public void setIdDungLuong(DungLuong idDungLuong) {
-        this.idDungLuong = idDungLuong;
-    }
-
-    public CuaHang getIdCuaHang() {
-        return idCuaHang;
-    }
-
-    public void setIdCuaHang(CuaHang idCuaHang) {
-        this.idCuaHang = idCuaHang;
-    }
-
-    public Date getNgayThem() {
-        return ngayThem;
-    }
-
-    public void setNgayThem(Date ngayThem) {
-        this.ngayThem = ngayThem;
-    }
-
-    public Date getNgaySua() {
-        return ngaySua;
-    }
-
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
-    }
-
-    public long getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(long soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
     
+
 }
