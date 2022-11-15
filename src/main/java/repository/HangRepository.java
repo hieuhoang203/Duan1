@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package repository;
 
 import hibernateConfig.HibernateConfig;
@@ -17,8 +13,9 @@ import org.hibernate.Session;
 public class HangRepository {
    private Session session = HibernateConfig.getFACTORY().openSession();
   public ArrayList<Hang> select(){
-      String query="FRom Hang";
+      String query="FRom Hang where trangThai =:trangThai";
       Query q=session.createQuery(query);
+      q.setParameter("trangThai", 1);
       ArrayList<Hang> list=(ArrayList<Hang>) q.getResultList();
       return list;
   }
@@ -40,8 +37,9 @@ public class HangRepository {
   }
   public void delete(Integer id){
       session.beginTransaction();
-      String query="DELETE from Hang WHERE id=: id";
+      String query="update Hang set trangThai =:trangThai where id =:id";
       Query q=session.createQuery(query);
+      q.setParameter("trangThai", 0);
       q.setParameter("id", id);
       q.executeUpdate();
       session.getTransaction().commit();

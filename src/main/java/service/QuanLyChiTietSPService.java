@@ -16,8 +16,8 @@ public interface QuanLyChiTietSPService {
     ArrayList<ChiTietSP> select();
     boolean insert(ChiTietSP ctsp);
     boolean update(Integer id, ChiTietSP ctsp);
-    void delete(Integer id);
+    void delete(Integer key);
     boolean checkData(ChiTietSP ctsp);
-    ArrayList<ChiTietSP> search(Integer id);
-    void updateAll(long number, DongSp dongSp);
+    boolean checkImei(ChiTietSP ctsp);
+    ArrayList<ChiTietSP> search(String id);
 }

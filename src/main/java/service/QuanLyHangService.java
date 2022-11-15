@@ -16,6 +16,6 @@ public interface QuanLyHangService {
     boolean insert(Hang h);
     boolean update(Integer id, Hang h);
     void delete(Integer id);
-    boolean checkMa(Hang h);
     boolean checkData(Hang h);
+    boolean checkMa(Hang h);
 }

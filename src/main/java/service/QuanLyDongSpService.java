@@ -11,7 +11,7 @@ import modul.DongSp;
  *
  * @author admin
  */
-public interface QuanLyDongSPService {
+public interface QuanLyDongSpService {
     ArrayList<DongSp> select();
     boolean insert(DongSp dsp);
     boolean update(Integer id, DongSp dsp);

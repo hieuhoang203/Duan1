@@ -7,13 +7,13 @@ package service.serviceImpl;
 import java.util.ArrayList;
 import modul.DongSp;
 import repository.DongSpRepository;
-import service.QuanLyDongSPService;
+import service.QuanLyDongSpService;
 
 /**
  *
  * @author admin
  */
-public class DongSpServiceImpl implements QuanLyDongSPService{
+public class DongSpServiceImpl implements QuanLyDongSpService{
     private DongSpRepository dongSpRepository = new DongSpRepository();
     
     @Override
@@ -64,5 +64,4 @@ public class DongSpServiceImpl implements QuanLyDongSPService{
             return false;
         }
     }
-    
 }

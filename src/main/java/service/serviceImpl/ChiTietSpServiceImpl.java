@@ -24,7 +24,7 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
 
     @Override
     public boolean insert(ChiTietSP ctsp) {
-        if (checkData(ctsp)) {
+        if (checkData(ctsp) && checkImei(ctsp)) {
             chiTietSpRepository.insert(ctsp);
             return true;
         } else {
@@ -49,7 +49,7 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
 
     @Override
     public boolean checkData(ChiTietSP ctsp) {
-        if (ctsp.getTrangThai() == 0 || ctsp.getTrangThai() == 1) {
+        if (ctsp.getImei().length() == 15) {
             return true;
         } else {
             return false;
@@ -57,13 +57,17 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     }
 
     @Override
-    public ArrayList<ChiTietSP> search(Integer id) {
-        return chiTietSpRepository.search(id);
+    public ArrayList<ChiTietSP> search(String key) {
+        return chiTietSpRepository.search(key);
     }
 
     @Override
-    public void updateAll(long number, DongSp dongSp) {
-        chiTietSpRepository.updateAll(number, dongSp);
+    public boolean checkImei(ChiTietSP ctsp) {
+        if (chiTietSpRepository.selectImei().contains(ctsp.getImei())) {
+            return false;
+        } else {
+            return true;
+        }
     }
     
 }

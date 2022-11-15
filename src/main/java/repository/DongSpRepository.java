@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package repository;
 
 import hibernateConfig.HibernateConfig;
@@ -17,7 +13,8 @@ public class DongSpRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
     
     public ArrayList<DongSp> select(){
-        Query q = session.createQuery("From DongSp");
+        Query q = session.createQuery("From DongSp where trangThai =:trangThai");
+        q.setParameter("trangThai", 1);
         ArrayList<DongSp> list = (ArrayList<DongSp>) q.getResultList();
         return list;
     }
@@ -45,8 +42,9 @@ public class DongSpRepository {
     
     public void delete(Integer id){
         session.beginTransaction();
-        String query = "delete from DongSp where id=:id";
+        String query = "update DongSp set trangThai =:trangThai where id =:id";
         Query q = session.createQuery(query);
+        q.setParameter("trangThai", 0);
         q.setParameter("id", id);
         q.executeUpdate();
         session.getTransaction().commit();;

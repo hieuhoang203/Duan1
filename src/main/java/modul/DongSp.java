@@ -61,33 +61,21 @@ public class DongSp implements Serializable{
     @OneToMany(mappedBy = "idDongSp", fetch = FetchType.LAZY)
     private List<LoaiSp> loaiSps;
     
-    @Column (name = "TrangThai")
-    private int trangThai;
-    
     
     public DongSp() {
     }
 
-<<<<<<< HEAD
-    public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<LoaiSp> loaiSps, int trangThai) {
-=======
-    public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
->>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
+    public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, int trangThai, Date ngayThem, Date ngaySua, List<LoaiSp> loaiSps) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
-<<<<<<< HEAD
-        this.ngayThem = ngayThem;
-=======
         this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
->>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
         this.ngaySua = ngaySua;
         this.loaiSps = loaiSps;
-        this.trangThai = trangThai;
     }
 
     public Integer getId() {
@@ -170,21 +158,10 @@ public class DongSp implements Serializable{
         this.loaiSps = loaiSps;
     }
 
-<<<<<<< HEAD
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    
-=======
->>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
     @Override
     public String toString() {
         return ten;
     }
+
     
 }

@@ -14,8 +14,9 @@ import service.QuanLyCuaHangService;
  * @author admin
  */
 public class CuaHangServiceImpl implements QuanLyCuaHangService{
-    private CuaHangRepository cuaHangRepository = new CuaHangRepository();  
-    
+
+    private CuaHangRepository cuaHangRepository = new CuaHangRepository();
+
     @Override
     public ArrayList<CuaHang> select() {
         return cuaHangRepository.select();
@@ -63,5 +64,5 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
             return false;
         }
     }
-    
+
 }

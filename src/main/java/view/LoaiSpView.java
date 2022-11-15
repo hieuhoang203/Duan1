@@ -4,23 +4,100 @@
  */
 package view;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modul.DongSp;
 import modul.DungLuong;
+import modul.LoaiSp;
 import modul.MauSac;
+import service.QuanLyDongSpService;
+import service.QuanLyDungLuongService;
+import service.QuanLyLoaiSpService;
+import service.QuanLyMauSacService;
+import service.serviceImpl.DongSpServiceImpl;
+import service.serviceImpl.DungLuongServiceImpl;
+import service.serviceImpl.LoaiSpServiceImpl;
+import service.serviceImpl.MauSacServiceImpl;
 
 /**
  *
  * @author admin
  */
 public class LoaiSpView extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    private QuanLyLoaiSpService quanLyLoaiSpService = new LoaiSpServiceImpl();
+    private QuanLyDongSpService quanLyDongSpService = new DongSpServiceImpl();
+    private DefaultComboBoxModel cbxDongSp;
+    private QuanLyDungLuongService quanLyDungLuongService = new DungLuongServiceImpl();
+    private DefaultComboBoxModel cbxDungLuong;
+    private QuanLyMauSacService quanLyMauSacService = new MauSacServiceImpl();
+    private DefaultComboBoxModel cbxMauSac;
     /**
      * Creates new form LoaiSpView
      */
     public LoaiSpView() {
         initComponents();
+        addCbxDongSp();
+        addCbxDungLuong();
+        addCbxMauSac();
+        addRows();
+    }
+    
+    public void addCbxDongSp(){
+        cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
+        cbxDongSp.addAll(quanLyDongSpService.select());
+        cbx_dongsp.setSelectedIndex(0);
+    }
+    
+    public void addCbxDungLuong(){
+        cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
+        cbxDungLuong.addAll(quanLyDungLuongService.select());
+        cbx_dungluong.setSelectedIndex(0);
+    }
+    
+    public void addCbxMauSac(){
+        cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
+        cbxMauSac.addAll(quanLyMauSacService.select());
+        cbx_mausac.setSelectedIndex(0);
     }
 
+    public void clear(){
+        txt_id.setText("");
+        txt_ma.setText("");
+        cbx_dongsp.setSelectedIndex(0);
+        cbx_dungluong.setSelectedIndex(0);
+        cbx_mausac.setSelectedIndex(0);
+    }
+    
+    public void fillData(int row){
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+        cbx_dongsp.setSelectedItem(tb_list.getValueAt(row, 2));
+        cbx_dungluong.setSelectedItem(tb_list.getValueAt(row, 3));
+        cbx_mausac.setSelectedItem(tb_list.getValueAt(row, 4));
+    }
+    
+    public void addRows(){
+        tableModel = (DefaultTableModel) tb_list.getModel();
+        tableModel.setRowCount(0);
+        for (LoaiSp loaiSp : quanLyLoaiSpService.select()) {
+            tableModel.addRow(new Object[]{
+                loaiSp.getId(),
+                loaiSp.getMa(),
+                loaiSp.getIdDongSp(),
+                loaiSp.getIdDungLuong(),
+                loaiSp.getIdMauSac()
+            });
+        }
+    }
+    
+    public LoaiSp create(){
+        return new LoaiSp(null, txt_ma.getText(), 
+                (DongSp)cbx_dongsp.getSelectedItem(), 
+                (MauSac) cbx_mausac.getSelectedItem(), 
+                (DungLuong)cbx_dungluong.getSelectedItem(), 1, null, null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,15 +174,40 @@ public class LoaiSpView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_list);
 
         btn_add.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\add.png")); // NOI18N
+        btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addMouseClicked(evt);
+            }
+        });
 
         btn_update.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\update.png")); // NOI18N
+        btn_update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_updateMouseClicked(evt);
+            }
+        });
 
         btn_delete.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\delete.png")); // NOI18N
+        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseClicked(evt);
+            }
+        });
 
         btn_clear.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\clear.png")); // NOI18N
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,11 +275,12 @@ public class LoaiSpView extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(cbx_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_add)
-                    .addComponent(btn_update)
-                    .addComponent(btn_delete)
-                    .addComponent(btn_clear))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_update, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_add)
+                        .addComponent(btn_clear)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -197,6 +300,69 @@ public class LoaiSpView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseClicked
+        // TODO add your handling code here:
+        if (quanLyLoaiSpService.insert(create())) {
+            addRows();
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
+            clear();
+        } else {
+            if (!quanLyLoaiSpService.checkMa(create())) {
+                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Mã trống !");
+            }
+        }
+    }//GEN-LAST:event_btn_addMouseClicked
+
+    private void btn_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            if (quanLyLoaiSpService.update(id, create())) {
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Load lại để xem dữ liệu !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Mã trống !");
+            }
+        }
+    }//GEN-LAST:event_btn_updateMouseClicked
+
+    private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(row, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyLoaiSpService.delte(id);
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Hủy xóa !");
+                clear();
+            }
+        }
+    }//GEN-LAST:event_btn_deleteMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tb_listMouseClicked
 
     /**
      * @param args the command line arguments

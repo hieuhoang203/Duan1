@@ -18,7 +18,8 @@ public class CuaHangRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
     
     public ArrayList<CuaHang> select(){
-        Query q = session.createQuery("From CuaHang");
+        Query q = session.createQuery("From CuaHang where trangThai =:trangThai");
+        q.setParameter("trangThai", 1);
         ArrayList<CuaHang> list = (ArrayList<CuaHang>) q.getResultList();
         return list;
     }
@@ -32,7 +33,7 @@ public class CuaHangRepository {
     public void update(Integer id, CuaHang ch){
         session.beginTransaction();
         String query = "update CuaHang set ma =:ma, ten =:ten, "
-                + "diaChi =:diaChi, idCoSo =:idCoSo, ngaySua=: ngaySua where id =:id";
+                + "diaChi =:diaChi, idCoSo =:idCoSo, ngaySua=:ngaySua where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("ma", ch.getMa());
         q.setParameter("ten", ch.getTen());
@@ -46,8 +47,9 @@ public class CuaHangRepository {
     
     public void delete(Integer id){
         session.beginTransaction();
-        String query = "delete from CuaHang where id =:id";
+        String query = "update CuaHang set trangThai =:trangThai where id =:id";
         Query q = session.createQuery(query);
+        q.setParameter("trangThai", 0);
         q.setParameter("id", id);
         q.executeUpdate();
         session.getTransaction().commit();

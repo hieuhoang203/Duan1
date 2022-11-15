@@ -14,18 +14,19 @@ import service.QuanLyHangService;
  * @author admin
  */
 public class HangServiceImpl implements QuanLyHangService{
-private HangRepository hangRepository= new HangRepository();
+    private HangRepository hangRepository = new HangRepository();
+
     @Override
     public ArrayList<Hang> select() {
-     return hangRepository.select();
+        return hangRepository.select();
     }
 
     @Override
     public boolean insert(Hang h) {
-        if (checkData(h)&&checkMa(h)) {
+        if (checkData(h) && checkMa(h)) {
             hangRepository.insert(h);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -42,26 +43,25 @@ private HangRepository hangRepository= new HangRepository();
 
     @Override
     public void delete(Integer id) {
-   hangRepository.delete(id);
+        hangRepository.delete(id);
     }
 
     @Override
     public boolean checkMa(Hang h) {
         if (hangRepository.selectMa().contains(h.getMa())) {
             return false;
-        }else{
+        } else {
             return true;
         }
-        
+
     }
 
     @Override
     public boolean checkData(Hang h) {
-        if (!h.getMa().equals("")&&!h.getTen().equals("")) {
+        if (!h.getMa().equals("") && !h.getTen().equals("")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
 }

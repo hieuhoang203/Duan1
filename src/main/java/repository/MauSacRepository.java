@@ -19,8 +19,9 @@ public class MauSacRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
 
     public ArrayList<MauSac> select() {
-        String query = "from MauSac where trangThai = git pgit pull";
+        String query = "from MauSac where trangThai =:trangThai";
         Query q = session.createQuery(query);
+        q.setParameter("trangThai", 1);
         ArrayList<MauSac> list = (ArrayList<MauSac>) q.getResultList();
         return list;
     }
@@ -45,8 +46,9 @@ public class MauSacRepository {
 
     public void delete(Integer id) {
         session.beginTransaction();
-        String query = "DELETE from MauSac WHERE id= : id";
+        String query = "update MauSac set trangThai =: trangThai WHERE id= : id";
         Query q = session.createQuery(query);
+        q.setParameter("trangThai", 0);
         q.setParameter("id", id);
         q.executeUpdate();
         session.getTransaction().commit();

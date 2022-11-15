@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +18,7 @@ public class CuaHangView extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
     private DefaultComboBoxModel cbxCoSo = new DefaultComboBoxModel();
-    private QuanLyCuaHangService quanLyCuaHangService = new CuaHangServiceImpl();
+    private QuanLyCuaHangService cuaHangService = new CuaHangServiceImpl();
     private QuanLyCoSoService quanLyCoSoService = new CoSoServiceImpl();
 
     /**
@@ -47,22 +42,18 @@ public class CuaHangView extends javax.swing.JFrame {
         txt_ten.setText("");
         txa_diachi.setText("");
         cbx_coso.setSelectedIndex(0);
-        txt_ngaythem.setText("");
-        txt_ngaysua.setText("");
     }
 
     public void addRows() {
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
-        for (CuaHang cuaHang : quanLyCuaHangService.select()) {
+        for (CuaHang cuaHang : cuaHangService.select()) {
             tableModel.addRow(new Object[]{
                 cuaHang.getId(),
                 cuaHang.getMa(),
                 cuaHang.getTen(),
                 cuaHang.getDiaChi(),
-                cuaHang.getIdCoSo(),
-                cuaHang.getNgayThem(),
-                cuaHang.getNgaySua()
+                cuaHang.getIdCoSo()
             });
         }
     }
@@ -74,18 +65,11 @@ public class CuaHangView extends javax.swing.JFrame {
         txt_ten.setText(tb_list.getValueAt(row, 2).toString());
         txa_diachi.setText(tb_list.getValueAt(row, 3).toString());
         cbxCoSo.setSelectedItem(tb_list.getValueAt(row, 4));
-        txt_ngaythem.setText(tb_list.getValueAt(row, 5).toString());
-        try {
-            txt_ngaysua.setText(tb_list.getValueAt(row, 7).toString());
-        } catch (Exception e) {
-            txt_ngaysua.setText("");
-        }
     }
 
     public CuaHang create() {
-        return new CuaHang(null, txt_ma.getText().trim(),
-                txt_ten.getText().trim(), txa_diachi.getText().trim(),
-                (CoSo) cbx_coso.getSelectedItem(), null, null, null);
+        return new CuaHang(null, txt_ma.getText().trim(), txt_ten.getText().trim(), txa_diachi.getText().trim(),
+                (CoSo) cbx_coso.getSelectedItem(), 1, null, null, null);
     }
 
     /**
@@ -104,15 +88,11 @@ public class CuaHangView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txa_diachi = new javax.swing.JTextArea();
         txt_id = new javax.swing.JTextField();
         txt_ma = new javax.swing.JTextField();
         txt_ten = new javax.swing.JTextField();
-        txt_ngaythem = new javax.swing.JTextField();
-        txt_ngaysua = new javax.swing.JTextField();
         cbx_coso = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_list = new javax.swing.JTable();
@@ -150,37 +130,25 @@ public class CuaHangView extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 0, 51));
         jLabel6.setText("Cơ sở:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel7.setText("Ngày thêm:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel8.setText("Ngày sửa:");
-
         txa_diachi.setColumns(20);
         txa_diachi.setRows(5);
         jScrollPane1.setViewportView(txa_diachi);
 
         txt_id.setEditable(false);
 
-        txt_ngaythem.setEditable(false);
-
-        txt_ngaysua.setEditable(false);
-
         tb_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Mã", "Tên", "Địa chỉ", "Cơ sở", "Ngày thêm", "Ngày sửa"
+                "ID", "Mã", "Tên", "Địa chỉ", "Cơ sở"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -230,34 +198,20 @@ public class CuaHangView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbx_coso, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_ngaythem, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_ngaysua, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane1)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -272,6 +226,16 @@ public class CuaHangView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -302,23 +266,15 @@ public class CuaHangView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cbx_coso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_ngaythem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_ngaysua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_xoa)
+                    .addComponent(btn_them)
                     .addComponent(btn_sua)
-                    .addComponent(btn_clear)
-                    .addComponent(btn_them))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(btn_xoa)
+                    .addComponent(btn_clear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,12 +294,12 @@ public class CuaHangView extends javax.swing.JFrame {
 
     private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
         // TODO add your handling code here:
-        if (quanLyCuaHangService.insert(create())) {
+        if (cuaHangService.insert(create())) {
             addRows();
             JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             clear();
         } else {
-            if (quanLyCuaHangService.checkMa(create())) {
+            if (cuaHangService.checkMa(create())) {
                 JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
             } else if (create().getMa().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
@@ -368,7 +324,7 @@ public class CuaHangView extends javax.swing.JFrame {
         if (id == null) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
-            if (quanLyCuaHangService.update(id, create())) {
+            if (cuaHangService.update(id, create())) {
                 addRows();
                 JOptionPane.showMessageDialog(rootPane, "Load lại để xem !");
                 clear();
@@ -398,7 +354,7 @@ public class CuaHangView extends javax.swing.JFrame {
         } else {
             int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
             if (choose == JOptionPane.YES_OPTION) {
-                quanLyCuaHangService.delete(id);
+                cuaHangService.delete(id);
                 addRows();
                 JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
                 clear();
@@ -457,8 +413,6 @@ public class CuaHangView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -466,8 +420,6 @@ public class CuaHangView extends javax.swing.JFrame {
     private javax.swing.JTextArea txa_diachi;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_ma;
-    private javax.swing.JTextField txt_ngaysua;
-    private javax.swing.JTextField txt_ngaythem;
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 }

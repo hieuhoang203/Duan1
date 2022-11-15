@@ -18,7 +18,8 @@ public class CoSoRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
     
     public ArrayList<CoSo> select(){
-        Query q = session.createQuery("From CoSo");
+        Query q = session.createQuery("From CoSo where trangThai =:trangThai");
+        q.setParameter("trangThai", 1);
         ArrayList<CoSo> list = (ArrayList<CoSo>) q.getResultList();
         return list;
     }
@@ -44,8 +45,9 @@ public class CoSoRepository {
     
     public void delete(Integer id){
         session.beginTransaction();
-        String query = "Delete from CoSo where id =:id";
+        String query = "update CoSo set trangThai =:trangThai where id =:id";
         Query q = session.createQuery(query);
+        q.setParameter("trangThai", 0);
         q.setParameter("id", id);
         q.executeUpdate();
         session.getTransaction().commit();

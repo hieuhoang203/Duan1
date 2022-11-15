@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class MauSac implements Serializable{
     private String ten;
     
     @Column(name = "TrangThai")
-    private boolean trangThai;
+    private int trangThai;
     
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -45,37 +46,22 @@ public class MauSac implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @Column (name = "TrangThai")
-    private int trangThai;
-        
-    @OneToMany(mappedBy = "idMauSac")
-    private List<LoaiSp> loaSPs;
+    @OneToMany(mappedBy = "idMauSac", fetch = FetchType.LAZY)
+    private List<LoaiSp> loaiSps;
 
     public MauSac() {
-        
     }
 
-<<<<<<< HEAD
-    public MauSac(Integer id, String ma, String ten, Date ngayThem, Date ngaySua, int trangThai, List<LoaiSp> loaSPs) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.ngayThem = ngayThem;
-        this.ngaySua = ngaySua;
-        this.trangThai = trangThai;
-        this.loaSPs = loaSPs;
-=======
-    public MauSac(Integer id, String ma, String ten, boolean trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+    public MauSac(Integer id, String ma, String ten, Date ngayThem, int trangThai, Date ngaySua, List<LoaiSp> loaiSps) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.trangThai = trangThai;
-        this.ngayThem = new java.sql.Date(new java.util.Date().getTime());
+        this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
-        this.chiTietSPs = chiTietSPs;
->>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
+        this.loaiSps = loaiSps;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -100,11 +86,11 @@ public class MauSac implements Serializable{
         this.ten = ten;
     }
 
-    public boolean isTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
@@ -124,31 +110,17 @@ public class MauSac implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public List<LoaiSp> getLoaiSps() {
+        return loaiSps;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setLoaiSps(List<LoaiSp> loaiSps) {
+        this.loaiSps = loaiSps;
     }
 
-<<<<<<< HEAD
-    public List<LoaiSp> getLoaSPs() {
-        return loaSPs;
-    }
-
-    public void setLoaSPs(List<LoaiSp> loaSPs) {
-        this.loaSPs = loaSPs;
-    }
-
-    
-=======
-
-
->>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
     @Override
     public String toString() {
         return ten;
     }
-    
+
 }
