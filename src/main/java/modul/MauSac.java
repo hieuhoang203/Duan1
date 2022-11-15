@@ -42,20 +42,24 @@ public class MauSac implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
+    @Column (name = "TrangThai")
+    private int trangThai;
+        
     @OneToMany(mappedBy = "idMauSac")
-    private List<ChiTietSP> chiTietSPs;
+    private List<LoaiSp> loaSPs;
 
     public MauSac() {
         
     }
 
-    public MauSac(Integer id, String ma, String ten, Date ngayThem, Date ngaySuaDate, List<ChiTietSP> chiTietSPs) {
+    public MauSac(Integer id, String ma, String ten, Date ngayThem, Date ngaySua, int trangThai, List<LoaiSp> loaSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.ngayThem = new java.sql.Date(new Date().getTime());
-        this.ngaySua = ngaySuaDate;
-        this.chiTietSPs = chiTietSPs;
+        this.ngayThem = ngayThem;
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+        this.loaSPs = loaSPs;
     }
 
     public Integer getId() {
@@ -98,14 +102,23 @@ public class MauSac implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public List<ChiTietSP> getChiTietSPs() {
-        return chiTietSPs;
+    public int getTrangThai() {
+        return trangThai;
     }
 
-    public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
-        this.chiTietSPs = chiTietSPs;
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
+    public List<LoaiSp> getLoaSPs() {
+        return loaSPs;
+    }
+
+    public void setLoaSPs(List<LoaiSp> loaSPs) {
+        this.loaSPs = loaSPs;
+    }
+
+    
     @Override
     public String toString() {
         return ten;

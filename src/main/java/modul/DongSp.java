@@ -56,21 +56,26 @@ public class DongSp implements Serializable{
     private Date ngaySua;
     
     @OneToMany(mappedBy = "idDongSp", fetch = FetchType.LAZY)
-    private List<ChiTietSP> chiTietSPs;
+    private List<LoaiSp> loaiSps;
+    
+    @Column (name = "TrangThai")
+    private int trangThai;
+    
     
     public DongSp() {
     }
 
-    public DongSp(Integer id, String ma, String Ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+    public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<LoaiSp> loaiSps, int trangThai) {
         this.id = id;
         this.ma = ma;
-        this.ten = Ten;
+        this.ten = ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
-        this.ngayThem = new java.sql.Date(new Date().getTime());
+        this.ngayThem = ngayThem;
         this.ngaySua = ngaySua;
-        this.chiTietSPs = chiTietSPs;
+        this.loaiSps = loaiSps;
+        this.trangThai = trangThai;
     }
 
     public Integer getId() {
@@ -93,8 +98,8 @@ public class DongSp implements Serializable{
         return ten;
     }
 
-    public void setTen(String Ten) {
-        this.ten = Ten;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
     public int getGiaNhap() {
@@ -137,13 +142,22 @@ public class DongSp implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public List<ChiTietSP> getChiTietSPs() {
-        return chiTietSPs;
+    public List<LoaiSp> getLoaiSps() {
+        return loaiSps;
     }
 
-    public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
-        this.chiTietSPs = chiTietSPs;
+    public void setLoaiSps(List<LoaiSp> loaiSps) {
+        this.loaiSps = loaiSps;
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     
     @Override
     public String toString() {
