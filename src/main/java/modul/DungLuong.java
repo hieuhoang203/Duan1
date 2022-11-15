@@ -46,19 +46,31 @@ public class DungLuong implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
+    @Column (name = "TrangThai")
+    private int trangThai;
+    
     @OneToMany(mappedBy = "idDungLuong", fetch = FetchType.LAZY)
     private List<ChiTietSP> chiTietSPs;
 
     public DungLuong() {
     }
 
+<<<<<<< HEAD
+    public DungLuong(Integer id, String ma, String ten, Date ngayThem, Date ngaySua, int trangThai, List<ChiTietSP> chiTietSPs) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.ngayThem = ngayThem;
+=======
     public DungLuong(Integer id, String ma, String ten, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
+>>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
         this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
         this.chiTietSPs = chiTietSPs;
     }
 
@@ -110,6 +122,14 @@ public class DungLuong implements Serializable{
         this.ngaySua = ngaySua;
     }
 
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public List<ChiTietSP> getChiTietSPs() {
         return chiTietSPs;
     }
@@ -118,6 +138,8 @@ public class DungLuong implements Serializable{
         this.chiTietSPs = chiTietSPs;
     }
 
+    
+    
     @Override
     public String toString() {
         return ten;

@@ -11,6 +11,7 @@ import modul.CuaHang;
 import modul.DongSp;
 import modul.DungLuong;
 import modul.Hang;
+import modul.LoaiSp;
 import modul.MauSac;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -44,6 +45,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(DungLuong.class);
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(Hang.class);
+        conf.addAnnotatedClass(LoaiSp.class);
         
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

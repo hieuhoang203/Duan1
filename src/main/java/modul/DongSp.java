@@ -59,22 +59,35 @@ public class DongSp implements Serializable{
     private Date ngaySua;
     
     @OneToMany(mappedBy = "idDongSp", fetch = FetchType.LAZY)
-    private List<ChiTietSP> chiTietSPs;
+    private List<LoaiSp> loaiSps;
+    
+    @Column (name = "TrangThai")
+    private int trangThai;
+    
     
     public DongSp() {
     }
 
+<<<<<<< HEAD
+    public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, Date ngayThem, Date ngaySua, List<LoaiSp> loaiSps, int trangThai) {
+=======
     public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+>>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.idHang = idHang;
+<<<<<<< HEAD
+        this.ngayThem = ngayThem;
+=======
         this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
+>>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
         this.ngaySua = ngaySua;
-        this.chiTietSPs = chiTietSPs;
+        this.loaiSps = loaiSps;
+        this.trangThai = trangThai;
     }
 
     public Integer getId() {
@@ -149,14 +162,26 @@ public class DongSp implements Serializable{
         this.ngaySua = ngaySua;
     }
 
-    public List<ChiTietSP> getChiTietSPs() {
-        return chiTietSPs;
+    public List<LoaiSp> getLoaiSps() {
+        return loaiSps;
     }
 
-    public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
-        this.chiTietSPs = chiTietSPs;
+    public void setLoaiSps(List<LoaiSp> loaiSps) {
+        this.loaiSps = loaiSps;
     }
 
+<<<<<<< HEAD
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    
+=======
+>>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
     @Override
     public String toString() {
         return ten;
