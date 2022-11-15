@@ -73,6 +73,7 @@ create table LoaiSanPham(
 CREATE TABLE ChiTietSP(
 	Id int identity(1,1) NOT NULL PRIMARY KEY,
 	Imei varchar(15) not null,
+	IdLoaiSp int not null FOREIGN KEY REFERENCES LoaiSanPham(Id),
 	IdCuaHang int NOT NULL FOREIGN KEY REFERENCES dbo.CuaHang(Id),
 	NgayThem DATE,
 	NgaySua DATE,

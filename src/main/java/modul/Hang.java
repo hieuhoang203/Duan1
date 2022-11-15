@@ -35,6 +35,9 @@ public class Hang implements Serializable{
     @Column(name = "TenHang")
     private String ten;
     
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
@@ -49,10 +52,11 @@ public class Hang implements Serializable{
     public Hang() {
     }
 
-    public Hang(Integer id, String ma, String ten, Date ngayThem, Date ngaySua, List<DongSp> dongSps) {
+    public Hang(Integer id, String ma, String ten, int trangThai, Date ngayThem, Date ngaySua, List<DongSp> dongSps) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
+        this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.dongSps = dongSps;
@@ -80,6 +84,14 @@ public class Hang implements Serializable{
 
     public void setTen(String ten) {
         this.ten = ten;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Date getNgayThem() {

@@ -35,6 +35,9 @@ public class DungLuong implements Serializable{
     @Column(name = "Ten")
     private String ten;
     
+    @Column(name = "TrangThai")
+    private int trangThai;
+    
     @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
@@ -52,11 +55,20 @@ public class DungLuong implements Serializable{
     public DungLuong() {
     }
 
+<<<<<<< HEAD
     public DungLuong(Integer id, String ma, String ten, Date ngayThem, Date ngaySua, int trangThai, List<ChiTietSP> chiTietSPs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.ngayThem = ngayThem;
+=======
+    public DungLuong(Integer id, String ma, String ten, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.trangThai = trangThai;
+        this.ngayThem = new java.sql.Date(new Date().getTime());
+>>>>>>> 0443d971bd2c5dec5afe790f62d7221fb58bea94
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
         this.chiTietSPs = chiTietSPs;
@@ -84,6 +96,14 @@ public class DungLuong implements Serializable{
 
     public void setTen(String ten) {
         this.ten = ten;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Date getNgayThem() {
