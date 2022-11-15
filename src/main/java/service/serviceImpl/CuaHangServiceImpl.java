@@ -29,7 +29,6 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
         } else {
             return false;
         }
-        return false;
     }
 
     @Override

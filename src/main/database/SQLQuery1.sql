@@ -64,7 +64,10 @@ CREATE TABLE MauSac(
 create table LoaiSanPham(
 	Id int identity(1,1) not null primary key,
 	Ma varchar(10) not null,
-
+	IdDongSp int FOREIGN KEY REFERENCES DongSP(Id),
+	IdMauSac int FOREIGN KEY REFERENCES MauSac(Id),
+	IdDungLuong int FOREIGN KEY REFERENCES DungLuong(Id),
+	TrangThai bit
 )
 -- Tao bang ChiTietSP
 CREATE TABLE ChiTietSP(

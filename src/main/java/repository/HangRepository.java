@@ -15,7 +15,7 @@ import org.hibernate.Session;
  * @author admin
  */
 public class HangRepository {
-   private Session session=HibernateConfig.getFACTORY().openSession();
+   private Session session = HibernateConfig.getFACTORY().openSession();
   public ArrayList<Hang> select(){
       String query="FRom Hang";
       Query q=session.createQuery(query);
