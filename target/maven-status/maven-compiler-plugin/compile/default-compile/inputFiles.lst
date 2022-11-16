@@ -1,13 +1,16 @@
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\Hang.java
+E:\DuAn1\ProjectDuAn1\src\main\java\modul\LoaiSp.java
+E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyLoaiSpService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\HangRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\view\CoSoView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\view\CuaHangView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\DongSpServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\ChiTietSpServiceImpl.java
-E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyDongSPService.java
+E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyDongSpService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyCoSoService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\ChiTietSP.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyMauSacService.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\LoaiSpView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\DongSp.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\MauSac.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\MauSacServiceImpl.java
@@ -33,4 +36,6 @@ E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyDungLuongService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyCuaHangService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyHangService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\CoSo.java
+E:\DuAn1\ProjectDuAn1\src\main\java\repository\LoaiSpRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\view\HangView.java
+E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\LoaiSpServiceImpl.java
