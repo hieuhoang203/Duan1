@@ -11,49 +11,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.crypto.Data;
 
 /**
  *
  * @author DieuThuy
  */
 @Entity
-@Table (name = "Rank")
-public class Rank {
+@Table (name = "ChucVu")
+public class ChucVu {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "Id")
+    @Column(name = "Id")
     private int id;
     
     @Column(name = "Ma")
     private String ma;
     
-    @Column (name = "Ten")
+    @Column(name = "Ten")
     private String ten;
     
-    @Column (name = "MucChi")
-    private double mucChi;
-    
-    @Column (name = "NgayThem")
+    @Column(name = "NgayThem")
     private Date ngayThem;
     
-    @Column (name = "NgaySua")
+    @Column(name = "NgaySua")
     private Date ngaySua;
     
-    @Column (name = "TrangThai")
+    @Column(name = "TrangThai")
     private int trangThai;
-
-    public Rank() {
-    }
-
-    public Rank(int id, String ma, String ten, double mucChi, Date ngayThem, Date ngaySua, int trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.mucChi = mucChi;
-        this.ngayThem = new java.sql.Date(new Date().getTime());
-        this.ngaySua = ngaySua;
-        this.trangThai = trangThai;
-    }
 
     public int getId() {
         return id;
@@ -77,14 +62,6 @@ public class Rank {
 
     public void setTen(String ten) {
         this.ten = ten;
-    }
-
-    public double getMucChi() {
-        return mucChi;
-    }
-
-    public void setMucChi(double mucChi) {
-        this.mucChi = mucChi;
     }
 
     public Date getNgayThem() {
