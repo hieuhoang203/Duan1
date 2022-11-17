@@ -5,13 +5,15 @@
 package modul;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.crypto.Data;
 
 /**
  *
@@ -39,6 +41,22 @@ public class ChucVu {
     
     @Column(name = "TrangThai")
     private int trangThai;
+    
+    @OneToMany(mappedBy = "idChucVu", fetch = FetchType.LAZY)
+    private List<NguoiDung> nguoiDungs;
+
+    public ChucVu() {
+    }
+
+    public ChucVu(int id, String ma, String ten, int trangThai, Date ngayThem, Date ngaySua,  List<NguoiDung> nguoiDungs) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.ngayThem = new java.sql.Date(new Date().getTime());
+        this.ngaySua = ngaySua;
+        this.trangThai = trangThai;
+        this.nguoiDungs = nguoiDungs;
+    }
 
     public int getId() {
         return id;
@@ -88,10 +106,17 @@ public class ChucVu {
         this.trangThai = trangThai;
     }
 
+    public List<NguoiDung> getNguoiDungs() {
+        return nguoiDungs;
+    }
+
+    public void setNguoiDungs(List<NguoiDung> nguoiDungs) {
+        this.nguoiDungs = nguoiDungs;
+    }
+
     @Override
     public String toString() {
         return ten;
     }
-    
-    
+
 }
