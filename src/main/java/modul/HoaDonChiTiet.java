@@ -24,7 +24,7 @@ public class HoaDonChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private int id;
+    private Integer id;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdHoaDon")
@@ -49,7 +49,7 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int id, HoaDon idHoaDon, ChiTietSP idSanPham, int soLuong, int donGia, int thanhTien, int trangThai) {
+    public HoaDonChiTiet(Integer id, HoaDon idHoaDon, ChiTietSP idSanPham, int soLuong, int donGia, int thanhTien, int trangThai) {
         this.id = id;
         this.idHoaDon = idHoaDon;
         this.idSanPham = idSanPham;
@@ -59,11 +59,11 @@ public class HoaDonChiTiet {
         this.trangThai = trangThai;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

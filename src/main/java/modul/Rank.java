@@ -25,7 +25,7 @@ public class Rank {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "Id")
-    private int id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -51,7 +51,7 @@ public class Rank {
     public Rank() {
     }
 
-    public Rank(int id, String ma, String ten, double mucChi, int trangThai, Date ngayThem, Date ngaySua, List<NguoiDung> nguoiDungs) {
+    public Rank(Integer id, String ma, String ten, double mucChi, int trangThai, Date ngayThem, Date ngaySua, List<NguoiDung> nguoiDungs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -62,11 +62,11 @@ public class Rank {
         this.nguoiDungs = nguoiDungs;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

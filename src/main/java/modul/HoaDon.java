@@ -28,7 +28,7 @@ public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private int id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -59,7 +59,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int id, String ma, NguoiDung idNguoiDung, Date ngayMua, String sdt, String diaChi, int tinhTrang, List<HoaDonChiTiet> hoaDonChiTiets, List<ChiTietBaoHanh> chiTietBaoHanhs) {
+    public HoaDon(Integer id, String ma, NguoiDung idNguoiDung, Date ngayMua, String sdt, String diaChi, int tinhTrang, List<HoaDonChiTiet> hoaDonChiTiets, List<ChiTietBaoHanh> chiTietBaoHanhs) {
         this.id = id;
         this.ma = ma;
         this.idNguoiDung = idNguoiDung;
@@ -71,11 +71,11 @@ public class HoaDon {
         this.chiTietBaoHanhs = chiTietBaoHanhs;
     }
     
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

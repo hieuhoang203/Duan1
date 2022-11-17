@@ -29,7 +29,7 @@ public class NguoiDung {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private int id;
+    private Integer id;
     
     @Column(name = "Ma")
     private String ma;
@@ -80,7 +80,7 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(int id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, Rank idRank, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
+    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, Rank idRank, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
         this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
@@ -98,11 +98,11 @@ public class NguoiDung {
         this.idAccount = acc;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
