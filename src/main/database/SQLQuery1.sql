@@ -135,6 +135,7 @@ CREATE TABLE HoaDon(
 	NgayMua DATE NOT NULL,
 	Sdt VARCHAR(10) NOT NULL,
 	DiaChi NVARCHAR(MAX),
+	TongTien bigint not null,
 	TinhTrang BIT
 )
 -- Tao bang ChiTietBaoHanh
@@ -143,7 +144,8 @@ CREATE TABLE ChiTietBaoHanh(
 	IdHoaDon int NOT NULL FOREIGN KEY REFERENCES dbo.HoaDon(Id),
 	IdBaoHanh int NOT NULL FOREIGN KEY REFERENCES dbo.BaoHanh(Id),
 	NgayBaoHanh DATE NOT NULL,
-	NgayKetThuc DATE NOT NULL
+	NgayKetThuc DATE NOT NULL,
+	TrangThai bit not null
 )
 -- Tao bang HoaDonChiTiet
 CREATE TABLE HoaDonChiTiet(
@@ -153,6 +155,7 @@ CREATE TABLE HoaDonChiTiet(
 	SoLuong INT NOT NULL,
 	DonGia BIGINT NOT NULL,
 	ThanhTien BIGINT NOT NULL,
+	TrangThai bit not null
 )
 -- Tao bang GioHang
 CREATE TABLE GioHang(
@@ -169,7 +172,8 @@ CREATE TABLE GioHangChiTiet(
 	IdSanPham int FOREIGN KEY REFERENCES dbo.ChiTietSP(Id) NOT NULL,
 	SoLuong INT NOT NULL,
 	DonGia BIGINT NOT NULL,
-	ThanhTien BIGINT NOT NULL
+	ThanhTien BIGINT NOT NULL,
+	TrangThai bit not null
 )
 -- Tao bang Account
 CREATE TABLE Account(
@@ -177,8 +181,6 @@ CREATE TABLE Account(
 	UserName VARCHAR(50) NOT NULL,
 	Pass varchar(18) not null,
 	IdNguoiDung int FOREIGN KEY REFERENCES dbo.NguoiDung(Id) NOT NULL,
-	TrangThai int
+	TrangThai int,
+	TrangThai bit not null
 )
-alter table Account add TrangThai int
-alter table HoaDonChiTiet add TrangThai int
-alter table ChiTietBaoHanh add TrangThai int
