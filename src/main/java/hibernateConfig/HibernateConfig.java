@@ -6,6 +6,7 @@ package hibernateConfig;
 
 import java.util.Properties;
 import modul.ChiTietSP;
+import modul.ChucVu;
 import modul.CoSo;
 import modul.CuaHang;
 import modul.DongSp;
@@ -46,6 +47,7 @@ public class HibernateConfig {
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(Hang.class);
         conf.addAnnotatedClass(LoaiSp.class);
+        conf.addAnnotatedClass(ChucVu.class);
         
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
