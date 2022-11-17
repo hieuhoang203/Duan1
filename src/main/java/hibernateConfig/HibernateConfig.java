@@ -56,7 +56,10 @@ public class HibernateConfig {
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(Hang.class);
         conf.addAnnotatedClass(LoaiSp.class);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 176bd8911f7f0a1232f7741caa0e9905b1754319
         conf.addAnnotatedClass(Account.class);
         conf.addAnnotatedClass(NguoiDung.class);
         conf.addAnnotatedClass(HoaDon.class);
