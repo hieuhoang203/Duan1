@@ -6,6 +6,7 @@ package modul;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -51,11 +53,17 @@ public class ChiTietSP implements Serializable {
     @Column(name = "NgaySua")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
+    
+    @OneToMany (mappedBy = "idSanPham", fetch = FetchType.LAZY)
+    private List<HoaDonChiTiet> hoaDonChiTiets;
+    
+    @OneToMany (mappedBy = "idSanPham", fetch = FetchType.LAZY)
+    private List<GioHangChiTiet> gioHangChiTiets;
 
     public ChiTietSP() {
     }
 
-    public ChiTietSP(Integer id, String imei, LoaiSp idLoaiSp, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua) {
+    public ChiTietSP(Integer id, String imei, LoaiSp idLoaiSp, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDonChiTiet> hoaDonChiTiets, List<GioHangChiTiet> gioHangChiTiets) {
         this.id = id;
         this.imei = imei;
         this.idLoaiSp = idLoaiSp;
@@ -63,6 +71,8 @@ public class ChiTietSP implements Serializable {
         this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
+        this.hoaDonChiTiets = hoaDonChiTiets;
+        this.gioHangChiTiets = gioHangChiTiets;
     }
 
     public Integer getId() {
@@ -119,6 +129,22 @@ public class ChiTietSP implements Serializable {
 
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    public List<HoaDonChiTiet> getHoaDonChiTiets() {
+        return hoaDonChiTiets;
+    }
+
+    public void setHoaDonChiTiets(List<HoaDonChiTiet> hoaDonChiTiets) {
+        this.hoaDonChiTiets = hoaDonChiTiets;
+    }
+
+    public List<GioHangChiTiet> getGioHangChiTiets() {
+        return gioHangChiTiets;
+    }
+
+    public void setGioHangChiTiets(List<GioHangChiTiet> gioHangChiTiets) {
+        this.gioHangChiTiets = gioHangChiTiets;
     }
 
     @Override

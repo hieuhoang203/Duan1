@@ -82,7 +82,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
     public ChiTietSP create() {
         return new ChiTietSP(null, txt_imei.getText().trim(),
                 (LoaiSp) cbx_loaisp.getSelectedItem(),
-                (CuaHang) cbx_cuahang.getSelectedItem(), 1, null, null);
+                (CuaHang) cbx_cuahang.getSelectedItem(), 1, null, null, null, null);
     }
 
     /**

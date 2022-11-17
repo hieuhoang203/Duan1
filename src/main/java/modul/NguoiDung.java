@@ -60,7 +60,7 @@ public class NguoiDung {
     @Column(name = "TrangThai")
     private int trangThai;
     
-    @Column(name = "NgaySua")
+    @Column(name = "NgayThem")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngayThem;
     
@@ -68,8 +68,11 @@ public class NguoiDung {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
     
-    @OneToMany(mappedBy = "", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idNguoiDung", fetch = FetchType.LAZY)
     List<HoaDon> hoaDons;
+    
+    @OneToOne(mappedBy = "idNguoiDung", fetch = FetchType.LAZY)
+    GioHang gioHangs;
     
     @OneToOne(mappedBy = "idNguoiDung")
     private Account idAccount;
@@ -77,7 +80,7 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(int id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, Rank idRank, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, Account acc) {
+    public NguoiDung(int id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, Rank idRank, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
         this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
@@ -91,6 +94,7 @@ public class NguoiDung {
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.hoaDons = hoaDons;
+        this.gioHangs = gioHangs;
         this.idAccount = acc;
     }
 
@@ -202,6 +206,14 @@ public class NguoiDung {
         this.hoaDons = hoaDons;
     }
 
+    public GioHang getGioHangs() {
+        return gioHangs;
+    }
+
+    public void setGioHangs(GioHang gioHangs) {
+        this.gioHangs = gioHangs;
+    }
+
     public Account getIdAccount() {
         return idAccount;
     }
@@ -214,6 +226,5 @@ public class NguoiDung {
     public String toString() {
         return hoTen;
     }
-    
-    
+
 }

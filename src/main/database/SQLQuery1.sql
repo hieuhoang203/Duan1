@@ -180,3 +180,5 @@ CREATE TABLE Account(
 	TrangThai int
 )
 alter table Account add TrangThai int
+alter table HoaDonChiTiet add TrangThai int
+alter table ChiTietBaoHanh add TrangThai int
