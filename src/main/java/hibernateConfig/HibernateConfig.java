@@ -5,15 +5,24 @@
 package hibernateConfig;
 
 import java.util.Properties;
+import modul.Account;
+import modul.BaoHanh;
+import modul.ChiTietBaoHanh;
 import modul.ChiTietSP;
 import modul.ChucVu;
 import modul.CoSo;
 import modul.CuaHang;
 import modul.DongSp;
 import modul.DungLuong;
+import modul.GioHang;
+import modul.GioHangChiTiet;
 import modul.Hang;
+import modul.HoaDon;
+import modul.HoaDonChiTiet;
 import modul.LoaiSp;
 import modul.MauSac;
+import modul.NguoiDung;
+import modul.Rank;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -47,6 +56,18 @@ public class HibernateConfig {
         conf.addAnnotatedClass(MauSac.class);
         conf.addAnnotatedClass(Hang.class);
         conf.addAnnotatedClass(LoaiSp.class);
+<<<<<<< HEAD
+=======
+        conf.addAnnotatedClass(Account.class);
+        conf.addAnnotatedClass(NguoiDung.class);
+        conf.addAnnotatedClass(HoaDon.class);
+        conf.addAnnotatedClass(HoaDonChiTiet.class);
+        conf.addAnnotatedClass(GioHang.class);
+        conf.addAnnotatedClass(GioHangChiTiet.class);
+        conf.addAnnotatedClass(Rank.class);
+        conf.addAnnotatedClass(BaoHanh.class);
+        conf.addAnnotatedClass(ChiTietBaoHanh.class);
+>>>>>>> 9fa786fe3fa00ceb89c330ba896697d08eca585f
         conf.addAnnotatedClass(ChucVu.class);
         
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
