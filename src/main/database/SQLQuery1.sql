@@ -90,16 +90,6 @@ CREATE TABLE ChucVu(
 	NgaySua DATE, 
 	TrangThai bit
 )
--- Tao bang Rank
-CREATE TABLE Rank(
-	Id int identity(1,1) NOT NULL PRIMARY KEY,
-	Ma VARCHAR(10) NOT NULL,
-	Ten NVARCHAR(50) NOT NULL,
-	MucChi BIGINT NOT NULL,
-	NgayThem DATE,
-	NgaySua DATE,
-	TrangThai bit
-)
 -- Tao bang NguoiDung 
 CREATE TABLE NguoiDung(
 	Id int identity(1,1) NOT NULL PRIMARY KEY,
@@ -111,7 +101,7 @@ CREATE TABLE NguoiDung(
 	DiaChi NVARCHAR(MAX),
 	ThanhPho NVARCHAR(50) NOT NULL,
 	IdChucVu int NOT NULL FOREIGN KEY REFERENCES dbo.ChucVu(Id),
-	IdRank int NOT NULL FOREIGN KEY REFERENCES dbo.Rank(Id),
+	IdCuaHang int NOT NULL FOREIGN KEY REFERENCES dbo.CuaHang(Id),
 	NgayThem DATE,
 	NgaySua DATE,
 	TrangThai bit

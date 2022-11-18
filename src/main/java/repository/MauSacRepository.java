@@ -34,7 +34,7 @@ public class MauSacRepository {
 
     public void update(Integer id, MauSac ms) {
         session.beginTransaction();
-        String query = "Update MauSac set ma= : ma, ten= : ten, ngaySua= : ngaySua Where id= : id";
+        String query = "Update MauSac set ma=:ma, ten=:ten, ngaySua=:ngaySua Where id=:id";
         Query q = session.createQuery(query);
         q.setParameter("ma", ms.getMa());
         q.setParameter("ten", ms.getTen());
@@ -46,7 +46,7 @@ public class MauSacRepository {
 
     public void delete(Integer id) {
         session.beginTransaction();
-        String query = "update MauSac set trangThai =: trangThai WHERE id= : id";
+        String query = "update MauSac set trangThai =:trangThai WHERE id=:id";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 0);
         q.setParameter("id", id);
