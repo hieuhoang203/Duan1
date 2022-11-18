@@ -6,6 +6,7 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.ChucVu;
+import repository.ChucVuRepo;
 import service.QuanLyChucVuService;
 
 /**
@@ -13,35 +14,49 @@ import service.QuanLyChucVuService;
  * @author admin
  */
 public class ChucVuServiceImpl implements QuanLyChucVuService{
-
+    private ChucVuRepo cvrp = new ChucVuRepo();
     @Override
     public boolean checkMa(ChucVu cv) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (cvrp.selectMa().contains(cv.getMa()) ) {
+            return false;
+        }else
+            return true;
     }
 
     @Override
     public boolean checkData(ChucVu cv) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!cv.getMa().equals("") && !cv.getTen().equals("") ) {
+            return true;
+        }else
+            return false;
     }
 
     @Override
     public boolean insert(ChucVu cv) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkMa(cv) && checkData(cv)) {
+            cvrp.insert(cv);
+            return true;
+        }else
+            return false;
     }
 
     @Override
     public boolean update(int id, ChucVu cv) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (checkData(cv)) {
+            cvrp.update(id, cv);
+            return true;
+        }else
+            return false;
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        cvrp.delete(id);
     }
 
     @Override
     public ArrayList<ChucVu> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return cvrp.select();
     }
     
 }
