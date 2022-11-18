@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
  *
  * @author DieuThuy
  */
-public class ChucVuRepo {
+public class ChucVuRepository {
     private Session session = hibernateConfig.HibernateConfig.getFACTORY().openSession();
     
     public ArrayList<ChucVu> select(){

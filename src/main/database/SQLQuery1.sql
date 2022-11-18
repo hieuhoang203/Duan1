@@ -181,6 +181,5 @@ CREATE TABLE Account(
 	UserName VARCHAR(50) NOT NULL,
 	Pass varchar(18) not null,
 	IdNguoiDung int FOREIGN KEY REFERENCES dbo.NguoiDung(Id) NOT NULL,
-	TrangThai int,
-	TrangThai bit not null
+	TrangThai int
 )
