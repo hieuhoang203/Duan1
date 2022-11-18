@@ -40,8 +40,8 @@ public class NguoiDung {
     @Column(name = "GioiTinh")
     private int gioiTinh;
     
-    @Column(name = "Sdt")
-    private String sdt;
+    @Column(name = "Email")
+    private String email;
     
     @Column(name = "DiaChi")
     private String diaChi;
@@ -80,12 +80,12 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
+    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, String email, String diaChi, String thanhPho, ChucVu idChucVu, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
         this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
-        this.sdt = sdt;
+        this.email = email;
         this.diaChi = diaChi;
         this.thanhPho = thanhPho;
         this.idChucVu = idChucVu;
@@ -134,12 +134,12 @@ public class NguoiDung {
         this.gioiTinh = gioiTinh;
     }
 
-    public String getSdt() {
-        return sdt;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDiaChi() {

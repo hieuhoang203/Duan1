@@ -5,7 +5,6 @@ import hibernateConfig.HibernateConfig;
 import java.util.ArrayList;
 import javax.persistence.Query;
 import modul.ChiTietSP;
-import modul.DongSp;
 /**
  *
  * @author admin
@@ -66,10 +65,10 @@ public class ChiTietSpRepository {
         return list;
     }
     
-    public static void main(String[] args) {
-        ChiTietSpRepository cts = new ChiTietSpRepository();
-        for (ChiTietSP chiTietSP : cts.search("iPhone")) {
-            System.out.println(chiTietSP.getImei());
-        }
-    }
+//
+//    public static void main(String[] args) {
+//        ChiTietSpRepository ctsr = new ChiTietSpRepository();
+//        System.out.println(ctsr.search(keyWord));
+//    }
+    
 }
