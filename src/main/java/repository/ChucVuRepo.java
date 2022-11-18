@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import modul.ChucVu;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import hibernateConfig.HibernateConfig;
 
 /**
  *
  * @author DieuThuy
  */
 public class ChucVuRepo {
-    private Session session = hibernateConfig.HibernateConfig.getFACTORY().openSession();
+    private Session session = HibernateConfig.getFACTORY().openSession();
     
     public ArrayList<ChucVu> select(){
-        String query = "from ChucVu where trangThai =:TrangThai ";
+        String query = "from ChucVu where trangThai =:trangThai ";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 1);
         ArrayList<ChucVu> list = (ArrayList<ChucVu>) q.getResultList();
@@ -33,12 +34,12 @@ public class ChucVuRepo {
     
     public void delete(Integer id){
         session.beginTransaction();
-        String query = "update ChucVu set trangThai =: TrangThai where id =: id ";
+        String query = "update ChucVu set trangThai =: trangThai where id =: id ";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 0);
         q.setParameter("id", id);
         q.executeUpdate();
-        session.beginTransaction().commit();
+        session.getTransaction().commit();
         
     }
     
@@ -49,8 +50,9 @@ public class ChucVuRepo {
         q.setParameter("ma", cv.getMa());
         q.setParameter("ten", cv.getTen());
         q.setParameter("ngaySua", cv.getNgayThem());
+        q.setParameter("id", id);
         q.executeUpdate();
-        session.beginTransaction().commit();
+        session.getTransaction().commit();
     }
     
     public ArrayList<String> selectMa(){

@@ -4,14 +4,23 @@
  */
 package view;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modul.ChucVu;
+import repository.ChucVuRepo;
+import service.QuanLyChucVuService;
+import service.serviceImpl.ChucVuServiceImpl;
 
 /**
  *
  * @author admin
  */
 public class ChucVuView extends javax.swing.JFrame {
+
+    private QuanLyChucVuService cvimpl = new ChucVuServiceImpl();
     private DefaultTableModel tableModel;
+
     /**
      * Creates new form ChucVuView
      */
@@ -20,23 +29,36 @@ public class ChucVuView extends javax.swing.JFrame {
         addRows();
     }
 
-    public void clear(){
+    public void clear() {
         txt_id.setText("");
         txt_ma.setText("");
         txt_ten.setText("");
     }
-    
-    public void addRows(){
+
+    public void addRows() {
+        ArrayList<ChucVu> list = cvimpl.select();
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
-        
+        for (ChucVu cv : list) {
+            tableModel.addRow(new Object[]{
+                cv.getId(),
+                cv.getMa(),
+                cv.getTen()
+            });
+        }
+
     }
-    
-    public void fillData(int row){
+
+    public void fillData(int row) {
         txt_id.setText(tb_list.getValueAt(row, 0).toString());
         txt_ma.setText(tb_list.getValueAt(row, 1).toString());
         txt_ten.setText(tb_list.getValueAt(row, 2).toString());
     }
+
+    public ChucVu create() {
+        return new ChucVu(null, txt_ma.getText().trim(), txt_ten.getText().trim(), 1, null, null, null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +81,7 @@ public class ChucVuView extends javax.swing.JFrame {
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
-        btn_search = new javax.swing.JButton();
+        btn_clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chức vụ");
@@ -101,15 +123,36 @@ public class ChucVuView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_list);
 
-        btn_them.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\add.png")); // NOI18N
+        btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_themMouseClicked(evt);
+            }
+        });
 
-        btn_sua.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\update.png")); // NOI18N
+        btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_suaMouseClicked(evt);
+            }
+        });
 
-        btn_xoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\delete.png")); // NOI18N
+        btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoaMouseClicked(evt);
+            }
+        });
 
-        btn_search.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Downloads\\img\\clear.png")); // NOI18N
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanelLayout = new javax.swing.GroupLayout(JPanel);
         JPanel.setLayout(JPanelLayout);
@@ -146,7 +189,7 @@ public class ChucVuView extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JPanelLayout.setVerticalGroup(
@@ -168,7 +211,7 @@ public class ChucVuView extends javax.swing.JFrame {
                     .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_search)
+                    .addComponent(btn_clear)
                     .addComponent(btn_xoa)
                     .addComponent(btn_sua)
                     .addComponent(btn_them))
@@ -191,6 +234,73 @@ public class ChucVuView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
+        // TODO add your handling code here:
+        if (cvimpl.insert(create())) {
+            addRows();
+            JOptionPane.showMessageDialog(rootPane, "Them thanh cong");
+            clear();
+        } else {
+            if (!cvimpl.checkMa(create())) {
+                JOptionPane.showMessageDialog(rootPane, "Ma bi trung");
+            } else if (create().getMa().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Ma bi trong");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Ten bi trong");
+            }
+        }
+
+    }//GEN-LAST:event_btn_themMouseClicked
+
+    private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
+        // TODO add your handling code here:
+        int i = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(i, 0);
+        if (id == null) {
+            JOptionPane.showMessageDialog(rootPane, "Ban chua chon hang muon sua");
+
+        } else {
+            if (cvimpl.update(id, create())) {
+                addRows();                
+                JOptionPane.showMessageDialog(rootPane, "Sua thanh cong");
+                clear();
+            } else {
+                if (create().getMa().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Ma bi trong");
+                } else if (create().getTen().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Ten bi trong");
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_suaMouseClicked
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+        int i = tb_list.getSelectedRow();
+        fillData(i);
+    }//GEN-LAST:event_tb_listMouseClicked
+
+    private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
+        // TODO add your handling code here:
+        int i = tb_list.getSelectedRow();
+        Integer id = (Integer) tb_list.getValueAt(i, 0);
+        int chon = JOptionPane.showConfirmDialog(rootPane, "Ban co muon xoa");
+        if (id == null ) {
+            JOptionPane.showMessageDialog(rootPane, "ban chua chon hang muon sua");
+        }else if (chon == JOptionPane.YES_OPTION) {
+            cvimpl.delete(id);
+            addRows();
+            JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong");
+            clear();
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Huy xoa");
+    }//GEN-LAST:event_btn_xoaMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
 
     /**
      * @param args the command line arguments
@@ -229,7 +339,7 @@ public class ChucVuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel;
-    private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoa;
