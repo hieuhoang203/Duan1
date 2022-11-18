@@ -306,7 +306,7 @@ public class CuaHangView extends javax.swing.JFrame {
             } else if (create().getTen().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
             } else if (create().getDiaChi().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Địa bị được trống !");
+                JOptionPane.showMessageDialog(rootPane, "Địa chỉ bị được trống !");
             }
     }//GEN-LAST:event_btn_themMouseClicked
     }
