@@ -14,13 +14,8 @@ import hibernateConfig.HibernateConfig;
  *
  * @author DieuThuy
  */
-<<<<<<< HEAD:src/main/java/repository/ChucVuRepository.java
-public class ChucVuRepository {
-    private Session session = hibernateConfig.HibernateConfig.getFACTORY().openSession();
-=======
 public class ChucVuRepo {
     private Session session = HibernateConfig.getFACTORY().openSession();
->>>>>>> 13ac456e1172994d5dd789a7b0344c390b5f4ea5:src/main/java/repository/ChucVuRepo.java
     
     public ArrayList<ChucVu> select(){
         String query = "from ChucVu where trangThai =:trangThai ";

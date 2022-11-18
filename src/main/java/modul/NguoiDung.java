@@ -54,8 +54,8 @@ public class NguoiDung {
     private ChucVu idChucVu;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdRank")
-    private Rank idRank;
+    @JoinColumn(name = "IdCuaHang")
+    private CuaHang idCuaHang;
     
     @Column(name = "TrangThai")
     private int trangThai;
@@ -80,7 +80,7 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, Rank idRank, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
+    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, String sdt, String diaChi, String thanhPho, ChucVu idChucVu, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
         this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
@@ -89,7 +89,7 @@ public class NguoiDung {
         this.diaChi = diaChi;
         this.thanhPho = thanhPho;
         this.idChucVu = idChucVu;
-        this.idRank = idRank;
+        this.idCuaHang = idCuaHang;
         this.trangThai = trangThai;
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
@@ -166,12 +166,12 @@ public class NguoiDung {
         this.idChucVu = idChucVu;
     }
 
-    public Rank getIdRank() {
-        return idRank;
+    public CuaHang getIdCuaHang() {
+        return idCuaHang;
     }
 
-    public void setIdRank(Rank idRank) {
-        this.idRank = idRank;
+    public void setIdRank(CuaHang idCuaHang) {
+        this.idCuaHang = idCuaHang;
     }
 
     public int getTrangThai() {

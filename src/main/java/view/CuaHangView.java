@@ -69,7 +69,7 @@ public class CuaHangView extends javax.swing.JFrame {
 
     public CuaHang create() {
         return new CuaHang(null, txt_ma.getText().trim(), txt_ten.getText().trim(), txa_diachi.getText().trim(),
-                (CoSo) cbx_coso.getSelectedItem(), 1, null, null, null);
+                (CoSo) cbx_coso.getSelectedItem(), 1, null, null, null, null);
     }
 
     /**

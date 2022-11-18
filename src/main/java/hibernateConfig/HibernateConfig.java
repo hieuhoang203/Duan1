@@ -22,7 +22,6 @@ import modul.HoaDonChiTiet;
 import modul.LoaiSp;
 import modul.MauSac;
 import modul.NguoiDung;
-import modul.Rank;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -62,7 +61,6 @@ public class HibernateConfig {
         conf.addAnnotatedClass(HoaDonChiTiet.class);
         conf.addAnnotatedClass(GioHang.class);
         conf.addAnnotatedClass(GioHangChiTiet.class);
-        conf.addAnnotatedClass(Rank.class);
         conf.addAnnotatedClass(BaoHanh.class);
         conf.addAnnotatedClass(ChiTietBaoHanh.class);
         conf.addAnnotatedClass(ChucVu.class);

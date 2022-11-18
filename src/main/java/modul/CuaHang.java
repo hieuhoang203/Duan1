@@ -55,13 +55,16 @@ public class CuaHang implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ngaySua;
 
-    @OneToMany(mappedBy = "idCuaHang", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idCuaHang", fetch = FetchType.LAZY)
     private List<ChiTietSP> chiTietSPs;
+    
+    @OneToMany(mappedBy = "idCuaHang", fetch = FetchType.LAZY)
+    private List<NguoiDung> nguoiDungs;
     
     public CuaHang() {
     }
 
-    public CuaHang(Integer id, String ma, String ten, String diaChi, CoSo idCoSo, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs) {
+    public CuaHang(Integer id, String ma, String ten, String diaChi, CoSo idCoSo, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs, List<NguoiDung> nguoiDungs) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
@@ -71,6 +74,7 @@ public class CuaHang implements Serializable{
         this.ngayThem = new java.sql.Date(new Date().getTime());
         this.ngaySua = ngaySua;
         this.chiTietSPs = chiTietSPs;
+        this.nguoiDungs = nguoiDungs;
     }
 
     public Integer getId() {
@@ -143,6 +147,14 @@ public class CuaHang implements Serializable{
 
     public void setChiTietSPs(List<ChiTietSP> chiTietSPs) {
         this.chiTietSPs = chiTietSPs;
+    }
+
+    public List<NguoiDung> getNguoiDungs() {
+        return nguoiDungs;
+    }
+
+    public void setNguoiDungs(List<NguoiDung> nguoiDungs) {
+        this.nguoiDungs = nguoiDungs;
     }
 
     @Override
