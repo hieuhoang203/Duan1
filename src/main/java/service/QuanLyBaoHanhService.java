@@ -4,10 +4,18 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.BaoHanh;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyBaoHanhService {
-    
+    boolean checkMa(BaoHanh bh);
+    boolean checkData(BaoHanh bh);
+    ArrayList<BaoHanh> select();
+    boolean insert(BaoHanh bh);
+    boolean update(Integer id, BaoHanh bh);
+    void delete(Integer id);
 }

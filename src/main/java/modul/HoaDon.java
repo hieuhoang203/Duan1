@@ -62,15 +62,15 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(Integer id, String ma, NguoiDung idNguoiDung, Date ngayMua, String sdt, String diaChi, int tinhTrang, List<HoaDonChiTiet> hoaDonChiTiets, List<ChiTietBaoHanh> chiTietBaoHanhs) {
+    public HoaDon(Integer id, String ma, NguoiDung idNguoiDung, List<HoaDonChiTiet> hoaDonChiTiets, List<ChiTietBaoHanh> chiTietBaoHanhs) {
         this.id = id;
         this.ma = ma;
         this.idNguoiDung = idNguoiDung;
-        this.ngayMua = ngayMua;
-        this.sdt = sdt;
-        this.diaChi = diaChi;
+        this.ngayMua = new java.sql.Date(new Date().getTime());
+        this.sdt = "0966628527";
+        this.diaChi = "Lý Viên";
         this.tongTien = 0;
-        this.tinhTrang = tinhTrang;
+        this.tinhTrang = 0;
         this.hoaDonChiTiets = hoaDonChiTiets;
         this.chiTietBaoHanhs = chiTietBaoHanhs;
     }
