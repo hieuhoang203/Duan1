@@ -81,7 +81,6 @@ CREATE TABLE ChiTietSP(
 	NgaySua DATE,
 	TrangThai BIT NOT NULL
 )
-select * from ChiTietSP
 -- Tao bang ChucVu 
 CREATE TABLE ChucVu(
 	Id int identity(1,1) NOT NULL PRIMARY KEY,
