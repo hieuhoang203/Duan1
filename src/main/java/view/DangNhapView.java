@@ -52,7 +52,7 @@ public class DangNhapView extends javax.swing.JFrame {
         setTitle("Login");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 0));
@@ -66,6 +66,9 @@ public class DangNhapView extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("Pass word:");
 
+        btn_log.setBackground(new java.awt.Color(204, 255, 204));
+        btn_log.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_log.setForeground(new java.awt.Color(255, 0, 0));
         btn_log.setText("Login");
         btn_log.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -73,6 +76,9 @@ public class DangNhapView extends javax.swing.JFrame {
             }
         });
 
+        btn_create.setBackground(new java.awt.Color(204, 255, 204));
+        btn_create.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_create.setForeground(new java.awt.Color(255, 0, 0));
         btn_create.setText("Create");
 
         lb_forgot.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
@@ -100,14 +106,17 @@ public class DangNhapView extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txt_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                                .addComponent(txt_user))
-                            .addComponent(lb_forgot, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_user)))
+                        .addContainerGap(74, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_log, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addContainerGap(102, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_forgot, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

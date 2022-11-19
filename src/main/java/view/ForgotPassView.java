@@ -37,7 +37,7 @@ public class ForgotPassView extends javax.swing.JFrame {
         setTitle("Forgot password");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -55,8 +55,14 @@ public class ForgotPassView extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("Confirm pass:");
 
+        btn_confirm.setBackground(new java.awt.Color(204, 255, 204));
+        btn_confirm.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_confirm.setForeground(new java.awt.Color(255, 0, 0));
         btn_confirm.setText("Confirm");
 
+        btn_login.setBackground(new java.awt.Color(204, 255, 204));
+        btn_login.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_login.setForeground(new java.awt.Color(255, 0, 0));
         btn_login.setText("Login");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -66,9 +72,9 @@ public class ForgotPassView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(btn_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_confirm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))

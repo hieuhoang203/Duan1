@@ -78,7 +78,7 @@ public class CoSoView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cơ sở");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -121,6 +121,9 @@ public class CoSoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_list);
 
+        btn_them.setBackground(new java.awt.Color(204, 255, 204));
+        btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_them.setForeground(new java.awt.Color(255, 0, 0));
         btn_them.setText("Thêm");
         btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -128,6 +131,9 @@ public class CoSoView extends javax.swing.JFrame {
             }
         });
 
+        btn_sua.setBackground(new java.awt.Color(204, 255, 204));
+        btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_sua.setForeground(new java.awt.Color(255, 0, 51));
         btn_sua.setText("Sửa");
         btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,6 +141,9 @@ public class CoSoView extends javax.swing.JFrame {
             }
         });
 
+        btn_xoa.setBackground(new java.awt.Color(204, 255, 204));
+        btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_xoa.setForeground(new java.awt.Color(255, 0, 0));
         btn_xoa.setText("Xóa");
         btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,6 +151,9 @@ public class CoSoView extends javax.swing.JFrame {
             }
         });
 
+        btn_clear.setBackground(new java.awt.Color(204, 255, 204));
+        btn_clear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_clear.setForeground(new java.awt.Color(255, 0, 0));
         btn_clear.setText("Clear");
         btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
