@@ -23,6 +23,7 @@ public class NhanVienView extends javax.swing.JFrame {
     public NhanVienView(NguoiDung ng){
         this.ng = ng;
         initComponents();
+        setupRd();
     }
     
     public void setupRd(){
