@@ -256,10 +256,10 @@ public class DungLuongView extends javax.swing.JFrame {
     private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyDungLuongService.update(id, create())) {
                 addRows();
                 JOptionPane.showMessageDialog(rootPane, "Load lại để xem cập nhật !");
@@ -277,10 +277,10 @@ public class DungLuongView extends javax.swing.JFrame {
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
             if (choose == JOptionPane.YES_OPTION) {
                 quanLyDungLuongService.delete(id);

@@ -272,13 +272,12 @@ public class ChucVuView extends javax.swing.JFrame {
     private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
         // TODO add your handling code here:
         int i = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(i, 0);
-        if (id == null) {
+        if (i < 0) {
             JOptionPane.showMessageDialog(rootPane, "Ban chua chon hang muon sua");
-
         } else {
+            Integer id = (Integer) tb_list.getValueAt(i, 0);
             if (cvimpl.update(id, create())) {
-                addRows();                
+                addRows();
                 JOptionPane.showMessageDialog(rootPane, "Sua thanh cong");
                 clear();
             } else {
@@ -300,17 +299,19 @@ public class ChucVuView extends javax.swing.JFrame {
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int i = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(i, 0);
-        int chon = JOptionPane.showConfirmDialog(rootPane, "Ban co muon xoa");
-        if (id == null ) {
+        if (i < 0) {
             JOptionPane.showMessageDialog(rootPane, "ban chua chon hang muon sua");
-        }else if (chon == JOptionPane.YES_OPTION) {
-            cvimpl.delete(id);
-            addRows();
-            JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong");
-            clear();
-        }else
-            JOptionPane.showMessageDialog(rootPane, "Huy xoa");
+        } else {
+            Integer id = (Integer) tb_list.getValueAt(i, 0);
+            int chon = JOptionPane.showConfirmDialog(rootPane, "Ban co muon xoa");
+            if (chon == JOptionPane.YES_OPTION) {
+                cvimpl.delete(id);
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong");
+                clear();
+            } else
+                JOptionPane.showMessageDialog(rootPane, "Huy xoa");
+        }
     }//GEN-LAST:event_btn_xoaMouseClicked
 
     private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked

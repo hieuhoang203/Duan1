@@ -319,10 +319,10 @@ public class LoaiSpView extends javax.swing.JFrame {
     private void btn_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyLoaiSpService.update(id, create())) {
                 addRows();
                 JOptionPane.showMessageDialog(rootPane, "Load lại để xem dữ liệu !");
@@ -336,10 +336,10 @@ public class LoaiSpView extends javax.swing.JFrame {
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
             if (choose == JOptionPane.YES_OPTION) {
                 quanLyLoaiSpService.delte(id);

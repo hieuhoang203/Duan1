@@ -75,4 +75,7 @@ public class HibernateConfig {
         return FACTORY;
     }
     
+    public static void main(String[] args) {
+        getFACTORY();
+    }
 }

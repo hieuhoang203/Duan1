@@ -40,14 +40,14 @@ public class NguoiDung {
     @Column(name = "GioiTinh")
     private int gioiTinh;
     
+    @Column(name = "NgaySinh")
+    private Date ngaySinh;
+    
     @Column(name = "Email")
     private String email;
     
     @Column(name = "DiaChi")
     private String diaChi;
-    
-    @Column(name = "ThanhPho")
-    private String thanhPho;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdChucVu")
@@ -56,6 +56,9 @@ public class NguoiDung {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdCuaHang")
     private CuaHang idCuaHang;
+    
+    @Column(name = "Anh")
+    private String anh;
     
     @Column(name = "TrangThai")
     private int trangThai;
@@ -80,14 +83,15 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, String email, String diaChi, String thanhPho, ChucVu idChucVu, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
+    public NguoiDung(Integer id, String ma, String hoTen, int gioiTinh, Date ngaySinh, String email, String diaChi, String anh, ChucVu idChucVu, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDon> hoaDons, GioHang gioHangs, Account acc) {
         this.id = id;
         this.ma = ma;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
         this.email = email;
         this.diaChi = diaChi;
-        this.thanhPho = thanhPho;
+        this.anh = anh;
         this.idChucVu = idChucVu;
         this.idCuaHang = idCuaHang;
         this.trangThai = trangThai;
@@ -122,7 +126,7 @@ public class NguoiDung {
         this.hoTen = hoTen;
     }
 
-    public String getGioiTinh() {
+    public String getGioiTinhCharecter() {
         if (gioiTinh == 1) {
             return "Nam";
         } else {
@@ -130,8 +134,20 @@ public class NguoiDung {
         }
     }
 
+    public int getGioiTinh() {
+        return gioiTinh;
+    }
+
     public void setGioiTinh(int gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
 
     public String getEmail() {
@@ -150,12 +166,12 @@ public class NguoiDung {
         this.diaChi = diaChi;
     }
 
-    public String getThanhPho() {
-        return thanhPho;
+    public String getAnh() {
+        return anh;
     }
 
-    public void setThanhPho(String thanhPho) {
-        this.thanhPho = thanhPho;
+    public void setAnh(String anh) {
+        this.anh = anh;
     }
 
     public ChucVu getIdChucVu() {

@@ -57,6 +57,10 @@ public class LoaiSp {
     
     public LoaiSp() {
     }
+ 
+    public LoaiSp(Integer id){
+        this.id = id;
+    }
 
     public LoaiSp(Integer id, String ma, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, int trangThai, Date ngayThem, Date ngaySua) {
         this.id = id;
@@ -132,10 +136,14 @@ public class LoaiSp {
     public void setNgaySua(Date ngaySua) {
         this.ngaySua = ngaySua;
     }
+    
+    public String getInfor(){
+        return getIdDongSp().toString() + " " + getIdMauSac().toString() + " " + getIdDungLuong().toString();
+    }
 
     @Override
     public String toString() {
-        return ma;
+        return getInfor();
     }
     
     

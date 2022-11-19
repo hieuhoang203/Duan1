@@ -268,10 +268,10 @@ public class MauSacView extends javax.swing.JFrame {
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn bản ghi");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (qlms.update(id, create())) {
                 addRow();
                 JOptionPane.showMessageDialog(rootPane, "Load lại để xem dữ liệu !");
@@ -293,10 +293,10 @@ public class MauSacView extends javax.swing.JFrame {
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn bản ghi");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
             if (choose == JOptionPane.YES_OPTION) {
                 qlms.delete(id);

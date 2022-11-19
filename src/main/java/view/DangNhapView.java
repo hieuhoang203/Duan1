@@ -4,17 +4,29 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import modul.NguoiDung;
+import service.QuanLyAccountService;
+import service.QuanLyNguoiDungService;
+import service.serviceImpl.AccountServiceImpl;
+import service.serviceImpl.NguoiDungServiceImpl;
+
 /**
  *
  * @author admin
  */
 public class DangNhapView extends javax.swing.JFrame {
-
+    private QuanLyAccountService quanLyAccountService = new AccountServiceImpl();
+    private QuanLyNguoiDungService quanLyNguoiDungService = new NguoiDungServiceImpl();
     /**
      * Creates new form LoginView
      */
     public DangNhapView() {
         initComponents();
+    }
+    
+    public NguoiDung getNguoiDung(){
+        return quanLyNguoiDungService.searchByEmail(txt_user.getText().trim());
     }
 
     /**
@@ -55,6 +67,11 @@ public class DangNhapView extends javax.swing.JFrame {
         jLabel3.setText("Pass word:");
 
         btn_log.setText("Login");
+        btn_log.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_logMouseClicked(evt);
+            }
+        });
 
         btn_create.setText("Create");
 
@@ -132,6 +149,25 @@ public class DangNhapView extends javax.swing.JFrame {
     private void lb_forgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_forgotMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lb_forgotMouseClicked
+
+    private void btn_logMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logMouseClicked
+        // TODO add your handling code here:
+        if (quanLyAccountService.search(txt_user.getText().trim(), txt_pass.getText().trim()) != null) {
+            if (quanLyNguoiDungService.searchByEmail(txt_user.getText().trim()).getIdChucVu().getId() == 1) {
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công !");
+                new AdminView(getNguoiDung()).setVisible(true);
+            } else if (quanLyNguoiDungService.searchByEmail(txt_user.getText().trim()).getIdChucVu().getId() == 4) {
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công !");
+                new NhanVienView(getNguoiDung()).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Các chức năng khác đang trong quá trình phát triển !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Sai tên đăng nhập hoặc mật khẩu !");
+        }
+    }//GEN-LAST:event_btn_logMouseClicked
 
     /**
      * @param args the command line arguments

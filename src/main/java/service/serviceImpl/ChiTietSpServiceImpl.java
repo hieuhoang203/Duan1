@@ -49,7 +49,7 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
 
     @Override
     public boolean checkData(ChiTietSP ctsp) {
-        if (ctsp.getImei().length() == 15) {
+        if (ctsp.getImei().length() == 16) {
             return true;
         } else {
             return false;

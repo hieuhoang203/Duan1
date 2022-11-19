@@ -185,6 +185,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
         });
 
         btn_xoa.setText("Xóa");
+        btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoaMouseClicked(evt);
+            }
+        });
 
         btn_search.setText("Search");
         btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -299,10 +304,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        Integer id = (Integer) tb_list.getValueAt(row, 0);
-        if (id == null) {
+        
+        if (row<0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyChiTietSPService.update(id, create())) {
                 addRows(quanLyChiTietSPService.select());
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công !");
@@ -335,6 +341,25 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_searchMouseClicked
+
+    private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        if (row<0) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyChiTietSPService.delete(id);
+                addRows(quanLyChiTietSPService.select());
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Hủy xóa !");
+            }
+        }
+    }//GEN-LAST:event_btn_xoaMouseClicked
 
     /**
      * @param args the command line arguments

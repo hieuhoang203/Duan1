@@ -62,7 +62,7 @@ public class DongSp implements Serializable{
     private List<LoaiSp> loaiSps;
     
     
-    public DongSp() {
+    public DongSp() {    
     }
 
     public DongSp(Integer id, String ma, String ten, int giaNhap, int giaBan, Hang idHang, int trangThai, Date ngayThem, Date ngaySua, List<LoaiSp> loaiSps) {
