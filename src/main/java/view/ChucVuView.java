@@ -87,7 +87,7 @@ public class ChucVuView extends javax.swing.JFrame {
         setTitle("Chức vụ");
         setResizable(false);
 
-        JPanel.setBackground(new java.awt.Color(255, 255, 51));
+        JPanel.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 0));
@@ -130,7 +130,7 @@ public class ChucVuView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_list);
 
-        btn_them.setBackground(new java.awt.Color(255, 204, 0));
+        btn_them.setBackground(new java.awt.Color(204, 255, 204));
         btn_them.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 0, 0));
         btn_them.setText("Thêm");
@@ -140,7 +140,7 @@ public class ChucVuView extends javax.swing.JFrame {
             }
         });
 
-        btn_sua.setBackground(new java.awt.Color(255, 204, 0));
+        btn_sua.setBackground(new java.awt.Color(204, 255, 204));
         btn_sua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 0, 0));
         btn_sua.setText("Sửa");
@@ -150,7 +150,7 @@ public class ChucVuView extends javax.swing.JFrame {
             }
         });
 
-        btn_xoa.setBackground(new java.awt.Color(255, 204, 0));
+        btn_xoa.setBackground(new java.awt.Color(204, 255, 204));
         btn_xoa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 51, 0));
         btn_xoa.setText("Xóa");
@@ -160,7 +160,7 @@ public class ChucVuView extends javax.swing.JFrame {
             }
         });
 
-        btn_clear.setBackground(new java.awt.Color(255, 204, 0));
+        btn_clear.setBackground(new java.awt.Color(204, 255, 204));
         btn_clear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_clear.setForeground(new java.awt.Color(255, 51, 0));
         btn_clear.setText("Clear");

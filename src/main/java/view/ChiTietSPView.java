@@ -116,7 +116,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         setTitle("Chi tiết sản phẩm");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -170,6 +170,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
 
         txt_id.setEditable(false);
 
+        btn_add.setBackground(new java.awt.Color(204, 255, 204));
+        btn_add.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_add.setForeground(new java.awt.Color(255, 0, 0));
         btn_add.setText("Thêm");
         btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -177,6 +180,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
+        btn_sua.setBackground(new java.awt.Color(204, 255, 204));
+        btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_sua.setForeground(new java.awt.Color(255, 0, 0));
         btn_sua.setText("Sửa");
         btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -184,6 +190,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
+        btn_xoa.setBackground(new java.awt.Color(204, 255, 204));
+        btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_xoa.setForeground(new java.awt.Color(255, 0, 0));
         btn_xoa.setText("Xóa");
         btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -191,6 +200,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
+        btn_search.setBackground(new java.awt.Color(204, 255, 204));
+        btn_search.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_search.setForeground(new java.awt.Color(255, 0, 0));
         btn_search.setText("Search");
         btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -198,6 +210,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
+        btn_clear.setBackground(new java.awt.Color(204, 255, 204));
+        btn_clear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_clear.setForeground(new java.awt.Color(255, 0, 0));
         btn_clear.setText("Clear");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
