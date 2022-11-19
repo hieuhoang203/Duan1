@@ -69,5 +69,10 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
             return true;
         }
     }
+
+    @Override
+    public ArrayList<ChiTietSP> searchByStore(Integer key) {
+        return chiTietSpRepository.searchByStore(key);
+    }
     
 }

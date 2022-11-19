@@ -79,5 +79,14 @@ public class ChiTietSpRepository {
         ArrayList<String> list = (ArrayList<String>) q.getResultList();
         return list;
     }
+    
+    public ArrayList<ChiTietSP> searchByStore(Integer idCuaHang){
+        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
+        Query q = session.createQuery(query);
+        q.setParameter("idCuaHang", idCuaHang);
+        q.setParameter("trangThai", 1);
+        ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
+        return list;
+    }
 
 }

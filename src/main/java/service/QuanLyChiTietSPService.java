@@ -19,5 +19,6 @@ public interface QuanLyChiTietSPService {
     void delete(Integer key);
     boolean checkData(ChiTietSP ctsp);
     boolean checkImei(ChiTietSP ctsp);
-    ArrayList<ChiTietSP> search(String id);
+    ArrayList<ChiTietSP> search(String key);
+    ArrayList<ChiTietSP> searchByStore(Integer key);
 }
