@@ -62,8 +62,14 @@ public class AdminView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 51));
 
+        btn_thongke.setBackground(new java.awt.Color(255, 204, 204));
+        btn_thongke.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_thongke.setForeground(new java.awt.Color(255, 51, 0));
         btn_thongke.setText("Thống kê");
 
+        btn_logout.setBackground(new java.awt.Color(255, 204, 204));
+        btn_logout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_logout.setForeground(new java.awt.Color(255, 0, 0));
         btn_logout.setText("Logout");
         btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +77,9 @@ public class AdminView extends javax.swing.JFrame {
             }
         });
 
+        btn_profile.setBackground(new java.awt.Color(255, 204, 204));
+        btn_profile.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_profile.setForeground(new java.awt.Color(255, 51, 0));
         btn_profile.setText("Profile");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -104,7 +113,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
