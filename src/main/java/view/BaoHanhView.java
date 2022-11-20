@@ -4,17 +4,74 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modul.BaoHanh;
+import service.QuanLyBaoHanhService;
+import service.serviceImpl.BaoHanhServiceImpl;
+
 /**
  *
  * @author admin
  */
 public class BaoHanhView extends javax.swing.JFrame {
 
+    private DefaultTableModel tableModel;
+    private QuanLyBaoHanhService quanLyBaoHanhService = new BaoHanhServiceImpl();
+
     /**
      * Creates new form BaoHanhView
      */
     public BaoHanhView() {
         initComponents();
+        addRows();
+    }
+
+    public void addRows() {
+        tableModel = (DefaultTableModel) tb_list.getModel();
+        tableModel.setRowCount(0);
+        for (BaoHanh baoHanh : quanLyBaoHanhService.select()) {
+            tableModel.addRow(new Object[]{
+                baoHanh.getId(),
+                baoHanh.getMa(),
+                baoHanh.getTen(),
+                baoHanh.getThoiGian(),
+                baoHanh.getGia()
+            });
+        }
+    }
+
+    public void clear() {
+        txt_id.setText("");
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_thoiGian.setText("");
+        txt_gia.setText("");
+    }
+
+    public BaoHanh create() {
+        int nam;
+        int gia;
+        try {
+            nam = Integer.parseInt(txt_thoiGian.getText().trim());
+        } catch (Exception e) {
+            nam = -1;
+        }
+        try {
+            gia = Integer.parseInt(txt_gia.getText().trim());
+        } catch (Exception e) {
+            gia = -1;
+        }
+        return new BaoHanh(null, txt_ma.getText().trim(), txt_ten.getText().trim(),
+                nam, gia, 1, null, null, null);
+    }
+    
+    public void fillData(int row){
+        txt_id.setText(tb_list.getValueAt(row, 0).toString());
+        txt_ma.setText(tb_list.getValueAt(row, 1).toString());
+        txt_ten.setText(tb_list.getValueAt(row, 2).toString());
+        txt_thoiGian.setText(tb_list.getValueAt(row, 3).toString());
+        txt_gia.setText(tb_list.getValueAt(row, 4).toString());
     }
 
     /**
@@ -43,7 +100,7 @@ public class BaoHanhView extends javax.swing.JFrame {
         txt_ten = new javax.swing.JTextField();
         txt_thoiGian = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txt_ten1 = new javax.swing.JTextField();
+        txt_gia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bảo hành");
@@ -76,15 +133,20 @@ public class BaoHanhView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Mã", "Tên", "Thời gian"
+                "Id", "Mã", "Tên", "Thời gian", "Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_listMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_list);
@@ -93,16 +155,31 @@ public class BaoHanhView extends javax.swing.JFrame {
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 0, 51));
         btn_them.setText("Thêm");
+        btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_themMouseClicked(evt);
+            }
+        });
 
         btn_sua.setBackground(new java.awt.Color(204, 255, 204));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 0, 0));
         btn_sua.setText("Sửa");
+        btn_sua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_suaMouseClicked(evt);
+            }
+        });
 
         btn_xoa.setBackground(new java.awt.Color(204, 255, 204));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 0, 0));
         btn_xoa.setText("Xóa");
+        btn_xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoaMouseClicked(evt);
+            }
+        });
 
         btn_clear.setBackground(new java.awt.Color(204, 255, 204));
         btn_clear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -138,7 +215,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                             .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_thoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_ten1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_gia, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,7 +250,7 @@ public class BaoHanhView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txt_ten1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_gia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -203,6 +280,79 @@ public class BaoHanhView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
+        // TODO add your handling code here:
+        if (quanLyBaoHanhService.insert(create())) {
+            addRows();
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
+            clear();
+        } else {
+            if (quanLyBaoHanhService.checkMa(create())) {
+                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
+            } else {
+                if (create().getMa().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                } else if (create().getTen().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                } else if (create().getThoiGian() < 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Năm không hợp lệ !");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Giá không hợp lệ !");
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_themMouseClicked
+
+    private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyBaoHanhService.delete(id);
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Hủy xóa !");
+            }
+        }
+    }//GEN-LAST:event_btn_xoaMouseClicked
+
+    private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
+        } else {
+            Integer id = (Integer) tb_list.getValueAt(row, 0);
+            if (quanLyBaoHanhService.update(id, create())) {
+                addRows();
+                JOptionPane.showMessageDialog(rootPane, "Load lại để xem data !");
+                clear();
+            } else {
+                if (create().getMa().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                } else if (create().getTen().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                } else if (create().getThoiGian() < 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Năm không hợp lệ !");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Giá không hợp lệ !");
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_suaMouseClicked
+
+    private void tb_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_listMouseClicked
+        // TODO add your handling code here:
+        int row = tb_list.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_tb_listMouseClicked
 
     /**
      * @param args the command line arguments
@@ -253,10 +403,10 @@ public class BaoHanhView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tb_list;
+    private javax.swing.JTextField txt_gia;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_ma;
     private javax.swing.JTextField txt_ten;
-    private javax.swing.JTextField txt_ten1;
     private javax.swing.JTextField txt_thoiGian;
     // End of variables declaration//GEN-END:variables
 }

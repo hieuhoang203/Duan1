@@ -6,7 +6,7 @@ package service;
 
 import java.util.ArrayList;
 import modul.ChiTietSP;
-import modul.DongSp;
+import modul.CuaHang;
 
 /**
  *
@@ -20,5 +20,6 @@ public interface QuanLyChiTietSPService {
     boolean checkData(ChiTietSP ctsp);
     boolean checkImei(ChiTietSP ctsp);
     ArrayList<ChiTietSP> search(String key);
-    ArrayList<ChiTietSP> searchByStore(Integer key);
+    ArrayList<ChiTietSP> searchByStore(CuaHang ch);
+    ChiTietSP searchById(Integer id);
 }

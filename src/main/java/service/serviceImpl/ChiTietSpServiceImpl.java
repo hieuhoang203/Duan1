@@ -6,6 +6,7 @@ package service.serviceImpl;
 
 import java.util.ArrayList;
 import modul.ChiTietSP;
+import modul.CuaHang;
 import modul.DongSp;
 import repository.ChiTietSpRepository;
 import service.QuanLyChiTietSPService;
@@ -71,8 +72,13 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     }
 
     @Override
-    public ArrayList<ChiTietSP> searchByStore(Integer key) {
-        return chiTietSpRepository.searchByStore(key);
+    public ArrayList<ChiTietSP> searchByStore(CuaHang ch) {
+        return chiTietSpRepository.searchByStore(ch);
+    }
+
+    @Override
+    public ChiTietSP searchById(Integer id) {
+        return chiTietSpRepository.searchById(id);
     }
     
 }

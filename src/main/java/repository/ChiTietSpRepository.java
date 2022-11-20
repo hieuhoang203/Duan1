@@ -80,13 +80,20 @@ public class ChiTietSpRepository {
         return list;
     }
     
-    public ArrayList<ChiTietSP> searchByStore(Integer idCuaHang){
+    public ArrayList<ChiTietSP> searchByStore(CuaHang ch){
         String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
         Query q = session.createQuery(query);
-        q.setParameter("idCuaHang", idCuaHang);
+        q.setParameter("idCuaHang", ch);
         q.setParameter("trangThai", 1);
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
     }
 
+    public ChiTietSP searchById(Integer id){
+        String query = "from ChiTietSP where id =:id";
+        Query q = session.createQuery(query);
+        q.setParameter("id", id);
+        return (ChiTietSP) q.getResultList().get(0);
+    }
+    
 }

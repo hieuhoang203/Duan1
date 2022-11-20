@@ -5,6 +5,7 @@
 package modul;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,13 +48,13 @@ public class ChiTietBaoHanh {
     public ChiTietBaoHanh() {
     }
 
-    public ChiTietBaoHanh(Integer id, HoaDon idHoaDon, BaoHanh idBaoHanh, Date ngayBaoHanh, Date ngayKetThuc, int trangThai) {
+    public ChiTietBaoHanh(Integer id, HoaDon idHoaDon, BaoHanh idBaoHanh) {
         this.id = id;
         this.idHoaDon = idHoaDon;
         this.idBaoHanh = idBaoHanh;
-        this.ngayBaoHanh = ngayBaoHanh;
-        this.ngayKetThuc = ngayKetThuc;
-        this.trangThai = trangThai;
+        this.ngayBaoHanh = idHoaDon.getNgayMua();
+        this.ngayKetThuc = new java.sql.Date(idHoaDon.getNgayMua().getTime() + TimeUnit.DAYS.toMillis(idBaoHanh.getThoiGian()*365));
+        this.trangThai = 1;
     }
 
     public Integer getId() {

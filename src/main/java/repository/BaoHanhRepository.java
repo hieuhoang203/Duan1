@@ -57,6 +57,7 @@ public class BaoHanhRepository {
     public ArrayList<String> selectMa(){
         String query = "select bh.ma from BaoHanh bh";
         Query q = session.createQuery(query);
-        ArrayList<
+        ArrayList<String> list = (ArrayList<String>) q.getResultList();
+        return list;
     }
 }

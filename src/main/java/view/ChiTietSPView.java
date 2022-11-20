@@ -214,6 +214,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
         btn_clear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_clear.setForeground(new java.awt.Color(255, 0, 0));
         btn_clear.setText("Clear");
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -375,6 +380,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_xoaMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
 
     /**
      * @param args the command line arguments

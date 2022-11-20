@@ -4,10 +4,16 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.HoaDon;
+import modul.HoaDonChiTiet;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyChiTietHoaDonService {
-    
+    ArrayList<HoaDonChiTiet> select(HoaDon hd);
+    void insert(HoaDonChiTiet hdct);
+    HoaDonChiTiet search(Integer id);
 }

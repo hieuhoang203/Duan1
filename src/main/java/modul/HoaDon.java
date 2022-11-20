@@ -48,7 +48,7 @@ public class HoaDon {
     private String diaChi;
     
     @Column(name = "TongTien")
-    private static double tongTien;
+    private double tongTien;
     
     @Column(name = "TinhTrang")
     private int tinhTrang;
@@ -119,12 +119,12 @@ public class HoaDon {
         return diaChi;
     }
 
-    public static double getTongTien() {
+    public double getTongTien() {
         return tongTien;
     }
 
-    public static void setTongTien(double tongTien) {
-        HoaDon.tongTien = tongTien;
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
     }
     
 
