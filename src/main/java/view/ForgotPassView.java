@@ -64,6 +64,11 @@ public class ForgotPassView extends javax.swing.JFrame {
         btn_login.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_login.setForeground(new java.awt.Color(255, 0, 0));
         btn_login.setText("Login");
+        btn_login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_loginMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,6 +135,12 @@ public class ForgotPassView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loginMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new DangNhapView().setVisible(true);
+    }//GEN-LAST:event_btn_loginMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -160,7 +171,7 @@ public class ForgotPassView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ForgotPassView().setVisible(true);
+                new ForgotPassView().setVisible(false);
             }
         });
     }

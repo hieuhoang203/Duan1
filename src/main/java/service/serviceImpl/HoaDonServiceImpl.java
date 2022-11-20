@@ -51,5 +51,10 @@ public class HoaDonServiceImpl implements QuanLyHoaDonService{
     public HoaDon searchByMa(String ma) {
         return hoaDonRepository.searchByMa(ma);
     }
+
+    @Override
+    public void updateTongTien(Integer id, long tongTien) {
+        hoaDonRepository.updateTongTien(id, tongTien);
+    }
     
 }

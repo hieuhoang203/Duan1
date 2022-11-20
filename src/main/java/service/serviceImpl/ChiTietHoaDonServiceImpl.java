@@ -32,5 +32,15 @@ public class ChiTietHoaDonServiceImpl implements QuanLyChiTietHoaDonService{
     public HoaDonChiTiet search(Integer id) {
         return hoaDonChiTietRepository.search(id);
     }
+
+    @Override
+    public long getThanhTien(HoaDon hd) {
+        return hoaDonChiTietRepository.getTongTien(hd);
+    }
+
+    @Override
+    public void delete(Integer id, HoaDon hd) {
+        hoaDonChiTietRepository.delete(id, hd);
+    }
     
 }

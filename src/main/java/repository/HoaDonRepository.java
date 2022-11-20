@@ -53,4 +53,14 @@ public class HoaDonRepository {
         q.setParameter("ma", ma);
         return (HoaDon) q.getResultList().get(0);
     }
+    
+    public void updateTongTien(Integer id, long tongTien){
+        session.beginTransaction();
+        String query = "update HoaDon set tongTien =:tongTien where id =:id";
+        Query q = session.createQuery(query);
+        q.setParameter("tongTien", tongTien);
+        q.setParameter("id", id);
+        q.executeUpdate();
+        session.getTransaction().commit();
+    }
 }

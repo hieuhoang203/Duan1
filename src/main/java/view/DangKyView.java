@@ -7,6 +7,7 @@ package view;
 import java.awt.Image;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -49,6 +50,9 @@ public class DangKyView extends javax.swing.JFrame {
      */
     public DangKyView() {
         initComponents();
+        gioiTinh();
+        addCbxChucVu();
+        addCbxCuaHang();
     }
 
     public void gioiTinh() {
@@ -70,8 +74,11 @@ public class DangKyView extends javax.swing.JFrame {
         cbx_cuahang.setSelectedIndex(0);
     }
 
-    public void addRow() {
-
+    public void addRow(ArrayList<NguoiDung> list) {
+        
+        for (NguoiDung nguoiDung : list) {
+            
+        }
     }
 
     public void fillData(int row) {
@@ -79,14 +86,11 @@ public class DangKyView extends javax.swing.JFrame {
     }
 
     public void clear() {
-        ButtonGroup group = new ButtonGroup();
-        group.add(rd_nu);
-        group.add(rd_nam);
         txt_id.setText("");
         txt_ma.setText("");
         txt_hoten.setText("");
         txt_ngaysinh.setText("");
-        group.clearSelection();
+        rd_nam.setSelected(true);
         txt_email.setText("");
         txt_diachi.setText("");
         cbx_chucvu.setSelectedIndex(0);
@@ -165,11 +169,11 @@ public class DangKyView extends javax.swing.JFrame {
         txt_diachi = new javax.swing.JTextField();
         cbx_chucvu = new javax.swing.JComboBox<>();
         cbx_cuahang = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btn_img = new javax.swing.JButton();
+        btn_them = new javax.swing.JButton();
+        btn_xoa = new javax.swing.JButton();
+        btn_sua = new javax.swing.JButton();
+        btn_clear = new javax.swing.JButton();
         rd_nam = new javax.swing.JRadioButton();
         rd_nu = new javax.swing.JRadioButton();
         lb_img = new javax.swing.JLabel();
@@ -177,6 +181,7 @@ public class DangKyView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng ký");
@@ -226,25 +231,30 @@ public class DangKyView extends javax.swing.JFrame {
 
         txt_ma.setEditable(false);
 
-        jButton1.setText("Choose File");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_img.setText("Choose File");
+        btn_img.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btn_imgMouseClicked(evt);
             }
         });
 
-        jButton2.setText("Thêm");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_them.setText("Thêm");
+        btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btn_themMouseClicked(evt);
             }
         });
 
-        jButton3.setText("Xóa");
+        btn_xoa.setText("Xóa");
 
-        jButton4.setText("Sửa");
+        btn_sua.setText("Sửa");
 
-        jButton5.setText("Clear");
+        btn_clear.setText("Clear");
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         rd_nam.setText("Nam");
 
@@ -273,13 +283,13 @@ public class DangKyView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cbx_chucvu, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cbx_cuahang, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,10 +310,10 @@ public class DangKyView extends javax.swing.JFrame {
                                 .addComponent(lb_img, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_img, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36))))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -339,24 +349,24 @@ public class DangKyView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lb_img, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(btn_img)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(btn_them))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4))
+                        .addComponent(btn_xoa)
+                        .addComponent(btn_sua))
                     .addComponent(cbx_chucvu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(cbx_cuahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(btn_clear))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -376,8 +386,8 @@ public class DangKyView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,6 +399,15 @@ public class DangKyView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 51, 0));
+        jButton6.setText("Back");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -396,7 +415,9 @@ public class DangKyView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
+                        .addContainerGap()
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
@@ -411,7 +432,9 @@ public class DangKyView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton6))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -436,7 +459,7 @@ public class DangKyView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btn_imgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_imgMouseClicked
         // TODO add your handling code here:
         try {
             JFileChooser fileChooser = new JFileChooser();
@@ -452,12 +475,12 @@ public class DangKyView extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn ảnh !");
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btn_imgMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
         // TODO add your handling code here:
         if (quanLyNguoiDungService.insert(createNguoiDung())) {
-            addRow();
+            addRow(quanLyNguoiDungService.select());
             JOptionPane.showMessageDialog(rootPane, "Đăng ký thành công !");
             quanLyAccountService.insert(createAccount(quanLyNguoiDungService.searchByEmail(txt_email.getText().trim())));
             clear();
@@ -475,7 +498,18 @@ public class DangKyView extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btn_themMouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new AdminView().setVisible(true);
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
 
     /**
      * @param args the command line arguments
@@ -507,20 +541,21 @@ public class DangKyView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangKyView().setVisible(true);
+                new DangKyView().setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_img;
     private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_xoa;
     private javax.swing.JComboBox<ChucVu> cbx_chucvu;
     private javax.swing.JComboBox<CuaHang> cbx_cuahang;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

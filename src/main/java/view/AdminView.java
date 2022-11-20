@@ -36,9 +36,9 @@ public class AdminView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_thongke = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
+        btn_profile = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mn_coso = new javax.swing.JMenuItem();
@@ -62,11 +62,16 @@ public class AdminView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 51));
 
-        jButton2.setText("Thống kê");
+        btn_thongke.setText("Thống kê");
 
-        jButton1.setText("Logout");
+        btn_logout.setText("Logout");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Profile");
+        btn_profile.setText("Profile");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -74,11 +79,11 @@ public class AdminView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btn_thongke)
                 .addGap(43, 43, 43)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -86,9 +91,9 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btn_thongke)
+                    .addComponent(btn_logout)
+                    .addComponent(btn_profile))
                 .addGap(30, 30, 30))
         );
 
@@ -123,6 +128,11 @@ public class AdminView extends javax.swing.JFrame {
         jMenu1.add(mn_coso);
 
         mn_cuahang.setText("Cửa hàng");
+        mn_cuahang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_cuahangActionPerformed(evt);
+            }
+        });
         jMenu1.add(mn_cuahang);
 
         mn_chucvu.setText("Chức vụ");
@@ -134,6 +144,11 @@ public class AdminView extends javax.swing.JFrame {
         jMenu1.add(mn_chucvu);
 
         mn_dangki.setText("Đăng ký thành viên");
+        mn_dangki.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_dangkiActionPerformed(evt);
+            }
+        });
         jMenu1.add(mn_dangki);
 
         jMenuBar1.add(jMenu1);
@@ -141,9 +156,19 @@ public class AdminView extends javax.swing.JFrame {
         jMenu3.setText("Thông tin sản phẩm");
 
         mn_hang.setText("Hãng");
+        mn_hang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_hangActionPerformed(evt);
+            }
+        });
         jMenu3.add(mn_hang);
 
         mn_mausac.setText("Màu sắc");
+        mn_mausac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_mausacActionPerformed(evt);
+            }
+        });
         jMenu3.add(mn_mausac);
 
         mn_dungluong.setText("Dung lượng");
@@ -163,6 +188,11 @@ public class AdminView extends javax.swing.JFrame {
         jMenu3.add(mn_baohanh);
 
         mn_dongsp.setText("Dòng sản phẩm");
+        mn_dongsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_dongspActionPerformed(evt);
+            }
+        });
         jMenu3.add(mn_dongsp);
 
         mn_loaisp.setText("Loại sản phẩm");
@@ -174,6 +204,11 @@ public class AdminView extends javax.swing.JFrame {
         jMenu3.add(mn_loaisp);
 
         mn_chitietsp.setText("Chi tiết sản phẩm");
+        mn_chitietsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mn_chitietspActionPerformed(evt);
+            }
+        });
         jMenu3.add(mn_chitietsp);
 
         jMenuBar1.add(jMenu3);
@@ -197,23 +232,75 @@ public class AdminView extends javax.swing.JFrame {
 
     private void mn_cosoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_cosoActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new CoSoView().setVisible(true);
     }//GEN-LAST:event_mn_cosoActionPerformed
 
     private void mn_dungluongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_dungluongActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new DungLuongView().setVisible(true);
     }//GEN-LAST:event_mn_dungluongActionPerformed
 
     private void mn_loaispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_loaispActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new LoaiSpView().setVisible(true);
     }//GEN-LAST:event_mn_loaispActionPerformed
 
     private void mn_chucvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_chucvuActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new ChucVuView().setVisible(true);
     }//GEN-LAST:event_mn_chucvuActionPerformed
 
     private void mn_baohanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_baohanhActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new BaoHanhView().setVisible(true);
     }//GEN-LAST:event_mn_baohanhActionPerformed
+
+    private void mn_cuahangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_cuahangActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new CuaHangView().setVisible(true);
+    }//GEN-LAST:event_mn_cuahangActionPerformed
+
+    private void mn_dangkiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_dangkiActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new DangKyView().setVisible(true);
+    }//GEN-LAST:event_mn_dangkiActionPerformed
+
+    private void mn_hangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_hangActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new HangView().setVisible(true);
+    }//GEN-LAST:event_mn_hangActionPerformed
+
+    private void mn_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_mausacActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new MauSacView().setVisible(true);
+    }//GEN-LAST:event_mn_mausacActionPerformed
+
+    private void mn_dongspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_dongspActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new DongSPView().setVisible(true);
+    }//GEN-LAST:event_mn_dongspActionPerformed
+
+    private void mn_chitietspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_chitietspActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ChiTietSPView().setVisible(true);
+    }//GEN-LAST:event_mn_chitietspActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new DangNhapView().setVisible(true);
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,15 +332,15 @@ public class AdminView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminView().setVisible(true);
+                new AdminView().setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_profile;
+    private javax.swing.JButton btn_thongke;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;

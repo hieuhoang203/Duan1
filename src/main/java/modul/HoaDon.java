@@ -48,7 +48,7 @@ public class HoaDon {
     private String diaChi;
     
     @Column(name = "TongTien")
-    private double tongTien;
+    private long tongTien;
     
     @Column(name = "TinhTrang")
     private int tinhTrang;
@@ -59,12 +59,21 @@ public class HoaDon {
     @OneToMany(mappedBy = "idHoaDon", fetch = FetchType.LAZY)
     private List<ChiTietBaoHanh> chiTietBaoHanhs;
 
+    private static int number = 0;
     public HoaDon() {
+        this.ma = "HD" + number;
+        number ++;
     }
 
-    public HoaDon(Integer id, String ma, NguoiDung idNguoiDung, List<HoaDonChiTiet> hoaDonChiTiets, List<ChiTietBaoHanh> chiTietBaoHanhs) {
+    public HoaDon(Integer id) {
         this.id = id;
-        this.ma = ma;
+        this.ma = "HD" + number;
+        number ++;
+    }
+
+    public HoaDon(Integer id, NguoiDung idNguoiDung, List<HoaDonChiTiet> hoaDonChiTiets, List<ChiTietBaoHanh> chiTietBaoHanhs) {
+        this.id = id;
+        this.ma = "HD" + number;
         this.idNguoiDung = idNguoiDung;
         this.ngayMua = new java.sql.Date(new Date().getTime());
         this.sdt = "0966628527";
@@ -73,6 +82,7 @@ public class HoaDon {
         this.tinhTrang = 0;
         this.hoaDonChiTiets = hoaDonChiTiets;
         this.chiTietBaoHanhs = chiTietBaoHanhs;
+        number ++;
     }
     
     public Integer getId() {
@@ -119,11 +129,11 @@ public class HoaDon {
         return diaChi;
     }
 
-    public double getTongTien() {
+    public long getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(double tongTien) {
+    public void setTongTien(long tongTien) {
         this.tongTien = tongTien;
     }
     

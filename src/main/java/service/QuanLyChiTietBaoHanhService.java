@@ -4,10 +4,17 @@
  */
 package service;
 
+import java.util.ArrayList;
+import modul.ChiTietBaoHanh;
+import modul.HoaDon;
+
 /**
  *
  * @author admin
  */
 public interface QuanLyChiTietBaoHanhService {
-    
+    ArrayList<ChiTietBaoHanh> select(HoaDon hd);
+    void inser(ChiTietBaoHanh ctbh);
+    void delete(Integer id);
+    long tienBaoHanh(HoaDon hd);
 }

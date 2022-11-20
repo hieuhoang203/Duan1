@@ -36,4 +36,21 @@ public class HoaDonChiTietRepository {
         q.setParameter("id", id);
         return (HoaDonChiTiet) q.getResultList().get(0);
     }
+    
+    public long getTongTien(HoaDon hd){
+        String query = "select sum(thanhTien) from HoaDonChiTiet where idHoaDon =:idHoaDon";
+        Query q = session.createQuery(query);
+        q.setParameter("idHoaDon", hd);
+        return (long) q.getResultList().get(0);
+    }
+    
+    public void delete(Integer id, HoaDon hd){
+        session.beginTransaction();
+        String query = "delete from HoaDonChiTiet where id =:id and idHoaDon =:idHoaDon";
+        Query q = session.createQuery(query);
+        q.setParameter("id", id);
+        q.setParameter("idHoaDon", hd);
+        q.executeUpdate();
+        session.getTransaction().commit();
+    }
 }

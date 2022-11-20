@@ -10,15 +10,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modul.BaoHanh;
+import modul.ChiTietBaoHanh;
 import modul.ChiTietSP;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
 import modul.NguoiDung;
 import service.QuanLyBaoHanhService;
+import service.QuanLyChiTietBaoHanhService;
 import service.QuanLyChiTietHoaDonService;
 import service.QuanLyChiTietSPService;
 import service.QuanLyHoaDonService;
 import service.serviceImpl.BaoHanhServiceImpl;
+import service.serviceImpl.ChiTietBaoHanhServiceImpl;
 import service.serviceImpl.ChiTietHoaDonServiceImpl;
 import service.serviceImpl.ChiTietSpServiceImpl;
 import service.serviceImpl.HoaDonServiceImpl;
@@ -28,11 +31,11 @@ import service.serviceImpl.HoaDonServiceImpl;
  * @author admin
  */
 public class NhanVienView extends javax.swing.JFrame {
+    private QuanLyChiTietBaoHanhService quanLyChiTietBaoHanhService = new ChiTietBaoHanhServiceImpl();
     private QuanLyChiTietHoaDonService quanLyChiTietHoaDonService = new ChiTietHoaDonServiceImpl();
     private QuanLyBaoHanhService quanLyBaoHanhService = new BaoHanhServiceImpl();
     private QuanLyHoaDonService quanLyHoaDonService = new HoaDonServiceImpl();
     private QuanLyChiTietSPService quanLyChiTietSPService = new ChiTietSpServiceImpl();
-    private static int number = 0;
     private NguoiDung ng;
     private DefaultTableModel tbModelHoaDon;
     private DefaultTableModel tbModelSanPham;
@@ -124,21 +127,11 @@ public class NhanVienView extends javax.swing.JFrame {
         return null;
     }
     
-    public HoaDonChiTiet getHoaDonChiTiet(){
-        int row = tb_giohang.getSelectedRow();
-        if (row>=0) {
-            Integer id = (Integer) tb_giohang.getValueAt(row, 0);
-            return quanLyChiTietHoaDonService.search(id);
-        }
-        return null;
-    }
-    
-    public void fillData(int row){
-        
-    }
-    
-    public void fillBaoHanh(){
-        
+    public void fillData(HoaDon hd){
+        txt_ma.setText(hd.getMa().toString());
+        txt_ngtao.setText(hd.getIdNguoiDung().toString());
+        txt_ngaytao.setText(hd.getNgayMua().toString());
+        txt_tongtien.setText(hd.getTongTien() + "");
     }
     
     public void addRowGioHang(){
@@ -157,18 +150,46 @@ public class NhanVienView extends javax.swing.JFrame {
     }
     
     public void addRowBaoHanh(){
-        
+        tbModelBaoHanh = (DefaultTableModel) tb_baohanh.getModel();
+        tbModelBaoHanh.setRowCount(0);
+        for (ChiTietBaoHanh chiTietBaoHanh : quanLyChiTietBaoHanhService.select(getHoaDon())) {
+            tbModelBaoHanh.addRow(new Object[]{
+                chiTietBaoHanh.getIdHoaDon(),
+                chiTietBaoHanh.getIdBaoHanh(),
+                chiTietBaoHanh.getIdBaoHanh().getGia(),
+                chiTietBaoHanh.getNgayBaoHanh(),
+                chiTietBaoHanh.getNgayKetThuc()
+            });
+        }
     }
     
     public HoaDon create(){
-        ++ number;
-        return new HoaDon(null, "HD"+number, ng, null, null);
+        return new HoaDon(null, ng, null, null);
     }
     
     public HoaDonChiTiet createHdct(){
         return new HoaDonChiTiet(null, getHoaDon(), getSanPham(), 1, getSanPham().getIdLoaiSp().getIdDongSp().getGiaBan(), getSanPham().getIdLoaiSp().getIdDongSp().getGiaBan(), 1);
     }
+    
+    public ChiTietBaoHanh createCtbh(){
+        return new ChiTietBaoHanh(null, getHoaDon(), (BaoHanh) cbx_baohanh.getSelectedItem());
+    }
+    
+    public void tinhTien(){
+        long tien = quanLyChiTietHoaDonService.getThanhTien(getHoaDon()) + quanLyChiTietBaoHanhService.tienBaoHanh(getHoaDon());
+        quanLyHoaDonService.updateTongTien(getHoaDon().getId(), tien);
+    }
 
+    public void clear(){
+        tbModelBaoHanh = (DefaultTableModel) tb_baohanh.getModel();
+        tbModelBaoHanh.setRowCount(0);
+        tbModelGioHang = (DefaultTableModel) tb_giohang.getModel();
+        tbModelGioHang.setRowCount(0);
+        txt_ma.setText("");
+        txt_ngaytao.setText("");
+        txt_ngtao.setText("");
+        txt_tongtien.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,7 +201,7 @@ public class NhanVienView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
         btn_create = new javax.swing.JButton();
         rd_da = new javax.swing.JRadioButton();
         rd_chua = new javax.swing.JRadioButton();
@@ -211,6 +232,8 @@ public class NhanVienView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cbx_baohanh = new javax.swing.JComboBox<>();
         btn_them = new javax.swing.JButton();
+        btn_xoahoadonchitiet = new javax.swing.JButton();
+        btn_xoabaohanhchitiet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thu ngân");
@@ -218,7 +241,12 @@ public class NhanVienView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 153));
 
-        jButton1.setText("Logout");
+        btn_logout.setText("Logout");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
 
         btn_create.setText("Tạo hóa đơn");
         btn_create.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,11 +378,11 @@ public class NhanVienView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Hóa đơn", "Loại bảo hành", "Giá", "Trạng thái"
+                "Hóa đơn", "Loại bảo hành", "Giá", "Ngày bắt đầu", "Ngày kết thúc"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -436,22 +464,35 @@ public class NhanVienView extends javax.swing.JFrame {
             }
         });
 
+        btn_xoahoadonchitiet.setText("Xóa");
+        btn_xoahoadonchitiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoahoadonchitietMouseClicked(evt);
+            }
+        });
+
+        btn_xoabaohanhchitiet.setText("Xóa");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_xoahoadonchitiet)
+                    .addComponent(btn_xoabaohanhchitiet))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel6))
-                        .addGap(0, 824, Short.MAX_VALUE))
+                        .addGap(0, 817, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,7 +532,7 @@ public class NhanVienView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_logout)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -508,7 +549,9 @@ public class NhanVienView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_xoahoadonchitiet)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -523,7 +566,8 @@ public class NhanVienView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xoabaohanhchitiet))
                 .addContainerGap())
         );
 
@@ -561,6 +605,10 @@ public class NhanVienView extends javax.swing.JFrame {
         // TODO add your handling code here:
         quanLyHoaDonService.insert(create());
         addRowHoaDon();
+        tbModelBaoHanh = (DefaultTableModel) tb_baohanh.getModel();
+        tbModelBaoHanh.setRowCount(0);
+        tbModelGioHang = (DefaultTableModel) tb_giohang.getModel();
+        tbModelGioHang.setRowCount(0);
     }//GEN-LAST:event_btn_createMouseClicked
 
     private void tb_sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_sanphamMouseClicked
@@ -571,6 +619,8 @@ public class NhanVienView extends javax.swing.JFrame {
             int choose = JOptionPane.showConfirmDialog(rootPane, "Thêm vào hóa đơn ?");
             if (choose == JOptionPane.YES_OPTION) {
                 quanLyChiTietHoaDonService.insert(createHdct());
+                tinhTien();
+                fillData(getHoaDon());
                 addRowGioHang();
             }
         }
@@ -578,18 +628,52 @@ public class NhanVienView extends javax.swing.JFrame {
 
     private void btn_thanhtoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_thanhtoanMouseClicked
         // TODO add your handling code here:
-        System.out.println(createHdct());
+        quanLyHoaDonService.update(txt_ma.getText().trim());
+        clear();
     }//GEN-LAST:event_btn_thanhtoanMouseClicked
 
     private void tb_hoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_hoadonMouseClicked
         // TODO add your handling code here:
+        int row = tb_hoadon.getSelectedRow();
+        fillData(getHoaDon());
         addRowGioHang();
+        addRowBaoHanh();
     }//GEN-LAST:event_tb_hoadonMouseClicked
 
     private void btn_themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMouseClicked
         // TODO add your handling code here:
-        
+        if (getHoaDon() == null && quanLyChiTietHoaDonService.select(getHoaDon()) != null) {
+            JOptionPane.showMessageDialog(rootPane, "Không đủ điều kiện để thực hiện thao tác !");
+        } else {
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Thêm bảo hành ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyChiTietBaoHanhService.inser(createCtbh());
+                tinhTien();
+                addRowBaoHanh();
+            }
+        }
     }//GEN-LAST:event_btn_themMouseClicked
+
+    private void btn_xoahoadonchitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoahoadonchitietMouseClicked
+        // TODO add your handling code here:
+        int row = tb_giohang.getSelectedRow();
+        if (row<0) {
+            JOptionPane.showMessageDialog(rootPane, "Hệ thống chưa hiểu yêu cầu !");
+        } else {
+            Integer id = (Integer) tb_giohang.getValueAt(row, 0);
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyChiTietHoaDonService.delete(id, getHoaDon());
+                addRowGioHang();
+            }
+        }
+    }//GEN-LAST:event_btn_xoahoadonchitietMouseClicked
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new DangNhapView().setVisible(true);
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -621,17 +705,19 @@ public class NhanVienView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhanVienView().setVisible(true);
+                new NhanVienView().setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_create;
+    private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_thanhtoan;
     private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_xoabaohanhchitiet;
+    private javax.swing.JButton btn_xoahoadonchitiet;
     private javax.swing.JComboBox<BaoHanh> cbx_baohanh;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
