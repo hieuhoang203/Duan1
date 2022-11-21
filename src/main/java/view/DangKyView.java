@@ -179,7 +179,7 @@ public class DangKyView extends javax.swing.JFrame {
         lb_img = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_search = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
@@ -377,6 +377,11 @@ public class DangKyView extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(153, 255, 153));
 
         btn_search.setText("Search");
+        btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_searchMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -384,7 +389,7 @@ public class DangKyView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -394,7 +399,7 @@ public class DangKyView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_search))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -511,6 +516,16 @@ public class DangKyView extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_btn_clearMouseClicked
 
+    private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
+        // TODO add your handling code here:
+        String hoTen = txt_search.getText().trim();
+        if (hoTen.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Chưa nhập tên cần tìm !");
+        } else {
+            
+        }
+    }//GEN-LAST:event_btn_searchMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -569,7 +584,6 @@ public class DangKyView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_img;
     private javax.swing.JRadioButton rd_nam;
     private javax.swing.JRadioButton rd_nu;
@@ -579,5 +593,6 @@ public class DangKyView extends javax.swing.JFrame {
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_ma;
     private javax.swing.JTextField txt_ngaysinh;
+    private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 }
