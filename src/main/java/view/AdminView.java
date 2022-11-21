@@ -22,7 +22,6 @@ public class AdminView extends javax.swing.JFrame {
     public AdminView(NguoiDung ng){
         this.ng = ng;
         initComponents();
-        System.out.println(ng);
     }
 
     /**

@@ -151,7 +151,7 @@ public class MauSacView extends javax.swing.JFrame {
         btn_sua.setBackground(new java.awt.Color(204, 255, 204));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 0, 0));
-        btn_sua.setText("Xóa");
+        btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_suaActionPerformed(evt);
@@ -161,7 +161,7 @@ public class MauSacView extends javax.swing.JFrame {
         btn_xoa.setBackground(new java.awt.Color(204, 255, 204));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 0, 0));
-        btn_xoa.setText("Sửa");
+        btn_xoa.setText("Xóa");
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_xoaActionPerformed(evt);
