@@ -5,6 +5,7 @@
 package service.serviceImpl;
 
 import java.util.ArrayList;
+import modul.BaoHanh;
 import modul.ChiTietBaoHanh;
 import modul.HoaDon;
 import repository.ChiTietBaoHanhRepository;
@@ -28,8 +29,8 @@ public class ChiTietBaoHanhServiceImpl implements QuanLyChiTietBaoHanhService{
     }
 
     @Override
-    public void delete(Integer id) {
-        chiTietBaoHanhRepository.delete(id);
+    public void delete(BaoHanh bh, HoaDon hd) {
+        chiTietBaoHanhRepository.delete(bh, hd);
     }
 
     @Override

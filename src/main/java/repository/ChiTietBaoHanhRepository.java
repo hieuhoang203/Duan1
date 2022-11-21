@@ -7,6 +7,7 @@ package repository;
 import org.hibernate.Session;
 import hibernateConfig.HibernateConfig;
 import java.util.ArrayList;
+import modul.BaoHanh;
 import modul.ChiTietBaoHanh;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
@@ -32,11 +33,12 @@ public class ChiTietBaoHanhRepository {
         session.getTransaction().commit();
     }
     
-    public void delete(Integer id){
+    public void delete(BaoHanh bh, HoaDon hd){
         session.beginTransaction();
-        String query = "delete from ChiTietBaoHanh where id =:id";
+        String query = "delete from ChiTietBaoHanh where idBaoHanh =:idBaoHanh and idHoaDon =:idHoaDon";
         Query q = session.createQuery(query);
-        q.setParameter("id", id);
+        q.setParameter("idBaoHanh", bh);
+        q.setParameter("idHoaDon", hd);
         q.executeUpdate();
         session.getTransaction().commit();
     }

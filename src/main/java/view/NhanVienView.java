@@ -472,6 +472,11 @@ public class NhanVienView extends javax.swing.JFrame {
         });
 
         btn_xoabaohanhchitiet.setText("Xóa");
+        btn_xoabaohanhchitiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoabaohanhchitietMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -664,6 +669,7 @@ public class NhanVienView extends javax.swing.JFrame {
             int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
             if (choose == JOptionPane.YES_OPTION) {
                 quanLyChiTietHoaDonService.delete(id, getHoaDon());
+                tinhTien();
                 addRowGioHang();
             }
         }
@@ -674,6 +680,22 @@ public class NhanVienView extends javax.swing.JFrame {
         this.setVisible(false);
         new DangNhapView().setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void btn_xoabaohanhchitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoabaohanhchitietMouseClicked
+        // TODO add your handling code here:
+        int row = tb_baohanh.getSelectedRow();
+        if (row<0) {
+            JOptionPane.showMessageDialog(rootPane, "Hệ thống chưa hiểu yêu cầu !");
+        } else {
+            BaoHanh bh = quanLyBaoHanhService.search(tb_baohanh.getValueAt(row, 1).toString());
+            int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
+            if (choose == JOptionPane.YES_OPTION) {
+                quanLyChiTietBaoHanhService.delete(bh, getHoaDon());
+                tinhTien();
+                addRowGioHang();
+            }
+        }
+    }//GEN-LAST:event_btn_xoabaohanhchitietMouseClicked
 
     /**
      * @param args the command line arguments

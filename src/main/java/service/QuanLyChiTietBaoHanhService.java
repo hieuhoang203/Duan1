@@ -5,6 +5,7 @@
 package service;
 
 import java.util.ArrayList;
+import modul.BaoHanh;
 import modul.ChiTietBaoHanh;
 import modul.HoaDon;
 
@@ -15,6 +16,6 @@ import modul.HoaDon;
 public interface QuanLyChiTietBaoHanhService {
     ArrayList<ChiTietBaoHanh> select(HoaDon hd);
     void inser(ChiTietBaoHanh ctbh);
-    void delete(Integer id);
+    void delete(BaoHanh bh, HoaDon hd);
     long tienBaoHanh(HoaDon hd);
 }

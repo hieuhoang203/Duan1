@@ -64,5 +64,10 @@ public class BaoHanhServiceImpl implements QuanLyBaoHanhService{
     public void delete(Integer id) {
         baoHanhRepository.delete(id);
     }
+
+    @Override
+    public BaoHanh search(String ten) {
+        return baoHanhRepository.search(ten);
+    }
     
 }

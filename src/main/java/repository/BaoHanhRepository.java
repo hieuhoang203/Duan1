@@ -54,6 +54,13 @@ public class BaoHanhRepository {
         session.getTransaction().commit();
     }
     
+    public BaoHanh search(String ten){
+        String query = "from BaoHanh where ten =:ten";
+        Query q = session.createQuery(query);
+        q.setParameter("ten", ten);
+        return (BaoHanh) q.getResultList().get(0);
+    }
+    
     public ArrayList<String> selectMa(){
         String query = "select bh.ma from BaoHanh bh";
         Query q = session.createQuery(query);

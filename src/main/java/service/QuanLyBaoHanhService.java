@@ -18,4 +18,5 @@ public interface QuanLyBaoHanhService {
     boolean insert(BaoHanh bh);
     boolean update(Integer id, BaoHanh bh);
     void delete(Integer id);
+    BaoHanh search(String ten);
 }
