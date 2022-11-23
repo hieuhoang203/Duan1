@@ -16,7 +16,10 @@ service\serviceImpl\NguoiDungServiceImpl.class
 view\AdminView$10.class
 view\CuaHangView$2.class
 view\ChucVuView$3.class
+<<<<<<< HEAD
 view\NhanVienView$16.class
+=======
+>>>>>>> 7fd2d69534a6afad77b39eaf36a4a0a15d073285
 view\NhanVienView$6.class
 view\ChiTietSPView$6.class
 view\LoaiSpView$2.class
@@ -95,7 +98,10 @@ view\ChiTietSPView$8.class
 view\ChiTietSPView$9.class
 view\DangNhapView.class
 view\CoSoView$7.class
+<<<<<<< HEAD
 view\ChiTietSPView$10.class
+=======
+>>>>>>> 7fd2d69534a6afad77b39eaf36a4a0a15d073285
 view\HangView$3.class
 view\AdminView$1.class
 view\MauSacView$2.class
@@ -175,7 +181,10 @@ service\QuanLyChiTietSPService.class
 service\serviceImpl\DungLuongServiceImpl.class
 view\LoaiSpView.class
 modul\NguoiDung.class
+<<<<<<< HEAD
 view\DangKyView$6.class
+=======
+>>>>>>> 7fd2d69534a6afad77b39eaf36a4a0a15d073285
 view\MauSacView$3.class
 repository\BaoHanhRepository.class
 service\serviceImpl\LoaiSpServiceImpl.class
