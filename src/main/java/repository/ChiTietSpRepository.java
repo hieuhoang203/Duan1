@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import modul.ChiTietSP;
 import modul.CuaHang;
 import modul.LoaiSp;
+import org.hibernate.Criteria;
 
 /**
  *
@@ -18,7 +19,8 @@ public class ChiTietSpRepository {
     private Session session = HibernateConfig.getFACTORY().openSession();
 
     public ArrayList<ChiTietSP> select() {
-        Query q = session.createQuery("From ChiTietSP where trangThai =:trangThai");
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
@@ -79,8 +81,8 @@ public class ChiTietSpRepository {
         ArrayList<String> list = (ArrayList<String>) q.getResultList();
         return list;
     }
-    
-    public ArrayList<ChiTietSP> searchByStore(CuaHang ch){
+
+    public ArrayList<ChiTietSP> searchByStore(CuaHang ch) {
         String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
         Query q = session.createQuery(query);
         q.setParameter("idCuaHang", ch);
@@ -89,11 +91,21 @@ public class ChiTietSpRepository {
         return list;
     }
 
-    public ChiTietSP searchById(Integer id){
+    public ChiTietSP searchById(Integer id) {
         String query = "from ChiTietSP where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("id", id);
         return (ChiTietSP) q.getResultList().get(0);
     }
-    
+
+    public ArrayList<ChiTietSP> select(int trang) {
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery("From ChiTietSP where trangThai =:trangThai");
+        q.setParameter("trangThai", 1);
+        q.setFirstResult(trang);
+        q.setMaxResults(5);
+        ArrayList<ChiTietSP> lastPage = (ArrayList<ChiTietSP>) q.getResultList();
+        return lastPage;
+    }
+
 }

@@ -80,5 +80,10 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     public ChiTietSP searchById(Integer id) {
         return chiTietSpRepository.searchById(id);
     }
+
+    @Override
+    public ArrayList<ChiTietSP> select(int trang) {
+        return chiTietSpRepository.select(trang);
+    }
     
 }

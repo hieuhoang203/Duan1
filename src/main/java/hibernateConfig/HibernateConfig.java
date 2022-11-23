@@ -33,19 +33,20 @@ import org.hibernate.service.ServiceRegistry;
  * @author admin
  */
 public class HibernateConfig {
+
     private static final SessionFactory FACTORY;
-    
+
     static {
         Configuration conf = new Configuration();
-        
+
         Properties props = new Properties();
-        props.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
+        props.put(Environment.DIALECT, "org.hibernate.dialect.SQLServer2008Dialect");
         props.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         props.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DuAn1_CuaHangDienThoai");
         props.put(Environment.USER, "sa");
         props.put(Environment.PASS, "123456");
-//        props.put(Environment.SHOW_SQL, "true");
-        
+        props.put(Environment.SHOW_SQL, "true");
+
         conf.setProperties(props);
         conf.addAnnotatedClass(CoSo.class);
         conf.addAnnotatedClass(ChiTietSP.class);
@@ -64,17 +65,17 @@ public class HibernateConfig {
         conf.addAnnotatedClass(BaoHanh.class);
         conf.addAnnotatedClass(ChiTietBaoHanh.class);
         conf.addAnnotatedClass(ChucVu.class);
-        
+
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
-        
+
         FACTORY = conf.buildSessionFactory(registry);
     }
 
     public static SessionFactory getFACTORY() {
         return FACTORY;
     }
-    
+
     public static void main(String[] args) {
         getFACTORY();
     }

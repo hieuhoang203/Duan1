@@ -22,4 +22,5 @@ public interface QuanLyChiTietSPService {
     ArrayList<ChiTietSP> search(String key);
     ArrayList<ChiTietSP> searchByStore(CuaHang ch);
     ChiTietSP searchById(Integer id);
+    ArrayList<ChiTietSP> select(int trang);
 }

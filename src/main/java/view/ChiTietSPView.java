@@ -20,6 +20,7 @@ import service.serviceImpl.*;
  */
 public class ChiTietSPView extends javax.swing.JFrame {
 
+    private int trang = 0, soTrang, count, temp = 1;
     private DefaultTableModel tableModel;
     private DefaultComboBoxModel cbxLoaiSp;
     private DefaultComboBoxModel cbxCuaHang;
@@ -34,7 +35,20 @@ public class ChiTietSPView extends javax.swing.JFrame {
         initComponents();
         addCbxLoaiSp();
         addCbxCuaHang();
-        addRows(quanLyChiTietSPService.select());
+        count = quanLyChiTietSPService.select().size();
+        if (count % 5 == 0) {
+            soTrang = count / 5;
+        } else {
+            soTrang = count / 5 + 1;
+        }
+        lb_sotrang.setText("/" + soTrang);
+        lb_trang.setText("        1");
+        addRows(quanLyChiTietSPService.select(0));
+    }
+
+    public void setAnimation(int temp, int soTrang) {
+        lb_sotrang.setText("/" + soTrang);
+        lb_trang.setText("        " + temp);
     }
 
     public void addCbxLoaiSp() {
@@ -76,7 +90,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         cbx_loaisp.setSelectedIndex(0);
         cbx_cuahang.setSelectedIndex(0);
         txt_imei.setText("");
-        addRows(quanLyChiTietSPService.select());
+        addRows(quanLyChiTietSPService.select(trang));
     }
 
     public ChiTietSP create() {
@@ -112,6 +126,12 @@ public class ChiTietSPView extends javax.swing.JFrame {
         btn_search = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lb_trang = new javax.swing.JLabel();
+        lb_sotrang = new javax.swing.JLabel();
+        btn_first = new javax.swing.JButton();
+        btn_prev = new javax.swing.JButton();
+        btn_next = new javax.swing.JButton();
+        btn_last = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chi tiết sản phẩm");
@@ -230,6 +250,24 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
+        btn_first.setText("<<");
+
+        btn_prev.setText("<");
+        btn_prev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_prevMouseClicked(evt);
+            }
+        });
+
+        btn_next.setText(">");
+        btn_next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_nextMouseClicked(evt);
+            }
+        });
+
+        btn_last.setText(">>");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -257,56 +295,75 @@ public class ChiTietSPView extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))))
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(80, 80, 80))
+                .addGap(84, 84, 84))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(btn_first)
+                .addGap(18, 18, 18)
+                .addComponent(btn_prev)
+                .addGap(22, 22, 22)
+                .addComponent(lb_trang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_sotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btn_next)
+                .addGap(18, 18, 18)
+                .addComponent(btn_last)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_sua, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_add, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txt_imei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(cbx_loaisp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(cbx_cuahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_search)
-                            .addComponent(btn_xoa))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_clear)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_add)
+                    .addComponent(btn_sua))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_imei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_xoa)
+                    .addComponent(btn_search))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbx_loaisp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_clear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbx_cuahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_trang, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_first)
+                        .addComponent(btn_prev))
+                    .addComponent(lb_sotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_next)
+                        .addComponent(btn_last)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,7 +374,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -338,8 +397,8 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        
-        if (row<0) {
+
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
@@ -379,7 +438,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        if (row<0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
@@ -405,6 +464,26 @@ public class ChiTietSPView extends javax.swing.JFrame {
         this.setVisible(false);
         new AdminView().setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
+        // TODO add your handling code here:
+        trang += 5;
+        temp++;
+        if (temp <= soTrang) {
+            addRows(quanLyChiTietSPService.select(trang));
+            setAnimation(temp, soTrang);
+        }
+    }//GEN-LAST:event_btn_nextMouseClicked
+
+    private void btn_prevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prevMouseClicked
+        // TODO add your handling code here:
+        trang -=5;
+        temp--;
+        if (temp>=1) {
+            addRows(quanLyChiTietSPService.select(trang));
+            setAnimation(temp, soTrang);
+        }
+    }//GEN-LAST:event_btn_prevMouseClicked
 
     /**
      * @param args the command line arguments
@@ -436,7 +515,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChiTietSPView().setVisible(false);
+                new ChiTietSPView().setVisible(true);
             }
         });
     }
@@ -444,6 +523,10 @@ public class ChiTietSPView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_first;
+    private javax.swing.JButton btn_last;
+    private javax.swing.JButton btn_next;
+    private javax.swing.JButton btn_prev;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_xoa;
@@ -457,6 +540,8 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_sotrang;
+    private javax.swing.JLabel lb_trang;
     private javax.swing.JTable tb_list;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_imei;
