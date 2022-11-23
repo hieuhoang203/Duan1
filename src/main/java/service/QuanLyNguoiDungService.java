@@ -18,6 +18,7 @@ public interface QuanLyNguoiDungService {
     boolean update(Integer id, NguoiDung ng);
     void delete(Integer id);
     ArrayList<NguoiDung> select();
-    ArrayList<NguoiDung> search(String name);
+    ArrayList<NguoiDung> select(int trang);
+    ArrayList<NguoiDung> search(String name, int trang);
     NguoiDung searchByEmail(String email);
 }

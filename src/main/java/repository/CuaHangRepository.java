@@ -15,7 +15,11 @@ import modul.CuaHang;
  * @author admin
  */
 public class CuaHangRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public CuaHangRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public ArrayList<CuaHang> select(){
         Query q = session.createQuery("From CuaHang where trangThai =:trangThai");

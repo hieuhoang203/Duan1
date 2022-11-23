@@ -8,14 +8,17 @@ import org.hibernate.Session;
 import hibernateConfig.HibernateConfig;
 import java.util.List;
 import modul.Account;
-import modul.NguoiDung;
 import org.hibernate.query.Query;
 /**
  *
  * @author admin
  */
 public class AccountRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public AccountRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public void insert(Account acc){
         session.beginTransaction();

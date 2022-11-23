@@ -15,7 +15,11 @@ import modul.LoaiSp;
  * @author admin
  */
 public class LoaiSpRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public LoaiSpRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public ArrayList<LoaiSp> select(){
         Query q = session.createQuery("from LoaiSp where trangThai =:trangThai");

@@ -16,7 +16,11 @@ import org.hibernate.Session;
  */
 public class MauSacRepository {
 
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public MauSacRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
 
     public ArrayList<MauSac> select() {
         String query = "from MauSac where trangThai =:trangThai";

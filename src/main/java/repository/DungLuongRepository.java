@@ -16,7 +16,11 @@ import org.hibernate.Session;
  */
 public class DungLuongRepository {
 
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public DungLuongRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
 
     public ArrayList<DungLuong> select() {
         String query = "FRom DungLuong where trangThai =:trangThai";

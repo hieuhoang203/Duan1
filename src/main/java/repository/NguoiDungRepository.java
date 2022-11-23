@@ -16,7 +16,11 @@ import org.hibernate.query.Query;
  * @author admin
  */
 public class NguoiDungRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public NguoiDungRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public void insert(NguoiDung ng){
         session.beginTransaction();
@@ -60,11 +64,22 @@ public class NguoiDungRepository {
         return list;
     }
     
-    public ArrayList<NguoiDung> search(String hoTen){
+    public ArrayList<NguoiDung> select(int trang){
+        Query q = session.createQuery("from NguoiDung where trangThai =:trangThai");
+        q.setParameter("trangThai", 1);
+        q.setFirstResult(trang);
+        q.setMaxResults(5);
+        ArrayList<NguoiDung> list = (ArrayList<NguoiDung>) q.getResultList();
+        return list;
+    }
+    
+    public ArrayList<NguoiDung> search(String hoTen, int trang){
         String query = "from NguoiDung where hoTen =:hoTen and trangThai =:trangThai";
         Query q = session.createQuery(query);
         q.setParameter("hoTen", hoTen);
         q.setParameter("trangThai", 1);
+        q.setFirstResult(trang);
+        q.setMaxResults(5);
         ArrayList<NguoiDung> list = (ArrayList<NguoiDung>) q.getResultList();
         return list;
     }

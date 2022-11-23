@@ -15,7 +15,11 @@ import modul.CoSo;
  * @author admin
  */
 public class CoSoRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public CoSoRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public ArrayList<CoSo> select(){
         Query q = session.createQuery("From CoSo where trangThai =:trangThai");

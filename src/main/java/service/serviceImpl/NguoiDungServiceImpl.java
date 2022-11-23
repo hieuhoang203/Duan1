@@ -29,7 +29,7 @@ public class NguoiDungServiceImpl implements QuanLyNguoiDungService{
 
     @Override
     public boolean checkEmail(NguoiDung ng) {
-        if (nguoiDungRepository.selectEmail().contains(ng)) {
+        if (nguoiDungRepository.selectEmail().contains(ng.getEmail())) {
             return false;
         } else {
             return true;
@@ -67,13 +67,18 @@ public class NguoiDungServiceImpl implements QuanLyNguoiDungService{
     }
 
     @Override
-    public ArrayList<NguoiDung> search(String name) {
-        return nguoiDungRepository.search(name);
+    public ArrayList<NguoiDung> search(String name, int trang) {
+        return nguoiDungRepository.search(name, trang);
     }
 
     @Override
     public NguoiDung searchByEmail(String email) {
         return nguoiDungRepository.searchByEmail(email);
+    }
+
+    @Override
+    public ArrayList<NguoiDung> select(int trang) {
+        return nguoiDungRepository.select(trang);
     }
 
 }

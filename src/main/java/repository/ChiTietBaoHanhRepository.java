@@ -18,7 +18,11 @@ import org.hibernate.query.Query;
  * @author admin
  */
 public class ChiTietBaoHanhRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public ChiTietBaoHanhRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public ArrayList<ChiTietBaoHanh> select(HoaDon idHoaDon){
         String query = "from ChiTietBaoHanh where idHoaDon =:idHoaDon";

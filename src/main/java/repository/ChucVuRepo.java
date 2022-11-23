@@ -15,7 +15,11 @@ import hibernateConfig.HibernateConfig;
  * @author DieuThuy
  */
 public class ChucVuRepo {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public ChucVuRepo() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public ArrayList<ChucVu> select(){
         String query = "from ChucVu where trangThai =:trangThai ";

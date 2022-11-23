@@ -16,10 +16,7 @@ service\serviceImpl\NguoiDungServiceImpl.class
 view\AdminView$10.class
 view\CuaHangView$2.class
 view\ChucVuView$3.class
-<<<<<<< HEAD
 view\NhanVienView$16.class
-=======
->>>>>>> 7fd2d69534a6afad77b39eaf36a4a0a15d073285
 view\NhanVienView$6.class
 view\ChiTietSPView$6.class
 view\LoaiSpView$2.class
@@ -92,16 +89,16 @@ view\DongSPView$4.class
 view\AdminView$4.class
 view\HangView$2.class
 view\ForgotPassView$2.class
+repository\EmailRepository$1.class
 view\DangKyView$1.class
 view\BaoHanhView$3.class
 view\ChiTietSPView$8.class
 view\ChiTietSPView$9.class
 view\DangNhapView.class
 view\CoSoView$7.class
-<<<<<<< HEAD
+service\serviceImpl\ExcelHelper.class
+service\QuanLyGuiMailService.class
 view\ChiTietSPView$10.class
-=======
->>>>>>> 7fd2d69534a6afad77b39eaf36a4a0a15d073285
 view\HangView$3.class
 view\AdminView$1.class
 view\MauSacView$2.class
@@ -119,10 +116,12 @@ view\CoSoView$2.class
 view\DangKyView.class
 view\NhanVienView$9.class
 view\AdminView$13.class
+repository\EmailRepository.class
 service\serviceImpl\ChiTietBaoHanhServiceImpl.class
 repository\CuaHangRepository.class
 view\CuaHangView.class
 view\MauSacView$7.class
+service\serviceImpl\GuiMailServiceImpl.class
 view\BaoHanhView$7.class
 view\LoaiSpView$5.class
 view\CoSoView.class
@@ -143,6 +142,7 @@ service\QuanLyCoSoService.class
 view\AdminView$12.class
 view\ChiTietSPView$4.class
 service\serviceImpl\ChiTietSpServiceImpl.class
+view\ChiTietSPView$11.class
 view\DangKyView$5.class
 view\BaoHanhView$6.class
 view\AdminView$7.class
@@ -181,10 +181,7 @@ service\QuanLyChiTietSPService.class
 service\serviceImpl\DungLuongServiceImpl.class
 view\LoaiSpView.class
 modul\NguoiDung.class
-<<<<<<< HEAD
 view\DangKyView$6.class
-=======
->>>>>>> 7fd2d69534a6afad77b39eaf36a4a0a15d073285
 view\MauSacView$3.class
 repository\BaoHanhRepository.class
 service\serviceImpl\LoaiSpServiceImpl.class
@@ -201,6 +198,7 @@ view\NhanVienView$8.class
 view\DungLuongView$7.class
 view\ChucVuView$8.class
 view\CoSoView$6.class
+view\ThongKeView.class
 view\LoaiSpView$1.class
 view\ChiTietSPView$1.class
 modul\LoaiSp.class

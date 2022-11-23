@@ -8,7 +8,6 @@ import javax.persistence.Query;
 import modul.ChiTietSP;
 import modul.CuaHang;
 import modul.LoaiSp;
-import org.hibernate.Criteria;
 
 /**
  *
@@ -16,10 +15,13 @@ import org.hibernate.Criteria;
  */
 public class ChiTietSpRepository {
 
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public ChiTietSpRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
 
     public ArrayList<ChiTietSP> select() {
-        Session session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();

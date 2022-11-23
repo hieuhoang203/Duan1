@@ -10,7 +10,11 @@ import org.hibernate.Session;
  * @author admin
  */
 public class DongSpRepository {
-    private Session session = HibernateConfig.getFACTORY().openSession();
+    private Session session;
+
+    public DongSpRepository() {
+        session = HibernateConfig.getFACTORY().openSession();
+    }
     
     public ArrayList<DongSp> select(){
         Query q = session.createQuery("From DongSp where trangThai =:trangThai");
