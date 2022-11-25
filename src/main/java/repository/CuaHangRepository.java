@@ -22,6 +22,7 @@ public class CuaHangRepository {
     }
     
     public ArrayList<CuaHang> select(){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("From CuaHang where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<CuaHang> list = (ArrayList<CuaHang>) q.getResultList();
@@ -63,5 +64,11 @@ public class CuaHangRepository {
         Query q = session.createQuery("select h.ma from CuaHang h");
         ArrayList<String> list = (ArrayList<String>) q.getResultList();
         return list;
+    }
+    
+    public CuaHang search(Integer id){
+        Query q = session.createQuery("from CuaHang where id =:id");
+        q.setParameter("id", id);
+        return (CuaHang) q.getResultList().get(0);
     }
 }

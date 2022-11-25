@@ -58,6 +58,7 @@ public class NguoiDungRepository {
     }
     
     public ArrayList<NguoiDung> select(){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from NguoiDung where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<NguoiDung> list = (ArrayList<NguoiDung>) q.getResultList();
@@ -65,6 +66,7 @@ public class NguoiDungRepository {
     }
     
     public ArrayList<NguoiDung> select(int trang){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from NguoiDung where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         q.setFirstResult(trang);

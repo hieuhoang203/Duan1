@@ -23,12 +23,14 @@ public class HoaDonRepository {
     }
     
     public ArrayList<HoaDon> select(NguoiDung ng){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from HoaDon where idNguoiDung =:idNguoiDung");
         q.setParameter("idNguoiDung", ng);
         return (ArrayList<HoaDon>) q.getResultList();
     }
     
     public ArrayList<HoaDon> selectByTrangThai(NguoiDung ng, int tinhTrang){
+        session = HibernateConfig.getFACTORY().openSession();
         String query = "from HoaDon where idNguoiDung =:idNguoiDung and tinhTrang =:tinhTrang";
         Query q = session.createQuery(query);
         q.setParameter("idNguoiDung", ng);
@@ -67,4 +69,14 @@ public class HoaDonRepository {
         q.executeUpdate();
         session.getTransaction().commit();
     }
+    
+    public ArrayList<HoaDon> select(int firtRecord, NguoiDung ng){
+        session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery("from HoaDon where idNguoiDung =:idNguoiDung");
+        q.setParameter("idNguoiDung", ng);
+        q.setFirstResult(firtRecord);
+        q.setMaxResults(5);
+        return (ArrayList<HoaDon>) q.getResultList();
+    }
+    
 }

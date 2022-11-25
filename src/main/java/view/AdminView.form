@@ -260,6 +260,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Profile"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_profileMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -22,6 +22,7 @@ public class LoaiSpRepository {
     }
     
     public ArrayList<LoaiSp> select(){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from LoaiSp where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<LoaiSp> list = (ArrayList<LoaiSp>) q.getResultList();
@@ -65,5 +66,12 @@ public class LoaiSpRepository {
         Query q = session.createQuery("select l.ma from LoaiSp l");
         ArrayList<String> list = (ArrayList<String>) q.getResultList();
         return list;
+    }
+    
+    public LoaiSp search(String ma){
+        session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery("from LoaiSp where ma =:ma");
+        q.setParameter("ma", ma);
+        return (LoaiSp) q.getResultList().get(0);
     }
 }

@@ -14,8 +14,10 @@ import modul.CuaHang;
  */
 public interface QuanLyChiTietSPService {
     ArrayList<ChiTietSP> select();
+    ArrayList<ChiTietSP> selectAll();
     boolean insert(ChiTietSP ctsp);
     boolean update(Integer id, ChiTietSP ctsp);
+    void upload(Integer key);
     void delete(Integer key);
     boolean checkData(ChiTietSP ctsp);
     boolean checkImei(ChiTietSP ctsp);
@@ -23,4 +25,5 @@ public interface QuanLyChiTietSPService {
     ArrayList<ChiTietSP> searchByStore(CuaHang ch);
     ChiTietSP searchById(Integer id);
     ArrayList<ChiTietSP> select(int trang);
+    ArrayList<ChiTietSP> select(int trang, CuaHang ch);
 }

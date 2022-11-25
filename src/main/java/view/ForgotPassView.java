@@ -1,16 +1,35 @@
 package view;
 
+import javax.swing.JOptionPane;
+import service.QuanLyAccountService;
+import service.QuanLyGuiMailService;
+import service.serviceImpl.AccountServiceImpl;
+import service.serviceImpl.GuiMailServiceImpl;
+
 /**
  *
  * @author admin
  */
 public class ForgotPassView extends javax.swing.JFrame {
-
+    private static final String PASSWOR_STRING = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    private static final String EMAIL_STRING = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    private QuanLyGuiMailService quanLyGuiMailService;
+    private QuanLyAccountService quanLyAccountService;
     /**
      * Creates new form ForgotPassView
      */
     public ForgotPassView() {
         initComponents();
+        quanLyGuiMailService = new GuiMailServiceImpl();
+        quanLyAccountService = new AccountServiceImpl();
+    }
+    
+    public boolean checkEmail(String mail){
+        if (mail.matches(EMAIL_STRING)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -59,6 +78,11 @@ public class ForgotPassView extends javax.swing.JFrame {
         btn_confirm.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_confirm.setForeground(new java.awt.Color(255, 0, 0));
         btn_confirm.setText("Confirm");
+        btn_confirm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_confirmMouseClicked(evt);
+            }
+        });
 
         btn_login.setBackground(new java.awt.Color(204, 255, 204));
         btn_login.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -141,6 +165,28 @@ public class ForgotPassView extends javax.swing.JFrame {
         new DangNhapView().setVisible(true);
     }//GEN-LAST:event_btn_loginMouseClicked
 
+    private void btn_confirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_confirmMouseClicked
+        // TODO add your handling code here:
+        String new_pass  = txt_new.getText().trim();
+        String pass_again = txt_confirm.getText().trim();
+        if (checkEmail(txt_email.getText().trim())) {
+            if (new_pass.equals(pass_again)) {
+                String code = quanLyGuiMailService.sendEmail(txt_email.getText());
+                String input = JOptionPane.showInputDialog(this,"Ma xac nhan la ?");
+                if (input.equals(code)) {
+                    quanLyAccountService.update(txt_email.getText(), new_pass);
+                    JOptionPane.showMessageDialog(rootPane, "Doi mat khau thanh cong !");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Ma xac nhan khong chinh xac !");
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Mat khau khong hop le !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Email khong hop le !");
+        }
+    }//GEN-LAST:event_btn_confirmMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -171,7 +217,7 @@ public class ForgotPassView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ForgotPassView().setVisible(false);
+                new ForgotPassView().setVisible(true);
             }
         });
     }

@@ -17,4 +17,5 @@ public interface QuanLyLoaiSpService {
     boolean update(Integer id, LoaiSp loaiSp);
     void delte(Integer id);
     boolean checkMa(LoaiSp loaiSp);
+    LoaiSp search(String ma);
 }

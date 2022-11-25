@@ -61,6 +61,10 @@ public class LoaiSp {
     public LoaiSp(Integer id){
         this.id = id;
     }
+    
+    public LoaiSp(String ma){
+        this.ma = ma;
+    }
 
     public LoaiSp(Integer id, String ma, DongSp idDongSp, MauSac idMauSac, DungLuong idDungLuong, int trangThai, Date ngayThem, Date ngaySua) {
         this.id = id;
@@ -143,8 +147,7 @@ public class LoaiSp {
 
     @Override
     public String toString() {
-        return getInfor();
+        return ma;
     }
-    
     
 }

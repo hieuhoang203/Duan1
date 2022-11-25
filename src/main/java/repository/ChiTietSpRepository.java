@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Query;
 import modul.ChiTietSP;
 import modul.CuaHang;
+import modul.DongSp;
 import modul.LoaiSp;
 
 /**
@@ -22,8 +23,16 @@ public class ChiTietSpRepository {
     }
 
     public ArrayList<ChiTietSP> select() {
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
+        ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
+        return list;
+    }
+
+    public ArrayList<ChiTietSP> selectAll() {
+        session = HibernateConfig.getFACTORY().openSession();
+        Query q = session.createQuery("from ChiTietSP");
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
     }
@@ -42,6 +51,16 @@ public class ChiTietSpRepository {
         q.setParameter("idLoaiSp", ctsp.getIdLoaiSp());
         q.setParameter("idCuaHang", ctsp.getIdCuaHang());
         q.setParameter("ngaySua", ctsp.getNgayThem());
+        q.setParameter("id", id);
+        q.executeUpdate();
+        session.getTransaction().commit();
+    }
+
+    public void upload(Integer id) {
+        session.beginTransaction();
+        String query = "update ChiTietSP set trangThai =:trangThai where id =:id";
+        Query q = session.createQuery(query);
+        q.setParameter("trangThai", 1);
         q.setParameter("id", id);
         q.executeUpdate();
         session.getTransaction().commit();
@@ -85,6 +104,7 @@ public class ChiTietSpRepository {
     }
 
     public ArrayList<ChiTietSP> searchByStore(CuaHang ch) {
+        session = HibernateConfig.getFACTORY().openSession();
         String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
         Query q = session.createQuery(query);
         q.setParameter("idCuaHang", ch);
@@ -94,6 +114,7 @@ public class ChiTietSpRepository {
     }
 
     public ChiTietSP searchById(Integer id) {
+        session = HibernateConfig.getFACTORY().openSession();
         String query = "from ChiTietSP where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("id", id);
@@ -101,13 +122,41 @@ public class ChiTietSpRepository {
     }
 
     public ArrayList<ChiTietSP> select(int trang) {
+        session = HibernateConfig.getFACTORY().openSession();
         Session session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("From ChiTietSP where trangThai =:trangThai");
+        Query q = session.createQuery("From ChiTietSP where trangThai =:trangThai order by (NgayThem) desc");
         q.setParameter("trangThai", 1);
         q.setFirstResult(trang);
         q.setMaxResults(5);
         ArrayList<ChiTietSP> lastPage = (ArrayList<ChiTietSP>) q.getResultList();
         return lastPage;
+    }
+
+    public ArrayList<ChiTietSP> select(int trang, CuaHang ch) {
+        session = HibernateConfig.getFACTORY().openSession();
+        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
+        Query q = session.createQuery(query);
+        q.setParameter("idCuaHang", ch);
+        q.setParameter("trangThai", 1);
+        q.setFirstResult(trang);
+        q.setMaxResults(5);
+        ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
+        return list;
+    }
+
+    public ArrayList<ChiTietSP> search(CuaHang idCuaHang, DongSp idDongSp) {
+        session = HibernateConfig.getFACTORY().openSession();
+        ArrayList<ChiTietSP> list = new ArrayList<>();
+        String query = "from ChiTietSP";
+        if (idCuaHang != null) {
+            query += " where idCuaHang =:idCuaHang";
+            Query q = session.createQuery(query);
+            q.setParameter("idCuaHang", idCuaHang);
+            list =  (ArrayList<ChiTietSP>) q.getResultList();
+        } else if (true) {
+            
+        }
+        return list;
     }
 
 }

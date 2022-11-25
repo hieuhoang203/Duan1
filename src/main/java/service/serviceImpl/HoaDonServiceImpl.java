@@ -15,7 +15,11 @@ import service.QuanLyHoaDonService;
  * @author admin
  */
 public class HoaDonServiceImpl implements QuanLyHoaDonService{
-    private HoaDonRepository hoaDonRepository = new HoaDonRepository();
+    private HoaDonRepository hoaDonRepository;
+
+    public HoaDonServiceImpl() {
+        hoaDonRepository = new HoaDonRepository();
+    }
     
     @Override
     public ArrayList<HoaDon> select(NguoiDung ng) {
@@ -55,6 +59,11 @@ public class HoaDonServiceImpl implements QuanLyHoaDonService{
     @Override
     public void updateTongTien(Integer id, long tongTien) {
         hoaDonRepository.updateTongTien(id, tongTien);
+    }
+
+    @Override
+    public ArrayList<HoaDon> select(int trang, NguoiDung ng) {
+        return hoaDonRepository.select(trang, ng);
     }
     
 }

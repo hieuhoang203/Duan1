@@ -14,8 +14,12 @@ import service.QuanLyNguoiDungService;
  * @author admin
  */
 public class NguoiDungServiceImpl implements QuanLyNguoiDungService{
-    private NguoiDungRepository nguoiDungRepository = new NguoiDungRepository();
+    private NguoiDungRepository nguoiDungRepository;
     private static String email = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+    public NguoiDungServiceImpl() {
+        nguoiDungRepository = new NguoiDungRepository();
+    }
     
     @Override
     public boolean checkData(NguoiDung ng) {

@@ -22,6 +22,7 @@ public class BaoHanhRepository {
     }
     
     public ArrayList<BaoHanh> select(){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("from BaoHanh where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<BaoHanh> list = (ArrayList<BaoHanh>) q.getResultList();

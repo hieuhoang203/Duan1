@@ -14,7 +14,11 @@ import service.QuanLyDongSpService;
  * @author admin
  */
 public class DongSpServiceImpl implements QuanLyDongSpService{
-    private DongSpRepository dongSpRepository = new DongSpRepository();
+    private DongSpRepository dongSpRepository;
+
+    public DongSpServiceImpl() {
+        dongSpRepository = new DongSpRepository();
+    }
     
     @Override
     public ArrayList<DongSp> select() {

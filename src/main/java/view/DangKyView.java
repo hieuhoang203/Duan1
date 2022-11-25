@@ -34,6 +34,7 @@ import service.serviceImpl.NguoiDungServiceImpl;
  * @author admin
  */
 public class DangKyView extends javax.swing.JFrame {
+
     private int count, soTrang, firtRecord = 0, trang = 1;
     private String imgPath = "";
     private static int number = 0;
@@ -55,15 +56,15 @@ public class DangKyView extends javax.swing.JFrame {
         addCbxCuaHang();
         count = quanLyNguoiDungService.select().size();
         if (count % 5 == 0) {
-            soTrang = count/5;
+            soTrang = count / 5;
         } else {
-            soTrang = count/5 + 1;
+            soTrang = count / 5 + 1;
         }
         addRow(quanLyNguoiDungService.select(0));
         setViewTrang(trang, soTrang);
     }
-    
-    public void setViewTrang(int trang, int soTrang){
+
+    public void setViewTrang(int trang, int soTrang) {
         lb_trang.setText("     " + trang);
         lb_sotrang.setText("/" + soTrang);
     }
@@ -495,8 +496,18 @@ public class DangKyView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tb_list);
 
         btn_frist.setText("<<");
+        btn_frist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_fristMouseClicked(evt);
+            }
+        });
 
         btn_prev.setText("<");
+        btn_prev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_prevMouseClicked(evt);
+            }
+        });
 
         btn_next.setText(">");
         btn_next.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -506,6 +517,11 @@ public class DangKyView extends javax.swing.JFrame {
         });
 
         btn_last.setText(">>");
+        btn_last.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_lastMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -670,8 +686,8 @@ public class DangKyView extends javax.swing.JFrame {
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
         // TODO add your handling code here:
         firtRecord += 5;
-        trang ++;
-        if (trang<=soTrang) {
+        trang++;
+        if (trang <= soTrang) {
             addRow(quanLyNguoiDungService.select(firtRecord));
             setViewTrang(trang, soTrang);
         }
@@ -680,7 +696,7 @@ public class DangKyView extends javax.swing.JFrame {
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        if (row<0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chua chon ban ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
@@ -698,7 +714,7 @@ public class DangKyView extends javax.swing.JFrame {
     private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        if (row<0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chua chon ban ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
@@ -718,6 +734,32 @@ public class DangKyView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_suaMouseClicked
+
+    private void btn_prevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prevMouseClicked
+        // TODO add your handling code here:
+        firtRecord -= 5;
+        trang--;
+        if (trang >= 1) {
+            addRow(quanLyNguoiDungService.select(firtRecord));
+            setViewTrang(trang, soTrang);
+        }
+    }//GEN-LAST:event_btn_prevMouseClicked
+
+    private void btn_fristMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_fristMouseClicked
+        // TODO add your handling code here:
+        firtRecord = 0;
+        trang = 1;
+        addRow(quanLyNguoiDungService.select(firtRecord));
+        setViewTrang(trang, soTrang);
+    }//GEN-LAST:event_btn_fristMouseClicked
+
+    private void btn_lastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_lastMouseClicked
+        // TODO add your handling code here:
+        firtRecord = count - 6;
+        trang = soTrang;
+        addRow(quanLyNguoiDungService.select(firtRecord));
+        setViewTrang(trang, soTrang);
+    }//GEN-LAST:event_btn_lastMouseClicked
 
     /**
      * @param args the command line arguments

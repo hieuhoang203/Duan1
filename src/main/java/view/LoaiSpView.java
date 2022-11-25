@@ -431,7 +431,7 @@ public class LoaiSpView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoaiSpView().setVisible(false);
+                new LoaiSpView().setVisible(true);
             }
         });
     }

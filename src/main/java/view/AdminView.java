@@ -80,6 +80,11 @@ public class AdminView extends javax.swing.JFrame {
         btn_profile.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_profile.setForeground(new java.awt.Color(255, 51, 0));
         btn_profile.setText("Profile");
+        btn_profile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_profileMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -310,6 +315,12 @@ public class AdminView extends javax.swing.JFrame {
         new DangNhapView().setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
+    private void btn_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_profileMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ProfileView(ng).setVisible(true);
+    }//GEN-LAST:event_btn_profileMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -340,7 +351,7 @@ public class AdminView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminView().setVisible(false);
+                new AdminView().setVisible(true);
             }
         });
     }

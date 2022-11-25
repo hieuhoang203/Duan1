@@ -18,4 +18,5 @@ public interface QuanLyCuaHangService {
     void delete(Integer id);
     boolean checkMa(CuaHang ch);
     boolean checkData(CuaHang ch);
+    CuaHang search(Integer id);
 }

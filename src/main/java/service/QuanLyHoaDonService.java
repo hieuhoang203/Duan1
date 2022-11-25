@@ -14,6 +14,7 @@ import modul.NguoiDung;
  */
 public interface QuanLyHoaDonService {
     ArrayList<HoaDon> select(NguoiDung ng);
+    ArrayList<HoaDon> select(int trang, NguoiDung ng);
     ArrayList<HoaDon> selectByTrangThai(NguoiDung ng, int trangThai);
     boolean insert(HoaDon hd);
     boolean update(String maHd);

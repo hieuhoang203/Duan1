@@ -168,6 +168,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Confirm"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_confirmMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_login">
           <Properties>

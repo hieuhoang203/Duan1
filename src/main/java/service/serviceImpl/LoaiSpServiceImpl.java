@@ -14,7 +14,11 @@ import service.QuanLyLoaiSpService;
  * @author admin
  */
 public class LoaiSpServiceImpl implements QuanLyLoaiSpService{
-    private LoaiSpRepository loaiSpRepository = new LoaiSpRepository();
+    private LoaiSpRepository loaiSpRepository;
+
+    public LoaiSpServiceImpl() {
+        loaiSpRepository = new LoaiSpRepository();
+    }
     
     @Override
     public ArrayList<LoaiSp> select() {
@@ -53,6 +57,11 @@ public class LoaiSpServiceImpl implements QuanLyLoaiSpService{
         } else {
             return true;
         }
+    }
+
+    @Override
+    public LoaiSp search(String ma) {
+        return loaiSpRepository.search(ma);
     }
     
 }

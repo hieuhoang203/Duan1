@@ -11,7 +11,11 @@ import service.QuanLyMauSacService;
  */
 public class MauSacServiceImpl implements QuanLyMauSacService {
 
-    private MauSacRepository mauSacRepository = new MauSacRepository();
+    private MauSacRepository mauSacRepository;
+
+    public MauSacServiceImpl() {
+        mauSacRepository = new MauSacRepository();
+    }
 
     @Override
     public ArrayList<MauSac> select() {

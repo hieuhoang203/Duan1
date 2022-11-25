@@ -21,7 +21,7 @@ public class EmailRepository {
     private static final String email = "hieuhvph22974@fpt.edu.vn";
     private static final String pass = "eslzicjofsttqmtl";
     
-    public static void sendEmail(String mailNhan){
+    public static String sendEmail(String mailNhan){
         int code = (int) Math.floor(((Math.random() * 899999) + 100000));
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,9 +43,11 @@ public class EmailRepository {
             message.setSubject("Password confirmation code");
             message.setText(code+"");
             Transport.send(message);
+            return code+"";
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
     
 }

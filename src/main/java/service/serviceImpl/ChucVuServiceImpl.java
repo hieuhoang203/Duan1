@@ -14,7 +14,12 @@ import service.QuanLyChucVuService;
  * @author admin
  */
 public class ChucVuServiceImpl implements QuanLyChucVuService{
-    private ChucVuRepo cvrp = new ChucVuRepo();
+    private ChucVuRepo cvrp;
+
+    public ChucVuServiceImpl() {
+        cvrp = new ChucVuRepo();
+    }
+    
     @Override
     public boolean checkMa(ChucVu cv) {
         if (cvrp.selectMa().contains(cv.getMa()) ) {

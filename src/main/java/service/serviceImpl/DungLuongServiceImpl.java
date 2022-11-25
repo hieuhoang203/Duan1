@@ -15,7 +15,11 @@ import service.QuanLyDungLuongService;
  */
 public class DungLuongServiceImpl implements QuanLyDungLuongService {
 
-    private DungLuongRepository dungLuongRepository = new DungLuongRepository();
+    private DungLuongRepository dungLuongRepository;
+
+    public DungLuongServiceImpl() {
+        dungLuongRepository = new DungLuongRepository();
+    }
     
     @Override
     public ArrayList<DungLuong> select() {

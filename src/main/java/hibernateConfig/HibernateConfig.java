@@ -45,7 +45,7 @@ public class HibernateConfig {
         props.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DuAn1_CuaHangDienThoai");
         props.put(Environment.USER, "sa");
         props.put(Environment.PASS, "123456");
-//        props.put(Environment.SHOW_SQL, "true");
+        props.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(props);
         conf.addAnnotatedClass(CoSo.class);

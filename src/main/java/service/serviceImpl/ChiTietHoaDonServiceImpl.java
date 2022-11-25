@@ -16,7 +16,11 @@ import service.QuanLyChiTietHoaDonService;
  * @author admin
  */
 public class ChiTietHoaDonServiceImpl implements QuanLyChiTietHoaDonService{
-    private HoaDonChiTietRepository hoaDonChiTietRepository = new HoaDonChiTietRepository();
+    private HoaDonChiTietRepository hoaDonChiTietRepository;
+
+    public ChiTietHoaDonServiceImpl() {
+        hoaDonChiTietRepository = new HoaDonChiTietRepository();
+    }
     
     @Override
     public ArrayList<HoaDonChiTiet> select(HoaDon hd) {

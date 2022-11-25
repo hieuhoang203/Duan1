@@ -63,6 +63,10 @@ public class CuaHang implements Serializable{
     
     public CuaHang() {
     }
+    
+    public CuaHang(Integer id){
+        this.id = id;
+    }
 
     public CuaHang(Integer id, String ma, String ten, String diaChi, CoSo idCoSo, int trangThai, Date ngayThem, Date ngaySua, List<ChiTietSP> chiTietSPs, List<NguoiDung> nguoiDungs) {
         this.id = id;

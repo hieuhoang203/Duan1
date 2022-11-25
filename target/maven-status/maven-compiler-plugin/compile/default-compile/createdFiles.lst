@@ -6,6 +6,7 @@ view\HangView$6.class
 view\DangKyView$2.class
 view\HangView.class
 repository\DongSpRepository.class
+view\ChiTietSPView$13.class
 service\QuanLyHangService.class
 view\CuaHangView$8.class
 view\DangNhapView$3.class
@@ -19,6 +20,7 @@ view\ChucVuView$3.class
 view\NhanVienView$16.class
 view\NhanVienView$6.class
 view\ChiTietSPView$6.class
+view\DangKyView$13.class
 view\LoaiSpView$2.class
 modul\ChucVu.class
 view\CoSoView$5.class
@@ -35,7 +37,9 @@ view\MauSacView.class
 view\CoSoView$4.class
 service\QuanLyCuaHangService.class
 view\NhanVienView$11.class
+view\NhanVienView$17.class
 modul\HoaDon.class
+view\DangKyView$12.class
 view\ChiTietSPView$5.class
 view\NhanVienView.class
 hibernateConfig\HibernateConfig.class
@@ -78,8 +82,10 @@ view\NhanVienView$2.class
 view\HangView$1.class
 view\AdminView$3.class
 view\BaoHanhView$4.class
+view\NhanVienView$20.class
 view\ChiTietSPView$7.class
 view\CoSoView$1.class
+view\DangKyView$14.class
 view\NhanVienView$13.class
 view\LoaiSpView$6.class
 view\NhanVienView$1.class
@@ -98,6 +104,7 @@ view\DangNhapView.class
 view\CoSoView$7.class
 service\serviceImpl\ExcelHelper.class
 service\QuanLyGuiMailService.class
+view\NhanVienView$21.class
 view\ChiTietSPView$10.class
 view\HangView$3.class
 view\AdminView$1.class
@@ -105,7 +112,9 @@ view\MauSacView$2.class
 view\NhanVienView$3.class
 repository\HangRepository.class
 view\ChiTietSPView$3.class
+view\NhanVienView$19.class
 view\ForgotPassView.class
+service\serviceImpl\ExcelHelper$1.class
 view\AdminView.class
 view\ChucVuView$6.class
 view\CuaHangView$5.class
@@ -117,6 +126,7 @@ view\DangKyView.class
 view\NhanVienView$9.class
 view\AdminView$13.class
 repository\EmailRepository.class
+view\DangKyView$10.class
 service\serviceImpl\ChiTietBaoHanhServiceImpl.class
 repository\CuaHangRepository.class
 view\CuaHangView.class
@@ -140,6 +150,7 @@ repository\ChiTietBaoHanhRepository.class
 view\DungLuongView.class
 service\QuanLyCoSoService.class
 view\AdminView$12.class
+view\DangKyView$11.class
 view\ChiTietSPView$4.class
 service\serviceImpl\ChiTietSpServiceImpl.class
 view\ChiTietSPView$11.class
@@ -161,6 +172,7 @@ service\serviceImpl\BaoHanhServiceImpl.class
 view\DungLuongView$6.class
 view\NhanVienView$7.class
 service\serviceImpl\HoaDonServiceImpl.class
+view\DangKyView$9.class
 view\AdminView$8.class
 view\ChiTietSPView$2.class
 view\ChucVuView$7.class
@@ -172,6 +184,7 @@ service\QuanLyHoaDonService.class
 modul\GioHang.class
 repository\DungLuongRepository.class
 view\LoaiSpView$3.class
+view\NhanVienView$18.class
 view\HangView$7.class
 view\MauSacView$6.class
 view\CoSoView$8.class
@@ -181,6 +194,7 @@ service\QuanLyChiTietSPService.class
 service\serviceImpl\DungLuongServiceImpl.class
 view\LoaiSpView.class
 modul\NguoiDung.class
+view\ChiTietSPView$12.class
 view\DangKyView$6.class
 view\MauSacView$3.class
 repository\BaoHanhRepository.class
@@ -188,6 +202,7 @@ service\serviceImpl\LoaiSpServiceImpl.class
 modul\HoaDonChiTiet.class
 view\DungLuongView$8.class
 view\DangNhapView$1.class
+view\DangKyView$7.class
 view\MauSacView$4.class
 view\HangView$8.class
 modul\ChiTietBaoHanh.class
@@ -202,6 +217,7 @@ view\ThongKeView.class
 view\LoaiSpView$1.class
 view\ChiTietSPView$1.class
 modul\LoaiSp.class
+view\DangKyView$8.class
 view\CuaHangView$4.class
 service\QuanLyChiTietBaoHanhService.class
 view\HangView$9.class

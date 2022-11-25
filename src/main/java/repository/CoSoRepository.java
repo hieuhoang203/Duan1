@@ -22,6 +22,7 @@ public class CoSoRepository {
     }
     
     public ArrayList<CoSo> select(){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("From CoSo where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<CoSo> list = (ArrayList<CoSo>) q.getResultList();

@@ -9,5 +9,5 @@ package service;
  * @author admin
  */
 public interface QuanLyGuiMailService {
-    void sendEmail(String email);
+    String sendEmail(String email);
 }

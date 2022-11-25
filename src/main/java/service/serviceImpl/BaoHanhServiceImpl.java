@@ -14,7 +14,11 @@ import service.QuanLyBaoHanhService;
  * @author admin
  */
 public class BaoHanhServiceImpl implements QuanLyBaoHanhService{
-    private BaoHanhRepository baoHanhRepository = new BaoHanhRepository();
+    private BaoHanhRepository baoHanhRepository;
+
+    public BaoHanhServiceImpl() {
+        baoHanhRepository = new BaoHanhRepository();
+    }
     
     @Override
     public boolean checkMa(BaoHanh bh) {

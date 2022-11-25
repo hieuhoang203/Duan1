@@ -15,7 +15,11 @@ import service.QuanLyCuaHangService;
  */
 public class CuaHangServiceImpl implements QuanLyCuaHangService{
 
-    private CuaHangRepository cuaHangRepository = new CuaHangRepository();
+    private CuaHangRepository cuaHangRepository;
+
+    public CuaHangServiceImpl() {
+        cuaHangRepository = new CuaHangRepository();
+    }
 
     @Override
     public ArrayList<CuaHang> select() {
@@ -63,6 +67,11 @@ public class CuaHangServiceImpl implements QuanLyCuaHangService{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public CuaHang search(Integer id) {
+        return cuaHangRepository.search(id);
     }
 
 }

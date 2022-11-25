@@ -7,7 +7,6 @@ package service.serviceImpl;
 import java.util.ArrayList;
 import modul.ChiTietSP;
 import modul.CuaHang;
-import modul.DongSp;
 import repository.ChiTietSpRepository;
 import service.QuanLyChiTietSPService;
 
@@ -16,7 +15,11 @@ import service.QuanLyChiTietSPService;
  * @author admin
  */
 public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
-    private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
+    private ChiTietSpRepository chiTietSpRepository;
+
+    public ChiTietSpServiceImpl() {
+        chiTietSpRepository = new ChiTietSpRepository();
+    }
     
     @Override
     public ArrayList<ChiTietSP> select() {
@@ -50,7 +53,7 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
 
     @Override
     public boolean checkData(ChiTietSP ctsp) {
-        if (ctsp.getImei().length() == 16) {
+        if (ctsp.getImei().length() == 15) {
             return true;
         } else {
             return false;
@@ -84,6 +87,21 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     @Override
     public ArrayList<ChiTietSP> select(int trang) {
         return chiTietSpRepository.select(trang);
+    }
+
+    @Override
+    public ArrayList<ChiTietSP> select(int trang, CuaHang ch) {
+        return chiTietSpRepository.select(trang, ch);
+    }
+
+    @Override
+    public void upload(Integer key) {
+        chiTietSpRepository.upload(key);
+    }
+
+    @Override
+    public ArrayList<ChiTietSP> selectAll() {
+        return chiTietSpRepository.selectAll();
     }
     
 }

@@ -17,6 +17,7 @@ public class DongSpRepository {
     }
     
     public ArrayList<DongSp> select(){
+        session = HibernateConfig.getFACTORY().openSession();
         Query q = session.createQuery("From DongSp where trangThai =:trangThai");
         q.setParameter("trangThai", 1);
         ArrayList<DongSp> list = (ArrayList<DongSp>) q.getResultList();

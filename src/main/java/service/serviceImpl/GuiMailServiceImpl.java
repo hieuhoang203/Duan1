@@ -12,11 +12,15 @@ import service.QuanLyGuiMailService;
  * @author admin
  */
 public class GuiMailServiceImpl implements QuanLyGuiMailService{
-    private EmailRepository emailRepository = new EmailRepository();
+    private EmailRepository emailRepository;
+
+    public GuiMailServiceImpl() {
+         emailRepository = new EmailRepository();
+    }
     
     @Override
-    public void sendEmail(String email) {
-        emailRepository.sendEmail(email);
+    public String sendEmail(String email) {
+        return emailRepository.sendEmail(email);
     }
     
 }

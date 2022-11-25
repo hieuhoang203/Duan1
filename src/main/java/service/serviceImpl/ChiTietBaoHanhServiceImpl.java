@@ -16,7 +16,11 @@ import service.QuanLyChiTietBaoHanhService;
  * @author admin
  */
 public class ChiTietBaoHanhServiceImpl implements QuanLyChiTietBaoHanhService{
-    private ChiTietBaoHanhRepository chiTietBaoHanhRepository = new ChiTietBaoHanhRepository();
+    private ChiTietBaoHanhRepository chiTietBaoHanhRepository;
+
+    public ChiTietBaoHanhServiceImpl() {
+        chiTietBaoHanhRepository = new ChiTietBaoHanhRepository();
+    }
     
     @Override
     public ArrayList<ChiTietBaoHanh> select(HoaDon hd) {

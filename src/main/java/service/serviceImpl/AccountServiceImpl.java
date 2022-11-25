@@ -15,7 +15,11 @@ import service.QuanLyAccountService;
  */
 public class AccountServiceImpl implements QuanLyAccountService{
     private static String pass = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-    private AccountRepository accountRepository = new AccountRepository();
+    private AccountRepository accountRepository;
+
+    public AccountServiceImpl() {
+        accountRepository = new AccountRepository();
+    }
             
     @Override
     public boolean checkPass(Account acc) {
@@ -51,4 +55,8 @@ public class AccountServiceImpl implements QuanLyAccountService{
         return accountRepository.search(user, pass);
     }
     
+    public static void main(String[] args) {
+        String passW = "Dieuthuy@2003";
+        System.out.println(passW.matches(passW));
+    }
 }

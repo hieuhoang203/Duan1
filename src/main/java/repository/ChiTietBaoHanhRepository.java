@@ -25,6 +25,7 @@ public class ChiTietBaoHanhRepository {
     }
     
     public ArrayList<ChiTietBaoHanh> select(HoaDon idHoaDon){
+        session = HibernateConfig.getFACTORY().openSession();
         String query = "from ChiTietBaoHanh where idHoaDon =:idHoaDon";
         Query q = session.createQuery(query);
         q.setParameter("idHoaDon", idHoaDon);

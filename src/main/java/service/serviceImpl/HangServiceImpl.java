@@ -14,7 +14,11 @@ import service.QuanLyHangService;
  * @author admin
  */
 public class HangServiceImpl implements QuanLyHangService{
-    private HangRepository hangRepository = new HangRepository();
+    private HangRepository hangRepository;
+
+    public HangServiceImpl() {
+        hangRepository = new HangRepository();
+    }
 
     @Override
     public ArrayList<Hang> select() {

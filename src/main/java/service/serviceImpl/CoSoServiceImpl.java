@@ -10,7 +10,11 @@ import service.QuanLyCoSoService;
  * @author admin
  */
 public class CoSoServiceImpl implements QuanLyCoSoService{
-    private CoSoRepository coSoRepository = new CoSoRepository();
+    private CoSoRepository coSoRepository;
+
+    public CoSoServiceImpl() {
+        coSoRepository = new CoSoRepository();
+    }
     
     @Override
     public ArrayList<CoSo> select() {

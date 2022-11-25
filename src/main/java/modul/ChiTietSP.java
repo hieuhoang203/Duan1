@@ -61,6 +61,8 @@ public class ChiTietSP implements Serializable {
     private List<GioHangChiTiet> gioHangChiTiets;
 
     public ChiTietSP() {
+        this.ngayThem = new java.sql.Date(new Date().getTime());
+        this.ngaySua = ngaySua;
     }
 
     public ChiTietSP(Integer id, String imei, LoaiSp idLoaiSp, CuaHang idCuaHang, int trangThai, Date ngayThem, Date ngaySua, List<HoaDonChiTiet> hoaDonChiTiets, List<GioHangChiTiet> gioHangChiTiets) {
