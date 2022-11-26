@@ -7,6 +7,7 @@ package service;
 import java.util.ArrayList;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
+import modul.LoaiSp;
 
 /**
  *
@@ -18,4 +19,5 @@ public interface QuanLyChiTietHoaDonService {
     HoaDonChiTiet search(Integer id);
     long getThanhTien(HoaDon hd);
     void delete(Integer id, HoaDon hd);
+    double percent(LoaiSp idLoaiSp);
 }

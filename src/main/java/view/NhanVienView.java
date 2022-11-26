@@ -12,26 +12,37 @@ import javax.swing.table.DefaultTableModel;
 import modul.BaoHanh;
 import modul.ChiTietBaoHanh;
 import modul.ChiTietSP;
+import modul.DongSp;
+import modul.DungLuong;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
+import modul.MauSac;
 import modul.NguoiDung;
 import service.QuanLyBaoHanhService;
 import service.QuanLyChiTietBaoHanhService;
 import service.QuanLyChiTietHoaDonService;
 import service.QuanLyChiTietSPService;
+import service.QuanLyDongSpService;
+import service.QuanLyDungLuongService;
 import service.QuanLyHoaDonService;
+import service.QuanLyMauSacService;
 import service.serviceImpl.BaoHanhServiceImpl;
 import service.serviceImpl.ChiTietBaoHanhServiceImpl;
 import service.serviceImpl.ChiTietHoaDonServiceImpl;
 import service.serviceImpl.ChiTietSpServiceImpl;
+import service.serviceImpl.DongSpServiceImpl;
+import service.serviceImpl.DungLuongServiceImpl;
 import service.serviceImpl.HoaDonServiceImpl;
+import service.serviceImpl.MauSacServiceImpl;
 
 /**
  *
  * @author admin
  */
 public class NhanVienView extends javax.swing.JFrame {
-
+    private QuanLyMauSacService quanLyMauSacService = new MauSacServiceImpl();
+    private QuanLyDungLuongService quanLyDungLuongService = new DungLuongServiceImpl();
+    private QuanLyDongSpService quanLyDongSpService = new DongSpServiceImpl();
     private QuanLyChiTietBaoHanhService quanLyChiTietBaoHanhService = new ChiTietBaoHanhServiceImpl();
     private QuanLyChiTietHoaDonService quanLyChiTietHoaDonService = new ChiTietHoaDonServiceImpl();
     private QuanLyBaoHanhService quanLyBaoHanhService = new BaoHanhServiceImpl();
@@ -43,6 +54,9 @@ public class NhanVienView extends javax.swing.JFrame {
     private DefaultTableModel tbModelBaoHanh;
     private DefaultTableModel tbModelGioHang;
     private DefaultComboBoxModel comboBoxModel;
+    private DefaultComboBoxModel cbxDongSp;
+    private DefaultComboBoxModel cbxDungLuong;
+    private DefaultComboBoxModel cbxMauSac;
     private int count, trang = 1, soTrang, first = 0;
 
     /**
@@ -86,7 +100,25 @@ public class NhanVienView extends javax.swing.JFrame {
         comboBoxModel.addAll(quanLyBaoHanhService.select());
         cbx_baohanh.setSelectedIndex(0);
     }
+    
+    public void addCbxDungLuong(){
+        cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
+        cbxDungLuong.addAll(quanLyDungLuongService.select());
+        cbx_dungluong.setSelectedIndex(0);
+    }
+    
+    public void addCbxMauSac(){
+        cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
+        cbxMauSac.addAll(quanLyMauSacService.select());
+        cbx_mausac.setSelectedIndex(0);
+    }
 
+    public void addCbxDongSp(){
+        cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
+        cbxDongSp.addAll(quanLyDungLuongService.select());
+        cbx_dongsp.setSelectedIndex(0);
+    }
+    
     public void addRowHoaDon(ArrayList<HoaDon> list) {
         int stt = 1;
         tbModelHoaDon = (DefaultTableModel) tb_hoadon.getModel();
@@ -269,6 +301,9 @@ public class NhanVienView extends javax.swing.JFrame {
         btn_last = new javax.swing.JButton();
         lb_trang = new javax.swing.JLabel();
         lb_sotrang = new javax.swing.JLabel();
+        cbx_dongsp = new javax.swing.JComboBox<>();
+        cbx_dungluong = new javax.swing.JComboBox<>();
+        cbx_mausac = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thu ngân");
@@ -548,6 +583,24 @@ public class NhanVienView extends javax.swing.JFrame {
             }
         });
 
+        cbx_dongsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_dongspActionPerformed(evt);
+            }
+        });
+
+        cbx_dungluong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_dungluongActionPerformed(evt);
+            }
+        });
+
+        cbx_mausac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_mausacActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -597,7 +650,13 @@ public class NhanVienView extends javax.swing.JFrame {
                                             .addGap(153, 153, 153))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel9)
-                                            .addGap(401, 401, 401))
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbx_dongsp, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbx_dungluong, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbx_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(77, 77, 77))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -666,7 +725,11 @@ public class NhanVienView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(cbx_dongsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_dungluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbx_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -699,16 +762,28 @@ public class NhanVienView extends javax.swing.JFrame {
 
     private void rd_allMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_allMouseClicked
         // TODO add your handling code here:
+        tbModelGioHang = (DefaultTableModel) tb_giohang.getModel();
+        tbModelGioHang.setRowCount(0);
+        tbModelBaoHanh = (DefaultTableModel) tb_hoadon.getModel();
+        tbModelBaoHanh.setRowCount(0);
         addRowHoaDon(quanLyHoaDonService.select(ng));
     }//GEN-LAST:event_rd_allMouseClicked
 
     private void rd_daMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_daMouseClicked
         // TODO add your handling code here:
+        tbModelGioHang = (DefaultTableModel) tb_giohang.getModel();
+        tbModelGioHang.setRowCount(0);
+        tbModelBaoHanh = (DefaultTableModel) tb_hoadon.getModel();
+        tbModelBaoHanh.setRowCount(0);
         addRowHoaDon(quanLyHoaDonService.selectByTrangThai(ng, 1));
     }//GEN-LAST:event_rd_daMouseClicked
 
     private void rd_chuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_chuaMouseClicked
         // TODO add your handling code here:
+        tbModelGioHang = (DefaultTableModel) tb_giohang.getModel();
+        tbModelGioHang.setRowCount(0);
+        tbModelBaoHanh = (DefaultTableModel) tb_hoadon.getModel();
+        tbModelBaoHanh.setRowCount(0);
         addRowHoaDon(quanLyHoaDonService.selectByTrangThai(ng, 0));
     }//GEN-LAST:event_rd_chuaMouseClicked
 
@@ -727,13 +802,17 @@ public class NhanVienView extends javax.swing.JFrame {
         if (getHoaDon() == null) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn hóa đơn cụ thể !");
         } else {
-            int choose = JOptionPane.showConfirmDialog(rootPane, "Thêm vào hóa đơn ?");
-            if (choose == JOptionPane.YES_OPTION) {
-                quanLyChiTietHoaDonService.insert(createHdct());
-                quanLyChiTietSPService.delete((Integer) tb_sanpham.getValueAt(tb_sanpham.getSelectedRow(), 0));
-                tinhTien();
-                fillData(getHoaDon());
-                addRowGioHang();
+            if (getHoaDon().getTinhTrang() == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Khong the them !");
+            } else {
+                int choose = JOptionPane.showConfirmDialog(rootPane, "Thêm vào hóa đơn ?");
+                if (choose == JOptionPane.YES_OPTION) {
+                    quanLyChiTietHoaDonService.insert(createHdct());
+                    quanLyChiTietSPService.delete((Integer) tb_sanpham.getValueAt(tb_sanpham.getSelectedRow(), 0));
+                    tinhTien();
+                    fillData(getHoaDon());
+                    addRowGioHang();
+                }
             }
         }
     }//GEN-LAST:event_tb_sanphamMouseClicked
@@ -757,11 +836,15 @@ public class NhanVienView extends javax.swing.JFrame {
         if (getHoaDon() == null && quanLyChiTietHoaDonService.select(getHoaDon()) != null) {
             JOptionPane.showMessageDialog(rootPane, "Không đủ điều kiện để thực hiện thao tác !");
         } else {
-            int choose = JOptionPane.showConfirmDialog(rootPane, "Thêm bảo hành ?");
-            if (choose == JOptionPane.YES_OPTION) {
-                quanLyChiTietBaoHanhService.inser(createCtbh());
-                tinhTien();
-                addRowBaoHanh();
+            if (getHoaDon().getTinhTrang() == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Khong the them !");
+            } else {
+                int choose = JOptionPane.showConfirmDialog(rootPane, "Thêm bảo hành ?");
+                if (choose == JOptionPane.YES_OPTION) {
+                    quanLyChiTietBaoHanhService.inser(createCtbh());
+                    tinhTien();
+                    addRowBaoHanh();
+                }
             }
         }
     }//GEN-LAST:event_btn_themMouseClicked
@@ -772,14 +855,18 @@ public class NhanVienView extends javax.swing.JFrame {
         if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Hệ thống chưa hiểu yêu cầu !");
         } else {
-            Integer id = (Integer) tb_giohang.getValueAt(row, 0);
-            int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
-            if (choose == JOptionPane.YES_OPTION) {
-                quanLyChiTietHoaDonService.delete(id, getHoaDon());
-                quanLyChiTietSPService.upload(getHoaDonChiTiet().getIdSanPham().getId());
-                tinhTien();
-                addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
-                addRowGioHang();
+            if (getHoaDon().getTinhTrang() == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Khong the them !");
+            } else {
+                Integer id = (Integer) tb_giohang.getValueAt(row, 0);
+                int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
+                if (choose == JOptionPane.YES_OPTION) {
+                    quanLyChiTietHoaDonService.delete(id, getHoaDon());
+                    quanLyChiTietSPService.upload(getHoaDonChiTiet().getIdSanPham().getId());
+                    tinhTien();
+                    addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
+                    addRowGioHang();
+                }
             }
         }
     }//GEN-LAST:event_btn_xoahoadonchitietMouseClicked
@@ -796,12 +883,16 @@ public class NhanVienView extends javax.swing.JFrame {
         if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Hệ thống chưa hiểu yêu cầu !");
         } else {
-            BaoHanh bh = quanLyBaoHanhService.search(tb_baohanh.getValueAt(row, 1).toString());
-            int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
-            if (choose == JOptionPane.YES_OPTION) {
-                quanLyChiTietBaoHanhService.delete(bh, getHoaDon());
-                tinhTien();
-                addRowGioHang();
+            if (getHoaDon().getTinhTrang() == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Khong the them !");
+            } else {
+                BaoHanh bh = quanLyBaoHanhService.search(tb_baohanh.getValueAt(row, 1).toString());
+                int choose = JOptionPane.showConfirmDialog(rootPane, "Xóa khỏi hóa đơn ?");
+                if (choose == JOptionPane.YES_OPTION) {
+                    quanLyChiTietBaoHanhService.delete(bh, getHoaDon());
+                    tinhTien();
+                    addRowGioHang();
+                }
             }
         }
     }//GEN-LAST:event_btn_xoabaohanhchitietMouseClicked
@@ -823,7 +914,7 @@ public class NhanVienView extends javax.swing.JFrame {
         // TODO add your handling code here:
         first -= 5;
         trang--;
-        if (trang >= 1) {
+        if (first >= 0) {
             addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
             setViewTrang(trang, soTrang);
         } else {
@@ -858,6 +949,18 @@ public class NhanVienView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Da tim thay ban ghi !");
         }
     }//GEN-LAST:event_btn_searchMouseClicked
+
+    private void cbx_dongspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_dongspActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_dongspActionPerformed
+
+    private void cbx_dungluongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_dungluongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_dungluongActionPerformed
+
+    private void cbx_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_mausacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_mausacActionPerformed
 
     /**
      * @param args the command line arguments
@@ -915,6 +1018,9 @@ public class NhanVienView extends javax.swing.JFrame {
     private javax.swing.JButton btn_xoabaohanhchitiet;
     private javax.swing.JButton btn_xoahoadonchitiet;
     private javax.swing.JComboBox<BaoHanh> cbx_baohanh;
+    private javax.swing.JComboBox<DongSp> cbx_dongsp;
+    private javax.swing.JComboBox<DungLuong> cbx_dungluong;
+    private javax.swing.JComboBox<MauSac> cbx_mausac;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

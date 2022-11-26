@@ -24,7 +24,7 @@ public class MauSacRepository {
 
     public ArrayList<MauSac> select() {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from MauSac where trangThai =:trangThai";
+        String query = "from MauSac where trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 1);
         ArrayList<MauSac> list = (ArrayList<MauSac>) q.getResultList();

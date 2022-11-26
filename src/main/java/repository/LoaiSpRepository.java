@@ -23,7 +23,7 @@ public class LoaiSpRepository {
     
     public ArrayList<LoaiSp> select(){
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from LoaiSp where trangThai =:trangThai");
+        Query q = session.createQuery("from LoaiSp where trangThai =:trangThai order by (ngayTao) desc");
         q.setParameter("trangThai", 1);
         ArrayList<LoaiSp> list = (ArrayList<LoaiSp>) q.getResultList();
         return list;

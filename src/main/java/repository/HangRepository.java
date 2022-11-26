@@ -19,7 +19,7 @@ public class HangRepository {
    
   public ArrayList<Hang> select(){
       session = HibernateConfig.getFACTORY().openSession();
-      String query="FRom Hang where trangThai =:trangThai";
+      String query="FRom Hang where trangThai =:trangThai order by (NgayThem) desc";
       Query q=session.createQuery(query);
       q.setParameter("trangThai", 1);
       ArrayList<Hang> list=(ArrayList<Hang>) q.getResultList();

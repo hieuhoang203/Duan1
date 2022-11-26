@@ -9,6 +9,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modul.ChiTietSP;
 import modul.CuaHang;
+import modul.DongSp;
 import modul.LoaiSp;
 import service.*;
 import service.serviceImpl.*;
@@ -19,13 +20,17 @@ import service.serviceImpl.*;
  */
 public class ChiTietSPView extends javax.swing.JFrame {
     private ExcelHelper excelHelper = new ExcelHelper();
-    private int trang = 0, soTrang, count, temp = 1;
+    private int firtRecord = 0, soTrang, count, temp = 1;
     private DefaultTableModel tableModel;
     private DefaultComboBoxModel cbxLoaiSp;
     private DefaultComboBoxModel cbxCuaHang;
+    private DefaultComboBoxModel cbxSearch;
+    private DefaultComboBoxModel cbxDongSp;
+    private QuanLyDongSpService quanLyDongSpService = new DongSpServiceImpl();
     private QuanLyLoaiSpService quanLyLoaiSpService = new LoaiSpServiceImpl();
     private QuanLyCuaHangService quanLyCuaHangService = new CuaHangServiceImpl();
     private QuanLyChiTietSPService quanLyChiTietSPService = new ChiTietSpServiceImpl();
+    private QuanLyHangService quanLyHangService = new HangServiceImpl();
 
     /**
      * Creates new form ChiTietSPView
@@ -34,20 +39,25 @@ public class ChiTietSPView extends javax.swing.JFrame {
         initComponents();
         addCbxLoaiSp();
         addCbxCuaHang();
-        count = quanLyChiTietSPService.select().size();
-        if (count % 5 == 0) {
-            soTrang = count / 5;
-        } else {
-            soTrang = count / 5 + 1;
-        }
-        lb_sotrang.setText("/" + soTrang);
-        lb_trang.setText("        1");
+        addCbxSearch();
+        addCbxDongSp();
+        setPage(quanLyChiTietSPService.select().size());
+        setAnimation(temp, soTrang);
         addRows(quanLyChiTietSPService.select(0));
     }
 
     public void setAnimation(int temp, int soTrang) {
         lb_sotrang.setText("/" + soTrang);
         lb_trang.setText("     " + temp);
+    }
+    
+    public void setPage(int size){
+        count = size;
+        if (count % 5 == 0) {
+            soTrang = count / 5;
+        } else {
+            soTrang = count / 5 + 1;
+        }
     }
 
     public void addCbxLoaiSp() {
@@ -60,6 +70,18 @@ public class ChiTietSPView extends javax.swing.JFrame {
         cbxCuaHang = (DefaultComboBoxModel) cbx_cuahang.getModel();
         cbxCuaHang.addAll(quanLyCuaHangService.select());
         cbx_cuahang.setSelectedIndex(0);
+    }
+    
+    public void addCbxSearch(){
+        cbxSearch = (DefaultComboBoxModel) cbx_cuaHangSearch.getModel();
+        cbxSearch.addAll(quanLyCuaHangService.select());
+        cbx_cuaHangSearch.setSelectedIndex(0);
+    }
+    
+    public void addCbxDongSp(){
+        cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
+        cbxDongSp.addAll(quanLyDongSpService.select());
+        cbx_dongsp.setSelectedIndex(0);
     }
 
     public void addRows(ArrayList<ChiTietSP> list) {
@@ -89,7 +111,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         cbx_loaisp.setSelectedIndex(0);
         cbx_cuahang.setSelectedIndex(0);
         txt_imei.setText("");
-        addRows(quanLyChiTietSPService.select(trang));
+        addRows(quanLyChiTietSPService.select(firtRecord));
     }
 
     public ChiTietSP create() {
@@ -122,7 +144,6 @@ public class ChiTietSPView extends javax.swing.JFrame {
         btn_add = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
-        btn_search = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lb_trang = new javax.swing.JLabel();
@@ -133,6 +154,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
         btn_last = new javax.swing.JButton();
         btn_read = new javax.swing.JButton();
         btn_write = new javax.swing.JButton();
+        cbx_cuaHangSearch = new javax.swing.JComboBox<>();
+        cbx_dongsp = new javax.swing.JComboBox<>();
+        btn_search = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chi tiết sản phẩm");
@@ -222,16 +246,6 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
-        btn_search.setBackground(new java.awt.Color(204, 255, 204));
-        btn_search.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_search.setForeground(new java.awt.Color(255, 0, 0));
-        btn_search.setText("Search");
-        btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_searchMouseClicked(evt);
-            }
-        });
-
         btn_clear.setBackground(new java.awt.Color(204, 255, 204));
         btn_clear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_clear.setForeground(new java.awt.Color(255, 0, 0));
@@ -299,12 +313,34 @@ public class ChiTietSPView extends javax.swing.JFrame {
             }
         });
 
+        cbx_cuaHangSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_cuaHangSearchActionPerformed(evt);
+            }
+        });
+
+        cbx_dongsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_dongspActionPerformed(evt);
+            }
+        });
+
+        btn_search.setBackground(new java.awt.Color(204, 255, 204));
+        btn_search.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_search.setForeground(new java.awt.Color(255, 0, 0));
+        btn_search.setText("Search");
+        btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_searchMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
@@ -313,6 +349,26 @@ public class ChiTietSPView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(cbx_cuaHangSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(cbx_dongsp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_search))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(btn_first)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_prev)
+                        .addGap(22, 22, 22)
+                        .addComponent(lb_trang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_sotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btn_next)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_last))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -320,12 +376,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_id)
-                                .addComponent(cbx_loaisp, 0, 113, Short.MAX_VALUE))
-                            .addComponent(txt_imei, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_cuahang, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_id)
+                            .addComponent(cbx_loaisp, 0, 113, Short.MAX_VALUE)
+                            .addComponent(txt_imei, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                            .addComponent(cbx_cuahang, 0, 113, Short.MAX_VALUE))
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,25 +390,8 @@ public class ChiTietSPView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_write, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(btn_first)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_prev)
-                        .addGap(22, 22, 22)
-                        .addComponent(lb_trang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb_sotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(btn_next)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_last)))
+                            .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,21 +424,24 @@ public class ChiTietSPView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbx_cuahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(btn_search)
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbx_dongsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_cuaHangSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_search))
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lb_trang, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_first)
                         .addComponent(btn_prev))
-                    .addComponent(lb_sotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_next)
-                        .addComponent(btn_last)))
-                .addContainerGap())
+                        .addComponent(btn_last))
+                    .addComponent(lb_sotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -454,22 +495,6 @@ public class ChiTietSPView extends javax.swing.JFrame {
         fillData(row);
     }//GEN-LAST:event_tb_listMouseClicked
 
-    private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
-        // TODO add your handling code here:
-        String keyWord = JOptionPane.showInputDialog("Nhập dòng sản phẩm cần tìm ?");
-        if (keyWord.equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập dữ liệu cần tìm !");
-        } else {
-            if (quanLyChiTietSPService.search(keyWord) == null) {
-                JOptionPane.showMessageDialog(rootPane, "Không tồn tại !");
-            } else {
-                addRows(quanLyChiTietSPService.search(keyWord));
-                fillData(0);
-                JOptionPane.showMessageDialog(rootPane, "Tìm thành công !");
-            }
-        }
-    }//GEN-LAST:event_btn_searchMouseClicked
-
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
@@ -502,26 +527,26 @@ public class ChiTietSPView extends javax.swing.JFrame {
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
         // TODO add your handling code here:
-        trang += 5;
+        firtRecord += 5;
         temp++;
-        if (trang <= count) {
-            addRows(quanLyChiTietSPService.select(trang));
+        if (firtRecord <= count) {
+            addRows(quanLyChiTietSPService.select(firtRecord));
             setAnimation(temp, soTrang);
         } else {
-            trang = count - 6;
+            firtRecord = count - 6;
             temp = soTrang;
         }
     }//GEN-LAST:event_btn_nextMouseClicked
 
     private void btn_prevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prevMouseClicked
         // TODO add your handling code here:
-        trang -= 5;
+        firtRecord -= 5;
         temp--;
-        if (temp >= 0) {
-            addRows(quanLyChiTietSPService.select(trang));
+        if (firtRecord >= 0) {
+            addRows(quanLyChiTietSPService.select(firtRecord));
             setAnimation(temp, soTrang);
         } else {
-            trang = 0;
+            firtRecord = 0;
             temp = 1;
         }
     }//GEN-LAST:event_btn_prevMouseClicked
@@ -562,19 +587,39 @@ public class ChiTietSPView extends javax.swing.JFrame {
 
     private void btn_firstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_firstMouseClicked
         // TODO add your handling code here:
-        trang = 0;
+        firtRecord = 0;
         temp = 1;
-        addRows(quanLyChiTietSPService.select(trang));
+        addRows(quanLyChiTietSPService.select(firtRecord));
         setAnimation(temp, soTrang);
     }//GEN-LAST:event_btn_firstMouseClicked
 
     private void btn_lastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_lastMouseClicked
         // TODO add your handling code here:
-        trang = count - 6;
+        firtRecord = count - 6;
         temp = soTrang;
-        addRows(quanLyChiTietSPService.select(trang));
+        addRows(quanLyChiTietSPService.select(firtRecord));
         setAnimation(temp, soTrang);
     }//GEN-LAST:event_btn_lastMouseClicked
+
+    private void cbx_cuaHangSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_cuaHangSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_cuaHangSearchActionPerformed
+
+    private void cbx_dongspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_dongspActionPerformed
+        // TODO add your handling code here:   
+    }//GEN-LAST:event_cbx_dongspActionPerformed
+
+    private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
+        // TODO add your handling code here:
+        firtRecord = 0;
+        setPage(quanLyChiTietSPService.select((CuaHang) cbx_cuaHangSearch.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
+        setAnimation(temp, soTrang);
+        if (soTrang>0) {
+            addRows(quanLyChiTietSPService.search(firtRecord,(CuaHang) cbx_cuaHangSearch.getSelectedItem(),(DongSp) cbx_dongsp.getSelectedItem()));
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Khong tim thay !");
+        }
+    }//GEN-LAST:event_btn_searchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -623,7 +668,9 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_write;
     private javax.swing.JButton btn_xoa;
+    private javax.swing.JComboBox<CuaHang> cbx_cuaHangSearch;
     private javax.swing.JComboBox<CuaHang> cbx_cuahang;
+    private javax.swing.JComboBox<DongSp> cbx_dongsp;
     private javax.swing.JComboBox<LoaiSp> cbx_loaisp;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

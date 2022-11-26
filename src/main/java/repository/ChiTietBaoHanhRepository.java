@@ -26,7 +26,7 @@ public class ChiTietBaoHanhRepository {
     
     public ArrayList<ChiTietBaoHanh> select(HoaDon idHoaDon){
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChiTietBaoHanh where idHoaDon =:idHoaDon";
+        String query = "from ChiTietBaoHanh where idHoaDon =:idHoaDon order by (ngayBaoHanh) desc";
         Query q = session.createQuery(query);
         q.setParameter("idHoaDon", idHoaDon);
         return (ArrayList<ChiTietBaoHanh>) q.getResultList();

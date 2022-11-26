@@ -65,5 +65,10 @@ public class HoaDonServiceImpl implements QuanLyHoaDonService{
     public ArrayList<HoaDon> select(int trang, NguoiDung ng) {
         return hoaDonRepository.select(trang, ng);
     }
+
+    @Override
+    public long turnover(int month) {
+        return hoaDonRepository.turnover(month);
+    }
     
 }

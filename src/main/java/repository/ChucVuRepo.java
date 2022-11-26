@@ -23,7 +23,7 @@ public class ChucVuRepo {
     
     public ArrayList<ChucVu> select(){
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChucVu where trangThai =:trangThai ";
+        String query = "from ChucVu where trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 1);
         ArrayList<ChucVu> list = (ArrayList<ChucVu>) q.getResultList();

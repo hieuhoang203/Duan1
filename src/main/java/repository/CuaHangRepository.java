@@ -23,7 +23,7 @@ public class CuaHangRepository {
     
     public ArrayList<CuaHang> select(){
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("From CuaHang where trangThai =:trangThai");
+        Query q = session.createQuery("From CuaHang where trangThai =:trangThai order by (NgayThem) desc");
         q.setParameter("trangThai", 1);
         ArrayList<CuaHang> list = (ArrayList<CuaHang>) q.getResultList();
         return list;

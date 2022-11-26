@@ -20,4 +20,5 @@ public interface QuanLyHoaDonService {
     boolean update(String maHd);
     HoaDon searchByMa(String ma);
     void updateTongTien(Integer id, long tongTien);
+    long turnover(int month);
 }

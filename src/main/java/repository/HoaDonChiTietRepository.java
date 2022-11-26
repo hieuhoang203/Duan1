@@ -6,9 +6,13 @@ package repository;
 
 import org.hibernate.Session;
 import hibernateConfig.HibernateConfig;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
+import modul.ChiTietSP;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
+import modul.LoaiSp;
 import org.hibernate.query.Query;
 
 /**
@@ -57,5 +61,37 @@ public class HoaDonChiTietRepository {
         q.setParameter("idHoaDon", hd);
         q.executeUpdate();
         session.getTransaction().commit();
+    }
+    
+    public float count(){
+        String query = "select count(*) from HoaDonChiTiet";
+        Query q = session.createQuery(query);
+        List list = q.getResultList();
+        return (long) list.get(0);
+    }
+    
+    public float percent(LoaiSp idLoaiSp){
+        String query = "select COUNT(*) from HoaDonChiTiet hd join ChiTietSP ct on hd.idSanPham = ct.id " +
+                        "join LoaiSp ls on ct.idLoaiSp = ls.id " +
+                        "where ct.idLoaiSp =:idLoaiSp " +
+                        "group by (ls.id)";
+        Query q = session.createQuery(query);
+        q.setParameter("idLoaiSp", idLoaiSp);
+        List list = q.getResultList();
+        if (!list.isEmpty()) {
+            return (float) ((long) list.get(0)/count()*100.00); 
+        } else {
+            return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        float a = 5f;
+        float b = 2f;
+        HoaDonChiTietRepository hs = new HoaDonChiTietRepository();
+        LoaiSp ls = new LoaiSp(1);
+        System.out.println(hs.count());
+        System.out.println(a/b);
+        System.out.println(hs.percent(ls));
     }
 }

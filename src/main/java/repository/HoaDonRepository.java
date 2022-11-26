@@ -9,6 +9,7 @@ import modul.HoaDon;
 import modul.NguoiDung;
 import org.hibernate.Session;
 import hibernateConfig.HibernateConfig;
+import java.util.List;
 import org.hibernate.query.Query;
 
 /**
@@ -24,7 +25,7 @@ public class HoaDonRepository {
     
     public ArrayList<HoaDon> select(NguoiDung ng){
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from HoaDon where idNguoiDung =:idNguoiDung");
+        Query q = session.createQuery("from HoaDon where idNguoiDung =:idNguoiDung order by (ngayMua) desc");
         q.setParameter("idNguoiDung", ng);
         return (ArrayList<HoaDon>) q.getResultList();
     }
@@ -77,6 +78,18 @@ public class HoaDonRepository {
         q.setFirstResult(firtRecord);
         q.setMaxResults(5);
         return (ArrayList<HoaDon>) q.getResultList();
+    }
+    
+    public long turnover(int month){
+        String query = "select SUM(hd.tongTien) from HoaDon hd where month(hd.ngayMua) =:month and year(hd.ngayMua) = year(getdate())";
+        Query q = session.createQuery(query);
+        q.setParameter("month", month);
+        List list = q.getResultList();
+        if (list.get(0) != null) {
+            return (long) list.get(0);
+        } else {
+            return 0;
+        }
     }
     
 }

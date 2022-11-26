@@ -24,7 +24,7 @@ public class DungLuongRepository {
 
     public ArrayList<DungLuong> select() {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "FRom DungLuong where trangThai =:trangThai";
+        String query = "FRom DungLuong where trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 1);
         ArrayList<DungLuong> list = (ArrayList<DungLuong>) q.getResultList();

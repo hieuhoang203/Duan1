@@ -5,8 +5,10 @@
 package service.serviceImpl;
 
 import java.util.ArrayList;
+import modul.ChiTietSP;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
+import modul.LoaiSp;
 import repository.HoaDonChiTietRepository;
 
 import service.QuanLyChiTietHoaDonService;
@@ -45,6 +47,11 @@ public class ChiTietHoaDonServiceImpl implements QuanLyChiTietHoaDonService{
     @Override
     public void delete(Integer id, HoaDon hd) {
         hoaDonChiTietRepository.delete(id, hd);
+    }
+
+    @Override
+    public double percent(LoaiSp iLoaiSp) {
+        return hoaDonChiTietRepository.percent(iLoaiSp);
     }
     
 }

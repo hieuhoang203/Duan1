@@ -59,7 +59,7 @@ public class NguoiDungRepository {
     
     public ArrayList<NguoiDung> select(){
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from NguoiDung where trangThai =:trangThai");
+        Query q = session.createQuery("from NguoiDung where trangThai =:trangThai order by (NgayThem) desc");
         q.setParameter("trangThai", 1);
         ArrayList<NguoiDung> list = (ArrayList<NguoiDung>) q.getResultList();
         return list;
@@ -67,7 +67,7 @@ public class NguoiDungRepository {
     
     public ArrayList<NguoiDung> select(int trang){
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from NguoiDung where trangThai =:trangThai");
+        Query q = session.createQuery("from NguoiDung where trangThai =:trangThai order by (NgayThem) desc");
         q.setParameter("trangThai", 1);
         q.setFirstResult(trang);
         q.setMaxResults(5);
@@ -76,7 +76,7 @@ public class NguoiDungRepository {
     }
     
     public ArrayList<NguoiDung> search(String hoTen, int trang){
-        String query = "from NguoiDung where hoTen =:hoTen and trangThai =:trangThai";
+        String query = "from NguoiDung where hoTen =:hoTen and trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("hoTen", hoTen);
         q.setParameter("trangThai", 1);

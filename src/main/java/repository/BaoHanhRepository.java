@@ -23,7 +23,7 @@ public class BaoHanhRepository {
     
     public ArrayList<BaoHanh> select(){
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from BaoHanh where trangThai =:trangThai");
+        Query q = session.createQuery("from BaoHanh where trangThai =:trangThai order by (NgayThem) desc");
         q.setParameter("trangThai", 1);
         ArrayList<BaoHanh> list = (ArrayList<BaoHanh>) q.getResultList();
         return list;
@@ -60,7 +60,7 @@ public class BaoHanhRepository {
     }
     
     public BaoHanh search(String ten){
-        String query = "from BaoHanh where ten =:ten";
+        String query = "from BaoHanh where ten =:ten order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("ten", ten);
         return (BaoHanh) q.getResultList().get(0);

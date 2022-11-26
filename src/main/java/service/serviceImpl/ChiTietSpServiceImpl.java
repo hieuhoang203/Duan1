@@ -7,6 +7,9 @@ package service.serviceImpl;
 import java.util.ArrayList;
 import modul.ChiTietSP;
 import modul.CuaHang;
+import modul.DongSp;
+import modul.DungLuong;
+import modul.MauSac;
 import repository.ChiTietSpRepository;
 import service.QuanLyChiTietSPService;
 
@@ -14,13 +17,14 @@ import service.QuanLyChiTietSPService;
  *
  * @author admin
  */
-public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
+public class ChiTietSpServiceImpl implements QuanLyChiTietSPService {
+
     private ChiTietSpRepository chiTietSpRepository;
 
     public ChiTietSpServiceImpl() {
         chiTietSpRepository = new ChiTietSpRepository();
     }
-    
+
     @Override
     public ArrayList<ChiTietSP> select() {
         return chiTietSpRepository.select();
@@ -103,5 +107,25 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService{
     public ArrayList<ChiTietSP> selectAll() {
         return chiTietSpRepository.selectAll();
     }
-    
+
+    @Override
+    public ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, DongSp idDongSp) {
+        return chiTietSpRepository.search(trang, idCuaHang, idDongSp);
+    }
+
+    @Override
+    public ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
+        return chiTietSpRepository.search(trang, idCuaHang, idMauSac, idDungLuong, idDongSp);
+    }
+
+    @Override
+    public int select(CuaHang idCuaHang, DongSp idDongSp) {
+        return chiTietSpRepository.select(idCuaHang, idDongSp);
+    }
+
+    @Override
+    public int select(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
+        return chiTietSpRepository.select(idCuaHang, idMauSac, idDungLuong, idDongSp);
+    }
+
 }

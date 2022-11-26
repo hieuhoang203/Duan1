@@ -8,7 +8,9 @@ import javax.persistence.Query;
 import modul.ChiTietSP;
 import modul.CuaHang;
 import modul.DongSp;
+import modul.DungLuong;
 import modul.LoaiSp;
+import modul.MauSac;
 
 /**
  *
@@ -24,7 +26,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> select() {
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai");
+        Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai order by (NgayThem) desc");
         q.setParameter("trangThai", 1);
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
@@ -32,7 +34,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> selectAll() {
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from ChiTietSP");
+        Query q = session.createQuery("from ChiTietSP order by (NgayThem) desc");
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
     }
@@ -80,7 +82,7 @@ public class ChiTietSpRepository {
         String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct "
                 + "inner join LoaiSp ls on ls.id = ct.idLoaiSp "
                 + "inner join DongSp ds on ds.id = ls.idDongSp "
-                + "inner join Hang h on h.id = ds.idHang where h.ten like :keyWord and ct.trangThai =:trangThai";
+                + "inner join Hang h on h.id = ds.idHang where h.ten like :keyWord and ct.trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("keyWord", keyWord + "%");
         q.setParameter("trangThai", 1);
@@ -105,7 +107,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> searchByStore(CuaHang ch) {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
+        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("idCuaHang", ch);
         q.setParameter("trangThai", 1);
@@ -134,7 +136,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> select(int trang, CuaHang ch) {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai";
+        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai order by (NgayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("idCuaHang", ch);
         q.setParameter("trangThai", 1);
@@ -144,19 +146,71 @@ public class ChiTietSpRepository {
         return list;
     }
 
-    public ArrayList<ChiTietSP> search(CuaHang idCuaHang, DongSp idDongSp) {
+    public int select(CuaHang idCuaHang, DongSp idDongSp) {
         session = HibernateConfig.getFACTORY().openSession();
-        ArrayList<ChiTietSP> list = new ArrayList<>();
-        String query = "from ChiTietSP";
-        if (idCuaHang != null) {
-            query += " where idCuaHang =:idCuaHang";
-            Query q = session.createQuery(query);
-            q.setParameter("idCuaHang", idCuaHang);
-            list =  (ArrayList<ChiTietSP>) q.getResultList();
-        } else if (true) {
-            
-        }
-        return list;
+        String query = "from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
+                + "where ct.trangThai =:trangThai and ls.idDongSp =:idDongSp and ct.idCuaHang =:idCuaHang";
+        Query q = session.createQuery(query);
+        q.setParameter("trangThai", 1);
+        q.setParameter("idCuaHang", idCuaHang);
+        q.setParameter("idDongSp", idDongSp);
+        return q.getResultList().size();
     }
 
+    public int select(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
+        session = HibernateConfig.getFACTORY().openSession();
+        String query = "select count(*) from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
+                + "where ct.trangThai =:trangThai and ls.idDongSp =:idDongSp and ct.idCuaHang =:idCuaHang";
+        Query q = session.createQuery(query);
+        q.setParameter("trangThai", 1);
+        q.setParameter("idCuaHang", idCuaHang);
+        q.setParameter("idDongSp", idDongSp);
+        return q.getResultList().size();
+    }
+
+    public ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, DongSp idDongSp) {
+        session = HibernateConfig.getFACTORY().openSession();
+        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
+                + "where ct.trangThai =:trangThai and ls.idDongSp =:idDongSp and ct.idCuaHang =:idCuaHang";
+        Query q = session.createQuery(query);
+        q.setParameter("trangThai", 1);
+        q.setParameter("idCuaHang", idCuaHang);
+        q.setParameter("idDongSp", idDongSp);
+        q.setFirstResult(trang);
+        q.setMaxResults(5);
+        List<Object[]> list = q.getResultList();
+        if (!list.isEmpty()) {
+            ArrayList<ChiTietSP> arr = new ArrayList<>();
+            list.forEach((t) -> {
+                arr.add(new ChiTietSP((Integer) t[0], t[1].toString(), (LoaiSp) t[2], (CuaHang) t[3], 1, null, null, null, null));
+            });
+            return arr;
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList<ChiTietSP> search(int first, CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
+        session = HibernateConfig.getFACTORY().openSession();
+        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct inner join LoaiSp ls where ct.trangThai =:trangThai and "
+                + "ct.idCuaHang =:idCuaHang and ls.idDongSp =:idDongSp and ls.idDungLuong =:idDungLuong and ls.idMauSac =:idMauSac";
+        Query q = session.createQuery(query);
+        q.setParameter("trangThai", 1);
+        q.setParameter("idCuaHang", idCuaHang);
+        q.setParameter("idDongSp", idDongSp);
+        q.setParameter("idDungLuong", idDungLuong);
+        q.setParameter("idMauSac", idMauSac);
+        q.setFirstResult(first);
+        q.setMaxResults(5);
+        List<Object[]> list = q.getResultList();
+        if (!list.isEmpty()) {
+            ArrayList<ChiTietSP> arr = new ArrayList<>();
+            list.forEach((t) -> {
+                arr.add(new ChiTietSP((Integer) t[0], t[1].toString(), (LoaiSp) t[2], (CuaHang) t[3], 1, null, null, null, null));
+            });
+            return arr;
+        } else {
+            return null;
+        }
+    }
 }
