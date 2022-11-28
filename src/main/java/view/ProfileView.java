@@ -90,7 +90,7 @@ public class ProfileView extends javax.swing.JFrame {
 
         lb_chucvu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lb_chucvu.setForeground(new java.awt.Color(255, 0, 0));
-        lb_chucvu.setText("jLabel6");
+        lb_chucvu.setText("Chuc Vu");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));

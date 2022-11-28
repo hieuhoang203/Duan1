@@ -201,6 +201,11 @@ public class BaoHanhView extends javax.swing.JFrame {
                 btn_backMouseClicked(evt);
             }
         });
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -374,6 +379,10 @@ public class BaoHanhView extends javax.swing.JFrame {
         this.setVisible(false);
         new AdminView().setVisible(true);
     }//GEN-LAST:event_btn_backMouseClicked
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
