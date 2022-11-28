@@ -65,11 +65,6 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService {
     }
 
     @Override
-    public ArrayList<ChiTietSP> search(String key) {
-        return chiTietSpRepository.search(key);
-    }
-
-    @Override
     public boolean checkImei(ChiTietSP ctsp) {
         if (chiTietSpRepository.selectImei().contains(ctsp.getImei())) {
             return false;
@@ -89,11 +84,6 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService {
     }
 
     @Override
-    public ArrayList<ChiTietSP> select(int trang) {
-        return chiTietSpRepository.select(trang);
-    }
-
-    @Override
     public ArrayList<ChiTietSP> select(int trang, CuaHang ch) {
         return chiTietSpRepository.select(trang, ch);
     }
@@ -109,23 +99,13 @@ public class ChiTietSpServiceImpl implements QuanLyChiTietSPService {
     }
 
     @Override
-    public ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, DongSp idDongSp) {
-        return chiTietSpRepository.search(trang, idCuaHang, idDongSp);
+    public ArrayList<ChiTietSP> search(CuaHang idCuaHang, DongSp idDongSp) {
+        return chiTietSpRepository.search(idCuaHang, idDongSp);
     }
 
     @Override
-    public ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
-        return chiTietSpRepository.search(trang, idCuaHang, idMauSac, idDungLuong, idDongSp);
-    }
-
-    @Override
-    public int select(CuaHang idCuaHang, DongSp idDongSp) {
-        return chiTietSpRepository.select(idCuaHang, idDongSp);
-    }
-
-    @Override
-    public int select(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
-        return chiTietSpRepository.select(idCuaHang, idMauSac, idDungLuong, idDongSp);
+    public ArrayList<ChiTietSP> search(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
+        return chiTietSpRepository.search(idCuaHang, idMauSac, idDungLuong, idDongSp);
     }
 
 }

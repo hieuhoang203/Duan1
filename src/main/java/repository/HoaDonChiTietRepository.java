@@ -6,10 +6,8 @@ package repository;
 
 import org.hibernate.Session;
 import hibernateConfig.HibernateConfig;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import modul.ChiTietSP;
 import modul.HoaDon;
 import modul.HoaDonChiTiet;
 import modul.LoaiSp;
@@ -85,13 +83,4 @@ public class HoaDonChiTietRepository {
         }
     }
 
-    public static void main(String[] args) {
-        float a = 5f;
-        float b = 2f;
-        HoaDonChiTietRepository hs = new HoaDonChiTietRepository();
-        LoaiSp ls = new LoaiSp(1);
-        System.out.println(hs.count());
-        System.out.println(a/b);
-        System.out.println(hs.percent(ls));
-    }
 }

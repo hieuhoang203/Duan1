@@ -26,7 +26,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> select() {
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai order by (NgayThem) desc");
+        Query q = session.createQuery("from ChiTietSP where trangThai =:trangThai order by (ngayThem) desc");
         q.setParameter("trangThai", 1);
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
@@ -34,7 +34,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> selectAll() {
         session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("from ChiTietSP order by (NgayThem) desc");
+        Query q = session.createQuery("from ChiTietSP order by (ngayThem) desc");
         ArrayList<ChiTietSP> list = (ArrayList<ChiTietSP>) q.getResultList();
         return list;
     }
@@ -78,26 +78,6 @@ public class ChiTietSpRepository {
         session.getTransaction().commit();
     }
 
-    public ArrayList<ChiTietSP> search(String keyWord) {
-        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct "
-                + "inner join LoaiSp ls on ls.id = ct.idLoaiSp "
-                + "inner join DongSp ds on ds.id = ls.idDongSp "
-                + "inner join Hang h on h.id = ds.idHang where h.ten like :keyWord and ct.trangThai =:trangThai order by (NgayThem) desc";
-        Query q = session.createQuery(query);
-        q.setParameter("keyWord", keyWord + "%");
-        q.setParameter("trangThai", 1);
-        List<Object[]> list = q.getResultList();
-        if (list.size() > 0) {
-            ArrayList<ChiTietSP> arr = new ArrayList<>();
-            list.forEach((t) -> {
-                arr.add(new ChiTietSP((Integer) t[0], t[1].toString(), (LoaiSp) t[2], (CuaHang) t[3], 1, null, null, null, null));
-            });
-            return arr;
-        } else {
-            return null;
-        }
-    }
-
     public ArrayList<String> selectImei() {
         String query = "select ct.imei from ChiTietSP ct";
         Query q = session.createQuery(query);
@@ -107,7 +87,7 @@ public class ChiTietSpRepository {
 
     public ArrayList<ChiTietSP> searchByStore(CuaHang ch) {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai order by (NgayThem) desc";
+        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai order by (ngayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("idCuaHang", ch);
         q.setParameter("trangThai", 1);
@@ -123,20 +103,9 @@ public class ChiTietSpRepository {
         return (ChiTietSP) q.getResultList().get(0);
     }
 
-    public ArrayList<ChiTietSP> select(int trang) {
-        session = HibernateConfig.getFACTORY().openSession();
-        Session session = HibernateConfig.getFACTORY().openSession();
-        Query q = session.createQuery("From ChiTietSP where trangThai =:trangThai order by (NgayThem) desc");
-        q.setParameter("trangThai", 1);
-        q.setFirstResult(trang);
-        q.setMaxResults(5);
-        ArrayList<ChiTietSP> lastPage = (ArrayList<ChiTietSP>) q.getResultList();
-        return lastPage;
-    }
-
     public ArrayList<ChiTietSP> select(int trang, CuaHang ch) {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai order by (NgayThem) desc";
+        String query = "from ChiTietSP where idCuaHang =:idCuaHang and trangThai =:trangThai order by (ngayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("idCuaHang", ch);
         q.setParameter("trangThai", 1);
@@ -146,38 +115,17 @@ public class ChiTietSpRepository {
         return list;
     }
 
-    public int select(CuaHang idCuaHang, DongSp idDongSp) {
+    public ArrayList<ChiTietSP> search(CuaHang idCuaHang, DongSp idDongSp) {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
-                + "where ct.trangThai =:trangThai and ls.idDongSp =:idDongSp and ct.idCuaHang =:idCuaHang";
+        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang "
+                + " from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
+                + " where ct.trangThai =:trangThai "
+                + " and ls.idDongSp =:idDongSp "
+                + " and ct.idCuaHang =:idCuaHang order by (ct.ngayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 1);
         q.setParameter("idCuaHang", idCuaHang);
         q.setParameter("idDongSp", idDongSp);
-        return q.getResultList().size();
-    }
-
-    public int select(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
-        session = HibernateConfig.getFACTORY().openSession();
-        String query = "select count(*) from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
-                + "where ct.trangThai =:trangThai and ls.idDongSp =:idDongSp and ct.idCuaHang =:idCuaHang";
-        Query q = session.createQuery(query);
-        q.setParameter("trangThai", 1);
-        q.setParameter("idCuaHang", idCuaHang);
-        q.setParameter("idDongSp", idDongSp);
-        return q.getResultList().size();
-    }
-
-    public ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, DongSp idDongSp) {
-        session = HibernateConfig.getFACTORY().openSession();
-        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct inner join LoaiSp ls on ct.idLoaiSp = ls.id "
-                + "where ct.trangThai =:trangThai and ls.idDongSp =:idDongSp and ct.idCuaHang =:idCuaHang";
-        Query q = session.createQuery(query);
-        q.setParameter("trangThai", 1);
-        q.setParameter("idCuaHang", idCuaHang);
-        q.setParameter("idDongSp", idDongSp);
-        q.setFirstResult(trang);
-        q.setMaxResults(5);
         List<Object[]> list = q.getResultList();
         if (!list.isEmpty()) {
             ArrayList<ChiTietSP> arr = new ArrayList<>();
@@ -186,31 +134,29 @@ public class ChiTietSpRepository {
             });
             return arr;
         } else {
-            return null;
+            return new ArrayList<>();
         }
     }
 
-    public ArrayList<ChiTietSP> search(int first, CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
+    public ArrayList<ChiTietSP> search(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp) {
         session = HibernateConfig.getFACTORY().openSession();
-        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct inner join LoaiSp ls where ct.trangThai =:trangThai and "
-                + "ct.idCuaHang =:idCuaHang and ls.idDongSp =:idDongSp and ls.idDungLuong =:idDungLuong and ls.idMauSac =:idMauSac";
+        String query = "select ct.id, ct.imei, ct.idLoaiSp, ct.idCuaHang from ChiTietSP ct inner join LoaiSp ls "
+                + "on ct.idLoaiSp = ls.id "
+                + "where ct.trangThai =:trangThai and "
+                + "ct.idCuaHang =:idCuaHang and ls.idDongSp =:idDongSp "
+                + "and ls.idDungLuong =:idDungLuong "
+                + "and ls.idMauSac =:idMauSac order by (ct.ngayThem) desc";
         Query q = session.createQuery(query);
         q.setParameter("trangThai", 1);
         q.setParameter("idCuaHang", idCuaHang);
         q.setParameter("idDongSp", idDongSp);
         q.setParameter("idDungLuong", idDungLuong);
         q.setParameter("idMauSac", idMauSac);
-        q.setFirstResult(first);
-        q.setMaxResults(5);
+        ArrayList<ChiTietSP> arr = new ArrayList<>();
         List<Object[]> list = q.getResultList();
-        if (!list.isEmpty()) {
-            ArrayList<ChiTietSP> arr = new ArrayList<>();
             list.forEach((t) -> {
                 arr.add(new ChiTietSP((Integer) t[0], t[1].toString(), (LoaiSp) t[2], (CuaHang) t[3], 1, null, null, null, null));
             });
             return arr;
-        } else {
-            return null;
-        }
     }
 }

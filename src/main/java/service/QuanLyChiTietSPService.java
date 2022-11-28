@@ -21,9 +21,9 @@ public interface QuanLyChiTietSPService {
 
     ArrayList<ChiTietSP> selectAll();
 
-    ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, DongSp idDongSp);
+    ArrayList<ChiTietSP> search(CuaHang idCuaHang, DongSp idDongSp);
 
-    ArrayList<ChiTietSP> search(int trang, CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp);
+    ArrayList<ChiTietSP> search(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp);
 
     boolean insert(ChiTietSP ctsp);
 
@@ -37,17 +37,10 @@ public interface QuanLyChiTietSPService {
 
     boolean checkImei(ChiTietSP ctsp);
 
-    ArrayList<ChiTietSP> search(String key);
-
     ArrayList<ChiTietSP> searchByStore(CuaHang ch);
 
     ChiTietSP searchById(Integer id);
 
-    ArrayList<ChiTietSP> select(int trang);
-
     ArrayList<ChiTietSP> select(int trang, CuaHang ch);
 
-    int select(CuaHang idCuaHang, DongSp idDongSp);
-
-    public int select(CuaHang idCuaHang, MauSac idMauSac, DungLuong idDungLuong, DongSp idDongSp);
 }
