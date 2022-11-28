@@ -352,7 +352,7 @@ public class CuaHangView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (cuaHangService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {

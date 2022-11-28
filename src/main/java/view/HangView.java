@@ -309,7 +309,7 @@ public class HangView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyHangService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem cập nhật !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {

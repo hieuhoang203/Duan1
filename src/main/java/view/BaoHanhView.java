@@ -352,7 +352,7 @@ public class BaoHanhView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyBaoHanhService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem data !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {

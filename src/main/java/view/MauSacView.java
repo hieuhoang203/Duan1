@@ -303,7 +303,7 @@ public class MauSacView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (qlms.update(id, create())) {
                 addRow();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem dữ liệu !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else if (create().getMa().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
