@@ -285,6 +285,11 @@ public class DangKyView extends javax.swing.JFrame {
                 btn_imgMouseClicked(evt);
             }
         });
+        btn_img.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_imgActionPerformed(evt);
+            }
+        });
 
         btn_them.setText("Thêm");
         btn_them.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,6 +322,8 @@ public class DangKyView extends javax.swing.JFrame {
         rd_nam.setText("Nam");
 
         rd_nu.setText("Nữ");
+
+        lb_img.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -760,6 +767,10 @@ public class DangKyView extends javax.swing.JFrame {
         addRow(quanLyNguoiDungService.select(firtRecord));
         setViewTrang(trang, soTrang);
     }//GEN-LAST:event_btn_lastMouseClicked
+
+    private void btn_imgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_imgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_imgActionPerformed
 
     /**
      * @param args the command line arguments

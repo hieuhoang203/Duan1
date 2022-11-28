@@ -392,7 +392,7 @@ public class HangView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HangView().setVisible(false);
+                new HangView().setVisible(true);
             }
         });
     }

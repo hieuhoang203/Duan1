@@ -414,7 +414,7 @@ public class BaoHanhView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BaoHanhView().setVisible(false);
+                new BaoHanhView().setVisible(true);
             }
         });
     }

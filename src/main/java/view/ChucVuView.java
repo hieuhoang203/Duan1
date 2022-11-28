@@ -366,7 +366,7 @@ public class ChucVuView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChucVuView().setVisible(false);
+                new ChucVuView().setVisible(true);
             }
         });
     }
