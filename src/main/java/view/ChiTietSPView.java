@@ -19,6 +19,7 @@ import service.serviceImpl.*;
  * @author admin
  */
 public class ChiTietSPView extends javax.swing.JFrame {
+
     private ExcelHelper excelHelper = new ExcelHelper();
     private int firtRecord = 0, soTrang, count, temp = 1;
     private DefaultTableModel tableModel;
@@ -31,6 +32,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private QuanLyCuaHangService quanLyCuaHangService = new CuaHangServiceImpl();
     private QuanLyChiTietSPService quanLyChiTietSPService = new ChiTietSpServiceImpl();
     private QuanLyHangService quanLyHangService = new HangServiceImpl();
+    private ArrayList<ChiTietSP> list = new ArrayList<>();
 
     /**
      * Creates new form ChiTietSPView
@@ -41,17 +43,18 @@ public class ChiTietSPView extends javax.swing.JFrame {
         addCbxCuaHang();
         addCbxSearch();
         addCbxDongSp();
+        list = quanLyChiTietSPService.select();
         setPage(quanLyChiTietSPService.select().size());
         setAnimation(temp, soTrang);
-        addRows(quanLyChiTietSPService.select(0));
+        addRows(firtRecord, list);
     }
 
     public void setAnimation(int temp, int soTrang) {
         lb_sotrang.setText("/" + soTrang);
         lb_trang.setText("     " + temp);
     }
-    
-    public void setPage(int size){
+
+    public void setPage(int size) {
         count = size;
         if (count % 5 == 0) {
             soTrang = count / 5;
@@ -71,28 +74,33 @@ public class ChiTietSPView extends javax.swing.JFrame {
         cbxCuaHang.addAll(quanLyCuaHangService.select());
         cbx_cuahang.setSelectedIndex(0);
     }
-    
-    public void addCbxSearch(){
+
+    public void addCbxSearch() {
         cbxSearch = (DefaultComboBoxModel) cbx_cuaHangSearch.getModel();
         cbxSearch.addAll(quanLyCuaHangService.select());
         cbx_cuaHangSearch.setSelectedIndex(0);
     }
-    
-    public void addCbxDongSp(){
+
+    public void addCbxDongSp() {
         cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
         cbxDongSp.addAll(quanLyDongSpService.select());
         cbx_dongsp.setSelectedIndex(0);
     }
 
-    public void addRows(ArrayList<ChiTietSP> list) {
+    public void addRows(int page, ArrayList<ChiTietSP> list) {
         tableModel = (DefaultTableModel) tb_list.getModel();
         tableModel.setRowCount(0);
-        for (ChiTietSP chiTietSP : list) {
-            tableModel.addRow(new Object[]{
-                chiTietSP.getId(),
-                chiTietSP.getImei(),
-                chiTietSP.getIdLoaiSp(),
-                chiTietSP.getIdCuaHang(),});
+        for (int i = page; i < page + 5; i++) {
+            try {
+                tableModel.addRow(new Object[]{
+                    list.get(i).getId(),
+                    list.get(i).getImei(),
+                    list.get(i).getIdLoaiSp(),
+                    list.get(i).getIdCuaHang()
+                });
+            } catch (Exception e) {
+                break;
+            }
         }
     }
 
@@ -107,11 +115,16 @@ public class ChiTietSPView extends javax.swing.JFrame {
     }
 
     public void clear() {
+        list = quanLyChiTietSPService.select();
+        firtRecord  = 0;
+        temp = 1;
         txt_id.setText("");
         cbx_loaisp.setSelectedIndex(0);
         cbx_cuahang.setSelectedIndex(0);
         txt_imei.setText("");
-        addRows(quanLyChiTietSPService.select(firtRecord));
+        addRows(0, list);
+        setPage(quanLyChiTietSPService.select().size());
+        setAnimation(temp, soTrang);
     }
 
     public ChiTietSP create() {
@@ -334,6 +347,11 @@ public class ChiTietSPView extends javax.swing.JFrame {
                 btn_searchMouseClicked(evt);
             }
         });
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -462,7 +480,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
     private void btn_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseClicked
         // TODO add your handling code here:
         if (quanLyChiTietSPService.insert(create())) {
-            addRows(quanLyChiTietSPService.select());
+            addRows(0, list);
             JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             clear();
         } else {
@@ -479,7 +497,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyChiTietSPService.update(id, create())) {
-                addRows(quanLyChiTietSPService.select());
+                addRows(0, list);
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công !");
             } else if (quanLyChiTietSPService.checkData(create())) {
                 JOptionPane.showMessageDialog(rootPane, "Sai định dạng imei !");
@@ -505,7 +523,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
             int choose = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa ?");
             if (choose == JOptionPane.YES_OPTION) {
                 quanLyChiTietSPService.delete(id);
-                addRows(quanLyChiTietSPService.select());
+                addRows(0, list);
                 JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
                 clear();
             } else {
@@ -530,10 +548,14 @@ public class ChiTietSPView extends javax.swing.JFrame {
         firtRecord += 5;
         temp++;
         if (firtRecord <= count) {
-            addRows(quanLyChiTietSPService.select(firtRecord));
+            addRows(firtRecord, list);
             setAnimation(temp, soTrang);
         } else {
-            firtRecord = count - 6;
+            if (count % 5 == 0) {
+                firtRecord = count - 5;
+            } else {
+                firtRecord = count - (count % 5);
+            }
             temp = soTrang;
         }
     }//GEN-LAST:event_btn_nextMouseClicked
@@ -543,7 +565,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         firtRecord -= 5;
         temp--;
         if (firtRecord >= 0) {
-            addRows(quanLyChiTietSPService.select(firtRecord));
+            addRows(firtRecord, list);
             setAnimation(temp, soTrang);
         } else {
             firtRecord = 0;
@@ -565,7 +587,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
                 for (ChiTietSP chiTietSP : list) {
                     quanLyChiTietSPService.insert(chiTietSP);
                 }
-                addRows(quanLyChiTietSPService.select(0));
+                addRows(0, this.list);
                 setAnimation(temp, soTrang);
                 JOptionPane.showMessageDialog(rootPane, "Doc file thanh cong !");
             }
@@ -589,15 +611,19 @@ public class ChiTietSPView extends javax.swing.JFrame {
         // TODO add your handling code here:
         firtRecord = 0;
         temp = 1;
-        addRows(quanLyChiTietSPService.select(firtRecord));
+        addRows(firtRecord, list);
         setAnimation(temp, soTrang);
     }//GEN-LAST:event_btn_firstMouseClicked
 
     private void btn_lastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_lastMouseClicked
         // TODO add your handling code here:
-        firtRecord = count - 6;
+        if (count % 5 == 0) {
+            firtRecord = count - 5;
+        } else {
+            firtRecord = count - (count % 5);
+        }
         temp = soTrang;
-        addRows(quanLyChiTietSPService.select(firtRecord));
+        addRows(firtRecord, list);
         setAnimation(temp, soTrang);
     }//GEN-LAST:event_btn_lastMouseClicked
 
@@ -610,16 +636,17 @@ public class ChiTietSPView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_dongspActionPerformed
 
     private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
-        // TODO add your handling code here:
+        list = quanLyChiTietSPService.search((CuaHang) cbx_cuaHangSearch.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem());
+        temp = 1;
         firtRecord = 0;
-        setPage(quanLyChiTietSPService.select((CuaHang) cbx_cuaHangSearch.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
+        addRows(firtRecord, list);
+        setPage(quanLyChiTietSPService.search((CuaHang) cbx_cuaHangSearch.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()).size());
         setAnimation(temp, soTrang);
-        if (soTrang>0) {
-            addRows(quanLyChiTietSPService.search(firtRecord,(CuaHang) cbx_cuaHangSearch.getSelectedItem(),(DongSp) cbx_dongsp.getSelectedItem()));
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Khong tim thay !");
-        }
     }//GEN-LAST:event_btn_searchMouseClicked
+
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+
+    }//GEN-LAST:event_btn_searchActionPerformed
 
     /**
      * @param args the command line arguments

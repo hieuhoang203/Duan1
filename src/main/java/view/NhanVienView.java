@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import modul.BaoHanh;
 import modul.ChiTietBaoHanh;
 import modul.ChiTietSP;
+import modul.CuaHang;
 import modul.DongSp;
 import modul.DungLuong;
 import modul.HoaDon;
@@ -40,6 +41,7 @@ import service.serviceImpl.MauSacServiceImpl;
  * @author admin
  */
 public class NhanVienView extends javax.swing.JFrame {
+
     private QuanLyMauSacService quanLyMauSacService = new MauSacServiceImpl();
     private QuanLyDungLuongService quanLyDungLuongService = new DungLuongServiceImpl();
     private QuanLyDongSpService quanLyDongSpService = new DongSpServiceImpl();
@@ -57,7 +59,7 @@ public class NhanVienView extends javax.swing.JFrame {
     private DefaultComboBoxModel cbxDongSp;
     private DefaultComboBoxModel cbxDungLuong;
     private DefaultComboBoxModel cbxMauSac;
-    private int count, trang = 1, soTrang, first = 0;
+    private int count, trang, soTrang, first;
 
     /**
      * Creates new form NhanVienView
@@ -71,15 +73,22 @@ public class NhanVienView extends javax.swing.JFrame {
         initComponents();
         setupTrangThai();
         addCbxBaoHanh();
-        count = quanLyChiTietSPService.searchByStore(ng.getIdCuaHang()).size();
+        addCbxDongSp();
+        addCbxDungLuong();
+        addCbxMauSac();
+        setPage(quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()).size());
+        addRowHoaDon(quanLyHoaDonService.select(ng));
+        addRowSanPham(0, quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
+        setViewTrang(trang, soTrang);
+    }
+    
+    public void setPage(int size){
+        count = size;
         if (count % 5 == 0) {
             soTrang = count / 5;
         } else {
             soTrang = count / 5 + 1;
         }
-        addRowHoaDon(quanLyHoaDonService.select(ng));
-        addRowSanPham(quanLyChiTietSPService.select(0, ng.getIdCuaHang()));
-        setViewTrang(trang, soTrang);
     }
 
     public void setViewTrang(int trang, int soTrang) {
@@ -100,25 +109,25 @@ public class NhanVienView extends javax.swing.JFrame {
         comboBoxModel.addAll(quanLyBaoHanhService.select());
         cbx_baohanh.setSelectedIndex(0);
     }
-    
-    public void addCbxDungLuong(){
+
+    public void addCbxDungLuong() {
         cbxDungLuong = (DefaultComboBoxModel) cbx_dungluong.getModel();
         cbxDungLuong.addAll(quanLyDungLuongService.select());
         cbx_dungluong.setSelectedIndex(0);
     }
-    
-    public void addCbxMauSac(){
+
+    public void addCbxMauSac() {
         cbxMauSac = (DefaultComboBoxModel) cbx_mausac.getModel();
         cbxMauSac.addAll(quanLyMauSacService.select());
         cbx_mausac.setSelectedIndex(0);
     }
 
-    public void addCbxDongSp(){
+    public void addCbxDongSp() {
         cbxDongSp = (DefaultComboBoxModel) cbx_dongsp.getModel();
-        cbxDongSp.addAll(quanLyDungLuongService.select());
-        cbx_dongsp.setSelectedIndex(0);
+        cbxDongSp.addAll(quanLyDongSpService.select());
+        cbx_dongsp.setSelectedIndex(2);
     }
-    
+
     public void addRowHoaDon(ArrayList<HoaDon> list) {
         int stt = 1;
         tbModelHoaDon = (DefaultTableModel) tb_hoadon.getModel();
@@ -146,16 +155,19 @@ public class NhanVienView extends javax.swing.JFrame {
         });
     }
 
-    public void addRowSanPham(ArrayList<ChiTietSP> list) {
+    public void addRowSanPham(int first, ArrayList<ChiTietSP> list) {
         tbModelSanPham = (DefaultTableModel) tb_sanpham.getModel();
         tbModelSanPham.setRowCount(0);
-        for (ChiTietSP chiTietSP : list) {
-            tbModelSanPham.addRow(new Object[]{
-                chiTietSP.getId(),
-                chiTietSP.getImei(),
-                chiTietSP.getIdLoaiSp(),
-                chiTietSP.getIdLoaiSp().getIdDongSp().getGiaBan()
-            });
+        for (int i = first; i < first + 5; i++) {
+            try {
+                tbModelSanPham.addRow(new Object[]{
+                    list.get(i).getId(),
+                    list.get(i).getImei(),
+                    list.get(i).getIdLoaiSp(),
+                    list.get(i).getIdLoaiSp().getIdDongSp().getGiaBan()
+                });
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -641,27 +653,29 @@ public class NhanVienView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(cbx_baohanh, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(153, 153, 153))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(cbx_dongsp, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(cbx_dungluong, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(cbx_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(77, 77, 77))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(83, 83, 83)))
+                                            .addGap(83, 83, 83))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel9)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(cbx_dongsp, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel5)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(cbx_baohanh, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(cbx_dungluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(cbx_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addContainerGap()))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())))
@@ -864,7 +878,7 @@ public class NhanVienView extends javax.swing.JFrame {
                     quanLyChiTietHoaDonService.delete(id, getHoaDon());
                     quanLyChiTietSPService.upload(getHoaDonChiTiet().getIdSanPham().getId());
                     tinhTien();
-                    addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
+                    addRowSanPham(first, quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
                     addRowGioHang();
                 }
             }
@@ -902,7 +916,7 @@ public class NhanVienView extends javax.swing.JFrame {
         first += 5;
         trang++;
         if (trang <= soTrang) {
-            addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
+            addRowSanPham(first, quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
             setViewTrang(trang, soTrang);
         } else {
             first = count - 6;
@@ -915,10 +929,14 @@ public class NhanVienView extends javax.swing.JFrame {
         first -= 5;
         trang--;
         if (first >= 0) {
-            addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
+            addRowSanPham(first, quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
             setViewTrang(trang, soTrang);
         } else {
-            first = 0;
+            if (count % 5 == 0) {
+                first = count - 5;
+            } else {
+                first = count - (count % 5);
+            }
             trang = 1;
         }
     }//GEN-LAST:event_btn_prevMouseClicked
@@ -927,39 +945,52 @@ public class NhanVienView extends javax.swing.JFrame {
         // TODO add your handling code here:
         first = 0;
         trang = 1;
-        addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
+        addRowSanPham(0, quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
         setViewTrang(trang, soTrang);
     }//GEN-LAST:event_btn_firtMouseClicked
 
     private void btn_lastMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_lastMouseClicked
         // TODO add your handling code here:
-        first = quanLyChiTietSPService.select().size() - 6;
+        count = quanLyChiTietSPService.search(ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()).size();
+        if (count % 5 == 0) {
+            first = count - 5;
+        } else {
+            first = count - (count % 5);
+        }
         trang = soTrang;
-        addRowSanPham(quanLyChiTietSPService.select(first, ng.getIdCuaHang()));
+        addRowSanPham(first, quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
         setViewTrang(trang, soTrang);
     }//GEN-LAST:event_btn_lastMouseClicked
 
     private void btn_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseClicked
-        // TODO add your handling code here:
-        String search = JOptionPane.showInputDialog("Nhap ma hoa don can tim ?");
-        if (search.equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Chua nhap ma hoa don !");
-        } else {
-            addRowHoaDon(quanLyHoaDonService.searchByMa(search));
-            JOptionPane.showMessageDialog(rootPane, "Da tim thay ban ghi !");
-        }
+
     }//GEN-LAST:event_btn_searchMouseClicked
 
     private void cbx_dongspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_dongspActionPerformed
         // TODO add your handling code here:
+        trang = 1;
+        first = 0;
+        addRowSanPham(first, quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
+        setPage(quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()).size());
+        setViewTrang(trang, soTrang);
     }//GEN-LAST:event_cbx_dongspActionPerformed
 
     private void cbx_dungluongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_dungluongActionPerformed
         // TODO add your handling code here:
+        trang = 1;
+        first = 0;
+        addRowSanPham(first, quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
+        setPage(quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()).size());
+        setViewTrang(trang, soTrang);
     }//GEN-LAST:event_cbx_dungluongActionPerformed
 
     private void cbx_mausacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_mausacActionPerformed
         // TODO add your handling code here:
+        trang = 1;
+        first = 0;
+        addRowSanPham(first, quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()));
+        setPage(quanLyChiTietSPService.search((CuaHang) ng.getIdCuaHang(), (MauSac) cbx_mausac.getSelectedItem(), (DungLuong) cbx_dungluong.getSelectedItem(), (DongSp) cbx_dongsp.getSelectedItem()).size());
+        setViewTrang(trang, soTrang);
     }//GEN-LAST:event_cbx_mausacActionPerformed
 
     /**
