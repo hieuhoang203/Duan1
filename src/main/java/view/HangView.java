@@ -289,12 +289,12 @@ public class HangView extends javax.swing.JFrame {
             clear();
         } else {
             if (quanLyHangService.checkData(create())) {
-                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
+                JOptionPane.showMessageDialog(rootPane, "Mã đã tồn tại !");
             } else {
                 if (create().getMa().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
                 }
             }
         }
@@ -313,9 +313,9 @@ public class HangView extends javax.swing.JFrame {
                 clear();
             } else {
                 if (create().getMa().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
                 }
             }
         }

@@ -264,7 +264,9 @@ public class CoSoView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             clear();
         } else {
-            if (create().getMa().equals("")) {
+            if (create().getMa().equals("") && create().getTen().equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Mã và tên không được bỏ trống !");
+            } else if (create().getMa().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
             } else if (create().getTen().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
@@ -283,16 +285,18 @@ public class CoSoView extends javax.swing.JFrame {
     private void btn_suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_suaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        if (row<0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (coSoServiceImpl.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công !");
                 clear();
             } else {
-                if (create().getMa().equals("")) {
+                if (create().getMa().equals("") && create().getTen().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Mã và tên không được bỏ trống !");
+                } else if (create().getMa().equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else if (create().getTen().equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
@@ -309,7 +313,7 @@ public class CoSoView extends javax.swing.JFrame {
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        if (row<0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);

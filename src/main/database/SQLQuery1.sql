@@ -31,6 +31,7 @@ CREATE TABLE CoSo(
 	NgaySua DATE,
 	TrangThai bit
 )
+
 -- Tao bang CuaHang
 create TABLE CuaHang(
 	Id int identity(1,1) PRIMARY KEY NOT NULL,
