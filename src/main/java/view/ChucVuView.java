@@ -266,15 +266,15 @@ public class ChucVuView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (cvimpl.insert(create())) {
             addRows();
-            JOptionPane.showMessageDialog(rootPane, "Them thanh cong");
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             clear();
         } else {
             if (!cvimpl.checkMa(create())) {
-                JOptionPane.showMessageDialog(rootPane, "Ma bi trung");
+                JOptionPane.showMessageDialog(rootPane, "Mã đã tồn tại !");
             } else if (create().getMa().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Ma bi trong");
+                JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Ten bi trong");
+                JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
             }
         }
 
@@ -284,18 +284,18 @@ public class ChucVuView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tb_list.getSelectedRow();
         if (i < 0) {
-            JOptionPane.showMessageDialog(rootPane, "Ban chua chon hang muon sua");
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(i, 0);
             if (cvimpl.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Sua thanh cong");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công !");
                 clear();
             } else {
                 if (create().getMa().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Ma bi trong");
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else if (create().getTen().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Ten bi trong");
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
                 }
             }
         }
@@ -311,17 +311,17 @@ public class ChucVuView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tb_list.getSelectedRow();
         if (i < 0) {
-            JOptionPane.showMessageDialog(rootPane, "ban chua chon hang muon sua");
+            JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(i, 0);
-            int chon = JOptionPane.showConfirmDialog(rootPane, "Ban co muon xoa");
+            int chon = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa?");
             if (chon == JOptionPane.YES_OPTION) {
                 cvimpl.delete(id);
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Xoa thanh cong");
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
                 clear();
             } else
-                JOptionPane.showMessageDialog(rootPane, "Huy xoa");
+                JOptionPane.showMessageDialog(rootPane, "Hủy xóa !");
         }
     }//GEN-LAST:event_btn_xoaMouseClicked
 
@@ -366,7 +366,7 @@ public class ChucVuView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChucVuView().setVisible(false);
+                new ChucVuView().setVisible(true);
             }
         });
     }

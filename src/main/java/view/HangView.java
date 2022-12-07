@@ -289,12 +289,12 @@ public class HangView extends javax.swing.JFrame {
             clear();
         } else {
             if (quanLyHangService.checkData(create())) {
-                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
+                JOptionPane.showMessageDialog(rootPane, "Mã đã tồn tại !");
             } else {
                 if (create().getMa().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
                 }
             }
         }
@@ -309,13 +309,13 @@ public class HangView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyHangService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem cập nhật !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
                 }
             }
         }
@@ -392,7 +392,7 @@ public class HangView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HangView().setVisible(false);
+                new HangView().setVisible(true);
             }
         });
     }

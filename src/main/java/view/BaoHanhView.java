@@ -201,6 +201,11 @@ public class BaoHanhView extends javax.swing.JFrame {
                 btn_backMouseClicked(evt);
             }
         });
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -347,7 +352,7 @@ public class BaoHanhView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyBaoHanhService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem data !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {
@@ -374,6 +379,10 @@ public class BaoHanhView extends javax.swing.JFrame {
         this.setVisible(false);
         new AdminView().setVisible(true);
     }//GEN-LAST:event_btn_backMouseClicked
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,7 +414,7 @@ public class BaoHanhView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BaoHanhView().setVisible(false);
+                new BaoHanhView().setVisible(true);
             }
         });
     }

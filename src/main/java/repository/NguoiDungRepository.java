@@ -32,7 +32,7 @@ public class NguoiDungRepository {
         session.beginTransaction();
         String query = "update NguoiDung set ma =:ma, hoTen =:hoTen, gioiTinh =:gioiTinh, "
                 + "ngaySinh =:ngaySinh, diaChi =:diaChi, "
-                + "anh =:anh, chucVu =:chucVu, cuaHang =:cuaHang where id =:id";
+                + "anh =:anh, idChucVu =:idChucVu, idCuaHang =:idCuaHang where id =:id";
         Query q = session.createQuery(query);
         q.setParameter("ma", ng.getMa());
         q.setParameter("hoTen", ng.getHoTen());
@@ -40,8 +40,8 @@ public class NguoiDungRepository {
         q.setParameter("ngaySinh", ng.getNgaySinh());
         q.setParameter("diaChi", ng.getDiaChi());
         q.setParameter("anh", ng.getAnh());
-        q.setParameter("chucVu", ng.getIdChucVu());
-        q.setParameter("cuaHang", ng.getIdCuaHang());
+        q.setParameter("idChucVu", ng.getIdChucVu());
+        q.setParameter("idCuaHang", ng.getIdCuaHang());
         q.setParameter("id", id);
         q.executeUpdate();
         session.getTransaction().commit();

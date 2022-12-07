@@ -248,6 +248,12 @@ public class CuaHangView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(133, 133, 133))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,13 +263,7 @@ public class CuaHangView extends javax.swing.JFrame {
                 .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133))
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,15 +292,15 @@ public class CuaHangView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cbx_coso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_them)
                     .addComponent(btn_sua)
                     .addComponent(btn_xoa)
                     .addComponent(btn_clear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,15 +325,15 @@ public class CuaHangView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Thêm thành công !");
             clear();
         } else {
-            if (cuaHangService.checkMa(create())) {
-                JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
-            } else if (create().getMa().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
-            } else if (create().getTen().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
-            } else if (create().getDiaChi().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Địa chỉ bị được trống !");
-            }
+        }if (create().getMa().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
+        } else if (create().getTen().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
+        } else if (create().getDiaChi().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Địa chỉ không được bỏ trống !");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Mã bị trùng !");
+
     }//GEN-LAST:event_btn_themMouseClicked
     }
 
@@ -352,15 +352,15 @@ public class CuaHangView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (cuaHangService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
                 } else if (create().getTen().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
                 } else if (create().getDiaChi().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Địa bị được trống !");
+                    JOptionPane.showMessageDialog(rootPane, "Địa chỉ không được bỏ trống !");
                 }
             }
         }
@@ -374,7 +374,7 @@ public class CuaHangView extends javax.swing.JFrame {
     private void btn_xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaMouseClicked
         // TODO add your handling code here:
         int row = tb_list.getSelectedRow();
-        if (row<0) {
+        if (row < 0) {
             JOptionPane.showMessageDialog(rootPane, "Chưa chọn bản ghi !");
         } else {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
@@ -428,7 +428,7 @@ public class CuaHangView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CuaHangView().setVisible(false);
+                new CuaHangView().setVisible(true);
             }
         });
     }

@@ -169,7 +169,9 @@ public class ForgotPassView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String new_pass  = txt_new.getText().trim();
         String pass_again = txt_confirm.getText().trim();
-        if (checkEmail(txt_email.getText().trim())) {
+        if(txt_email.getText().length()==0||txt_new.getText().length()==0||txt_confirm.getText().length()==0){
+            JOptionPane.showMessageDialog(rootPane, "Email hoặc new password hoặc confilm pass không được để trống !");
+        }else if (checkEmail(txt_email.getText().trim())) {
             if (new_pass.equals(pass_again)) {
                 String code = quanLyGuiMailService.sendEmail(txt_email.getText());
                 String input = JOptionPane.showInputDialog(this,"Ma xac nhan la ?");

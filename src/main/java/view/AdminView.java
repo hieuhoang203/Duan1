@@ -317,6 +317,10 @@ public class AdminView extends javax.swing.JFrame {
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
+        int confilm=JOptionPane.showConfirmDialog(rootPane, "Xác nhận đăng xuất ?");
+        if (confilm !=JOptionPane.YES_OPTION) {
+            return;
+        }
         this.setVisible(false);
         new DangNhapView().setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed

@@ -288,7 +288,7 @@ public class DungLuongView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyDungLuongService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem cập nhật !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 if (create().getMa().equals("")) {
@@ -367,7 +367,7 @@ public class DungLuongView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DungLuongView().setVisible(false);
+                new DungLuongView().setVisible(true);
             }
         });
     }

@@ -165,7 +165,10 @@ public class DangNhapView extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Các chức năng khác đang trong quá trình phát triển !");
             }
-        } else {
+        }else if(txt_user.getText().length()==0||txt_pass.getText().length()==0){
+            JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập hoặc mật khẩu không được để trống !");
+        }
+        else {
             JOptionPane.showMessageDialog(rootPane, "Sai tên đăng nhập hoặc mật khẩu !");
         }
     }//GEN-LAST:event_btn_logMouseClicked

@@ -356,7 +356,7 @@ public class LoaiSpView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (quanLyLoaiSpService.update(id, create())) {
                 addRows();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem dữ liệu !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Mã trống !");

@@ -284,11 +284,11 @@ public class MauSacView extends javax.swing.JFrame {
             clear();
         } else {
             if (!qlms.checkMa(create())) {
-                JOptionPane.showMessageDialog(this, "Mã bị trùng");
+                JOptionPane.showMessageDialog(this, "Mã đã tồn tại !");
             } else if (create().getMa().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
             }
         }
 
@@ -303,12 +303,12 @@ public class MauSacView extends javax.swing.JFrame {
             Integer id = (Integer) tb_list.getValueAt(row, 0);
             if (qlms.update(id, create())) {
                 addRow();
-                JOptionPane.showMessageDialog(rootPane, "Load lại để xem dữ liệu !");
+                JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
                 clear();
             } else if (create().getMa().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Mã bị trống !");
+                JOptionPane.showMessageDialog(rootPane, "Mã không được bỏ trống !");
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Tên bị trống !");
+                JOptionPane.showMessageDialog(rootPane, "Tên không được bỏ trống !");
             }
         }
     }//GEN-LAST:event_btn_suaActionPerformed
