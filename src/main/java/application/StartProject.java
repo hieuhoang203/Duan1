@@ -11,6 +11,7 @@ import view.DangNhapView;
  * @author admin
  */
 public class StartProject {
+
     public static void main(String[] args) {
         new DangNhapView().setVisible(true);
     }

@@ -4,52 +4,53 @@
  */
 package view;
 
+import modul.LoaiSp;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
-import service.QuanLyHoaDonService;
-import service.serviceImpl.HoaDonServiceImpl;
-import static view.DoanhThuView.createChart;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import service.QuanLyChiTietHoaDonService;
+import service.QuanLyLoaiSpService;
+import service.serviceImpl.ChiTietHoaDonServiceImpl;
+import service.serviceImpl.LoaiSpServiceImpl;
 
 /**
  *
  * @author admin
  */
-public class DoanhThuView extends javax.swing.JFrame {
-    private static QuanLyHoaDonService quanLyHoaDonService = new HoaDonServiceImpl();
+public class SanPhamBanDuoc extends javax.swing.JFrame {
+    private static QuanLyLoaiSpService quanLyLoaiSpService = new LoaiSpServiceImpl();
+    private static QuanLyChiTietHoaDonService quanLyChiTietHoaDonService = new ChiTietHoaDonServiceImpl();
     /**
      * Creates new form Test
      */
-    public DoanhThuView() {
+    public SanPhamBanDuoc() {
         init();
     }
     
     public void init(){
-        ChartPanel chartPanel = new ChartPanel(createChart());
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFreeChart pieChart = createChart(createDataset());
+        ChartPanel chartPanel = new ChartPanel(pieChart);
         this.add(chartPanel);
-        this.setTitle("Biểu đồ doanh thu cac thang trong nam 2022");
+        this.setTitle("Bieu do san pham ban ra");
         this.setSize(600, 400);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
     }
     
-    public static JFreeChart createChart() {
-        JFreeChart barChart = ChartFactory.createBarChart(
-                "Bieu do doanh thu trong cac thang",
-                "Thang", "Doanh thu",
-                createDataset(), PlotOrientation.VERTICAL, false, false, false);
-        return barChart;
+    private static JFreeChart createChart(PieDataset dataset) {
+        JFreeChart chart = ChartFactory.createPieChart("CO CAU SAN PHAM BAN DUOC", dataset, true, true, true);
+        return chart;
     }
 
-    private static CategoryDataset createDataset() {
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (int i = 1; i <= 12; i++) {
-            dataset.addValue(quanLyHoaDonService.turnover(i), "Doanh thu", i+"");
+    private static PieDataset createDataset() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        for (LoaiSp loaiSp : quanLyLoaiSpService.select()) {
+            if (quanLyChiTietHoaDonService.percent(loaiSp)>0) {
+                dataset.setValue(loaiSp.toString(), quanLyChiTietHoaDonService.percent(loaiSp));
+            }
         }
         return dataset;
     }
@@ -96,13 +97,13 @@ public class DoanhThuView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoanhThuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SanPhamBanDuoc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoanhThuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SanPhamBanDuoc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoanhThuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SanPhamBanDuoc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoanhThuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SanPhamBanDuoc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -110,7 +111,7 @@ public class DoanhThuView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DoanhThuView().setVisible(true);
+                new SanPhamBanDuoc().setVisible(true);
             }
         });
     }

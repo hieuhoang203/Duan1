@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modul.NguoiDung;
 
@@ -334,7 +337,11 @@ public class AdminView extends javax.swing.JFrame {
     private void btn_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_thongkeMouseClicked
         // TODO add your handling code here:
         String input = JOptionPane.showInputDialog("Nhap bieu do muon xem ?");
-        
+        if (input.equals("1")) {
+            new SanPhamBanDuoc().setVisible(true);
+        } else if (input.equals("2")) {
+            new DoanhThuView().setVisible(true);
+        }
     }//GEN-LAST:event_btn_thongkeMouseClicked
 
     /**

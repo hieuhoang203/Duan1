@@ -309,7 +309,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         btn_read.setBackground(new java.awt.Color(204, 255, 204));
         btn_read.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_read.setForeground(new java.awt.Color(255, 0, 0));
-        btn_read.setText("Read");
+        btn_read.setText("Import");
         btn_read.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_readMouseClicked(evt);
@@ -319,7 +319,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         btn_write.setBackground(new java.awt.Color(204, 255, 204));
         btn_write.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_write.setForeground(new java.awt.Color(255, 0, 0));
-        btn_write.setText("Write");
+        btn_write.setText("Export");
         btn_write.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_writeMouseClicked(evt);
@@ -547,7 +547,7 @@ public class ChiTietSPView extends javax.swing.JFrame {
         // TODO add your handling code here:
         firtRecord += 5;
         temp++;
-        if (firtRecord <= count) {
+        if (temp<=soTrang) {
             addRows(firtRecord, list);
             setAnimation(temp, soTrang);
         } else {

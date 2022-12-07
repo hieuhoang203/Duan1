@@ -287,7 +287,7 @@ public class NhanVienView extends javax.swing.JFrame {
         txt_ngtao = new javax.swing.JTextField();
         txt_ngaytao = new javax.swing.JTextField();
         txt_tongtien = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btn_profile = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_giohang = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -435,7 +435,12 @@ public class NhanVienView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton4.setText("Profile");
+        btn_profile.setText("Profile");
+        btn_profile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_profileMouseClicked(evt);
+            }
+        });
 
         tb_giohang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -647,15 +652,15 @@ public class NhanVienView extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btn_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(83, 83, 83))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -680,8 +685,8 @@ public class NhanVienView extends javax.swing.JFrame {
                                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(168, 168, 168)
-                                .addComponent(btn_firt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(143, 143, 143)
+                                .addComponent(btn_firt)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_prev, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -691,8 +696,8 @@ public class NhanVienView extends javax.swing.JFrame {
                                 .addGap(16, 16, 16)
                                 .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_last, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 65, Short.MAX_VALUE))))))
+                                .addComponent(btn_last)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -700,7 +705,7 @@ public class NhanVienView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_logout)
-                    .addComponent(jButton4))
+                    .addComponent(btn_profile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_create)
@@ -993,6 +998,12 @@ public class NhanVienView extends javax.swing.JFrame {
         setViewTrang(trang, soTrang);
     }//GEN-LAST:event_cbx_mausacActionPerformed
 
+    private void btn_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_profileMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ProfileView(ng).setVisible(true);
+    }//GEN-LAST:event_btn_profileMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1043,6 +1054,7 @@ public class NhanVienView extends javax.swing.JFrame {
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_next;
     private javax.swing.JButton btn_prev;
+    private javax.swing.JButton btn_profile;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_thanhtoan;
     private javax.swing.JButton btn_them;
@@ -1052,7 +1064,6 @@ public class NhanVienView extends javax.swing.JFrame {
     private javax.swing.JComboBox<DongSp> cbx_dongsp;
     private javax.swing.JComboBox<DungLuong> cbx_dungluong;
     private javax.swing.JComboBox<MauSac> cbx_mausac;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
