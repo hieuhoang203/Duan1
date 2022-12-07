@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import modul.NguoiDung;
 
 /**
@@ -65,6 +66,11 @@ public class AdminView extends javax.swing.JFrame {
         btn_thongke.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_thongke.setForeground(new java.awt.Color(255, 51, 0));
         btn_thongke.setText("Thống kê");
+        btn_thongke.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_thongkeMouseClicked(evt);
+            }
+        });
 
         btn_logout.setBackground(new java.awt.Color(255, 204, 204));
         btn_logout.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -320,6 +326,12 @@ public class AdminView extends javax.swing.JFrame {
         this.setVisible(false);
         new ProfileView(ng).setVisible(true);
     }//GEN-LAST:event_btn_profileMouseClicked
+
+    private void btn_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_thongkeMouseClicked
+        // TODO add your handling code here:
+        String input = JOptionPane.showInputDialog("Nhap bieu do muon xem ?");
+        
+    }//GEN-LAST:event_btn_thongkeMouseClicked
 
     /**
      * @param args the command line arguments
