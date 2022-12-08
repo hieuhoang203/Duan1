@@ -39,9 +39,9 @@ E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\AccountServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\ChiTietBaoHanhServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyHangService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\NguoiDungServiceImpl.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\DoanhThuView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\HoaDonServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\view\DangKyView.java
-E:\DuAn1\ProjectDuAn1\src\main\java\view\ThongKeView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyChucVuService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\HoaDonRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\Hang.java
@@ -55,9 +55,11 @@ E:\DuAn1\ProjectDuAn1\src\main\java\modul\HoaDonChiTiet.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\ChiTietSpServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\ChiTietBaoHanh.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\NguoiDung.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\ProfileView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\QuanLyNguoiDungService.java
 E:\DuAn1\ProjectDuAn1\src\main\java\repository\BaoHanhRepository.java
 E:\DuAn1\ProjectDuAn1\src\main\java\modul\MauSac.java
+E:\DuAn1\ProjectDuAn1\src\main\java\view\SanPhamBanDuoc.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\HangServiceImpl.java
 E:\DuAn1\ProjectDuAn1\src\main\java\view\ChucVuView.java
 E:\DuAn1\ProjectDuAn1\src\main\java\service\serviceImpl\CoSoServiceImpl.java
