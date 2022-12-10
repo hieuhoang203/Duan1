@@ -13,15 +13,15 @@ import service.serviceImpl.GuiMailServiceImpl;
 public class ForgotPassView extends javax.swing.JFrame {
     private static final String PASSWOR_STRING = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
     private static final String EMAIL_STRING = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-    private QuanLyGuiMailService quanLyGuiMailService;
-    private QuanLyAccountService quanLyAccountService;
+    private QuanLyGuiMailService mailService;
+    private QuanLyAccountService accountService;
     /**
      * Creates new form ForgotPassView
      */
     public ForgotPassView() {
         initComponents();
-        quanLyGuiMailService = new GuiMailServiceImpl();
-        quanLyAccountService = new AccountServiceImpl();
+        mailService = new GuiMailServiceImpl();
+        accountService = new AccountServiceImpl();
     }
     
     public boolean checkEmail(String mail){
@@ -173,10 +173,10 @@ public class ForgotPassView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Email hoặc new password hoặc confilm pass không được để trống !");
         }else if (checkEmail(txt_email.getText().trim())) {
             if (new_pass.equals(pass_again)) {
-                String code = quanLyGuiMailService.sendEmail(txt_email.getText());
+                String code = mailService.sendEmail(txt_email.getText());
                 String input = JOptionPane.showInputDialog(this,"Ma xac nhan la ?");
                 if (input.equals(code)) {
-                    quanLyAccountService.update(txt_email.getText(), new_pass);
+                    accountService.update(txt_email.getText(), new_pass);
                     JOptionPane.showMessageDialog(rootPane, "Doi mat khau thanh cong !");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Ma xac nhan khong chinh xac !");
