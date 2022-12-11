@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import modul.BaoHanh;
 import modul.ChiTietBaoHanh;
 import modul.HoaDon;
-import modul.HoaDonChiTiet;
 import org.hibernate.query.Query;
 
 /**
